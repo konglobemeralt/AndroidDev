@@ -4,24 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.jesper.testapp.MainActivity">
+    tools:context="com.example.jesper.testapp.MainActivity"
+    tools:layout_editor_absoluteY="0dp"
+    tools:layout_editor_absoluteX="0dp">
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="86dp"
-        android:layout_height="23dp"
-        android:text="TextView"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="16dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/edit_message"
         android:layout_marginLeft="16dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/button3" />
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="81dp"
-        android:layout_height="51dp"
-        android:text="Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_send"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
         app:layout_constraintLeft_toRightOf="@+id/textView2"
-        android:layout_marginLeft="21dp" />
+        app:layout_constraintRight_toRightOf="parent" />
+         />
 </android.support.constraint.ConstraintLayout>
