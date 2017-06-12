@@ -15,8 +15,9 @@ public class QuizActivity extends AppCompatActivity {
 
     private Button mTrueButton;
     private Button mFalseButton;
-    private ImageButton mNextButton;
-    private ImageButton mPreviousButton;
+    private Button mNextButton;
+    private ImageButton mNextImageButton;
+    private ImageButton mPreviousImageButton;
     private TextView mQuestionTextView;
 
     private Question[] mQuestionBank = new Question[] {
@@ -93,21 +94,36 @@ public class QuizActivity extends AppCompatActivity {
 
 
 
-        mNextButton = (ImageButton) findViewById(R.id.next_button);
-        mNextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                nextQuestion();
-            }
-        });
+        mNextImageButton = (ImageButton) findViewById(R.id.next_imagebutton);
+        if( mNextImageButton != null ) {
+            mNextImageButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    nextQuestion();
+                }
+            });
+        }
 
-        mPreviousButton = (ImageButton) findViewById(R.id.previous_button);
-        mPreviousButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                previousQuestion();
-            }
-        });
+        mPreviousImageButton = (ImageButton) findViewById(R.id.previous_imagebutton);
+        if( mPreviousImageButton != null ) {
+            mPreviousImageButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    previousQuestion();
+                }
+            });
+        }
+
+        mNextButton = (Button) findViewById(R.id.next_button);
+        if( mNextButton != null ){
+            mNextButton.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    nextQuestion();
+                }
+            });
+        }
 
         updateQuestion();
 
