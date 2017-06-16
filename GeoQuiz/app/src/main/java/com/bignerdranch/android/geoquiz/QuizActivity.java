@@ -68,7 +68,7 @@ public class QuizActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate(Bundle) called");
         setContentView(R.layout.activity_quiz);
 
-        //mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
+        mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
         mQuestionTextView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -144,7 +144,7 @@ public class QuizActivity extends AppCompatActivity {
 
 
     private void nextQuestion(){
-        mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+       // mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
         updateQuestion();
     }
 
@@ -156,6 +156,8 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void updateQuestion() {
+        Log.d(TAG, "Updating question text for question #" + mCurrentIndex,
+                new Exception());
         int question = mQuestionBank[mCurrentIndex].getTextResId();
         mQuestionTextView.setText(question);
     }
