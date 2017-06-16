@@ -144,7 +144,7 @@ public class QuizActivity extends AppCompatActivity {
 
 
     private void nextQuestion(){
-       // mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+        mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
         updateQuestion();
     }
 
@@ -156,8 +156,6 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void updateQuestion() {
-        Log.d(TAG, "Updating question text for question #" + mCurrentIndex,
-                new Exception());
         int question = mQuestionBank[mCurrentIndex].getTextResId();
         mQuestionTextView.setText(question);
     }
