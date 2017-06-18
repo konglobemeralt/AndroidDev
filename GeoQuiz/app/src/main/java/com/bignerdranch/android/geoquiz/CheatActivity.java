@@ -15,7 +15,7 @@ public class CheatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cheat);
 
 
-        
+
     }
 
 }
