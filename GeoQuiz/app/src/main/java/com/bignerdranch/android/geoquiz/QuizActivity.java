@@ -131,9 +131,6 @@ public class QuizActivity extends AppCompatActivity {
             });
         }
 
-
-
-
         mCheatButton = (Button) findViewById(R.id.cheat_button);
         mCheatButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -173,7 +170,7 @@ public class QuizActivity extends AppCompatActivity {
         super.onSaveInstanceState(savedInstanceState);
         Log.i(TAG, "onSavedInstanceState");
         savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
-        savedInstanceState.putBoolean(KEY_INDEX, true);
+        savedInstanceState.putBoolean(KEY_CHEATER, mIsCheater);
     }
 
 
@@ -211,11 +208,14 @@ public class QuizActivity extends AppCompatActivity {
             }
 
         }
-
-
-
-
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
+    }
+
+
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
+        mIsCheater = savedInstanceState.getBoolean(KEY_CHEATER, false);
     }
 
 }
