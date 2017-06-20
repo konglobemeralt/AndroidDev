@@ -36,17 +36,14 @@ public class CheatActivity extends AppCompatActivity {
         mShowAnswer.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                if(mAnswerIsTrue){
-                    mAnswerTextView.setText(R.string.true_button);
-                }else {
-                    mAnswerTextView.setText(R.string.false_button);
-                }
-                setAnswerShowResult(true);
+                mIsCheater = true;
+                handleCheatString();
             }
         });
 
         if(savedInstanceState != null){
-            mIsCheater = savedInstanceState.getBoolean(KEY_CHEATER);
+            mIsCheater = savedInstanceState.getBoolean(KEY_CHEATER, false);
+            handleCheatString();
         }
     }
 
@@ -75,9 +72,16 @@ public class CheatActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         mIsCheater = savedInstanceState.getBoolean(KEY_CHEATER, false);
-        if(mIsCheater){
-            setAnswerShowResult(true);
-        }
+        handleCheatString();
 
+    }
+
+    private void handleCheatString(){
+        if(mAnswerIsTrue){
+            mAnswerTextView.setText(R.string.true_button);
+        }else {
+            mAnswerTextView.setText(R.string.false_button);
+        }
+        setAnswerShowResult(true);
     }
 }
