@@ -21,11 +21,12 @@ public class Dice {
     }
 
     /**
-     * This function "rolls" the dice assigning a random integer
-     * in the range 1-6 as the dices value
+     * This function rolls the dice assignings and returns a
+     * random integer in the range 1-6 as the dices value
      */
-    public void roll(){
+    public int roll(){
         this.value = (int)(Math.random()*6) + 1;
+        return this.value;
     }
 
     /**
@@ -33,5 +34,13 @@ public class Dice {
      */
     public int getValue(){
         return value;
+    }
+
+    /**
+     * Get the value as a string
+     */
+    @Override
+    public String toString() {
+        return "This dice has the value " + value;
     }
 }
