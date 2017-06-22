@@ -67,8 +67,30 @@ public class ThirtyGame {
 
     }
 
+    /**
+     * Toggles selection on a dice
+     */
     public void selectDice(int index){
         dices[index].toggleSelection();
+    }
+
+    /**
+     * Checks if all dices are selected
+     */
+    public boolean playPossible() {
+        int selectedCount = 0;
+        for (int i = 0; i < dices.length; ++i) {
+            if (dices[i].isSelected()) {
+                selectedCount += 1;
+            }
+        }
+
+        if(selectedCount == 6){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 
     /**

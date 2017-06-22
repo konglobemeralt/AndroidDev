@@ -44,8 +44,16 @@ public class ThirtyActivity extends AppCompatActivity {
         mRollDiceButton = (Button) findViewById(R.id.rollButton);
         mRollDiceButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                game.rollDices();
-                updateDices();
+
+                if(game.playPossible()){
+                    game.rollDices();
+                    updateDices();
+                }
+                else{
+                    //TODO: Display a toast with some text like "Please unselect at least one dice"
+
+                }
+
                 //Log.d("ThirtyActivity", game.toString());
             }
         });
@@ -80,8 +88,8 @@ public class ThirtyActivity extends AppCompatActivity {
      */
     private void updateDices() {
         int index = 0;
-        for (ImageButton button : diceButtons) {
 
+        for (ImageButton button : diceButtons) {
             //build string for identifier
             String identifier = "dice_";
             if(game.getDiceAtIndex(index).isSelected()){
@@ -91,7 +99,7 @@ public class ThirtyActivity extends AppCompatActivity {
                 identifier += "white";
             }
 
-            //add value of dice att index
+            //add value of dice
             identifier += game.getDiceValueAtIndex(index++);
 
             button.setImageResource(getResources().getIdentifier(identifier, "mipmap", getPackageName()));
