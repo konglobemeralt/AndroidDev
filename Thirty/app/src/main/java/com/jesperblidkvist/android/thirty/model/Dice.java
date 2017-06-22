@@ -21,7 +21,7 @@ public class Dice {
     }
 
     /**
-     * This function rolls the dice assignings and returns a
+     * This function rolls the dice assigning and returns a
      * random integer in the range 1-6 as the dices value
      */
     public int roll(){

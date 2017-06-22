@@ -23,12 +23,33 @@ public class ThirtyGame {
     }
 
     /**
-     * Returns the dices in the game.
+     * Returns all the dices in the game.
      */
     public Dice[] getAllDices() {
         return dices;
     }
 
+    /**
+     * Returns all the dices in the game.
+     */
+    public int[] getAllDiceValues() {
+        int[] values = new int[6];
+        for (int i = 0; i < dices.length; ++i) {
+            values[i] = dices[i].getValue();
+        }
+        return values;
+    }
+
+    /**
+     * Returns the value of a dice at a specific index
+     */
+    public int getDiceValueAtIndex(int i){
+        return dices[i].getValue();
+    }
+
+    /**
+     * Roll all the dices
+     */
     public void rollDices(){
         for (int i = 0; i < dices.length; ++i) {
             dices[i].roll();
