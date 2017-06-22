@@ -9,18 +9,30 @@ import android.widget.ImageButton;
 
 import com.jesperblidkvist.android.thirty.model.ThirtyGame;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ThirtyActivity extends AppCompatActivity {
 
     private ThirtyGame game;
     private Button mRollDiceButton;
 
-    private ImageButton mDice1;
-    private ImageButton mDice2;
-    private ImageButton mDice3;
-    private ImageButton mDice4;
-    private ImageButton mDice5;
-    private ImageButton mDice6;
+    /**
+     * List of each visual representation of dices.
+     */
+    private List<ImageButton> diceButtons = new ArrayList<>();
 
+    /**
+     * List of all the diceButton ID to enable looping through
+     */
+    private static final int[] DICE_BUTTON_IDS = {
+            R.id.diceButton1,
+            R.id.diceButton2,
+            R.id.diceButton3,
+            R.id.diceButton4,
+            R.id.diceButton5,
+            R.id.diceButton6,
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,67 +46,42 @@ public class ThirtyActivity extends AppCompatActivity {
             public void onClick(View v) {
                 game.rollDices();
                 updateDices();
-                Log.d("ThirtyActivity", game.toString());
+                //Log.d("ThirtyActivity", game.toString());
             }
         });
-
 
         game = new ThirtyGame();
     }
 
+    /**
+     * Initiate the diceButtons
+     */
     private void initDices(){
-        mDice1 = (ImageButton) findViewById(R.id.diceButton1);
-        mDice1.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View v) {
-                Log.d("ThirtyActivity", "Selected Dice1");
-            }
-        });
 
-        mDice2 = (ImageButton) findViewById(R.id.diceButton2);
-        mDice2.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View v) {
-                Log.d("ThirtyActivity", "Selected Dice2");
-            }
-        });
+        int buttonNR = 1;
+        for(int id : DICE_BUTTON_IDS) {
+            final int index = buttonNR++;
 
-        mDice3 = (ImageButton) findViewById(R.id.diceButton3);
-        mDice3.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View v) {
-                Log.d("ThirtyActivity", "Selected Dice3");
-            }
-        });
+            ImageButton diceButton = (ImageButton) findViewById(id);
+            diceButton.setOnClickListener(new Button.OnClickListener() {
+                public void onClick(View v) {
+                   //TODO: Set dice as selected
+                }
+            });
 
-        mDice4 = (ImageButton) findViewById(R.id.diceButton4);
-        mDice4.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View v) {
-                Log.d("ThirtyActivity", "Selected Dice4");
-            }
-        });
-
-        mDice5 = (ImageButton) findViewById(R.id.diceButton5);
-        mDice5.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View v) {
-                Log.d("ThirtyActivity", "Selected Dice5");
-            }
-        });
-
-        mDice6 = (ImageButton) findViewById(R.id.diceButton6);
-        mDice6.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View v) {
-                Log.d("ThirtyActivity", "Selected Dice6");
-            }
-        });
-
+            diceButtons.add(diceButton);
+        }
 
     }
 
-    private void updateDices(){
-        //TODO: Fancy mapping instead of hardcoding
-        mDice1.setImageResource(getResources().getIdentifier("dice_white"+ game.getDiceValueAtIndex(0), "mipmap", getPackageName()));
-        mDice2.setImageResource(getResources().getIdentifier("dice_white"+ game.getDiceValueAtIndex(1), "mipmap", getPackageName()));
-        mDice3.setImageResource(getResources().getIdentifier("dice_white"+ game.getDiceValueAtIndex(2), "mipmap", getPackageName()));
-        mDice4.setImageResource(getResources().getIdentifier("dice_white"+ game.getDiceValueAtIndex(3), "mipmap", getPackageName()));
-        mDice5.setImageResource(getResources().getIdentifier("dice_white"+ game.getDiceValueAtIndex(4), "mipmap", getPackageName()));
-        mDice6.setImageResource(getResources().getIdentifier("dice_white"+ game.getDiceValueAtIndex(5), "mipmap", getPackageName()));
+    /**
+     * Update the diceButtons with the current values
+     */
+    private void updateDices() {
+        int index = 0;
+        for (ImageButton button : diceButtons) {
+            button.setImageResource(getResources().getIdentifier("dice_white" + game.getDiceValueAtIndex(index++), "mipmap", getPackageName()));
+        }
+
     }
 }
