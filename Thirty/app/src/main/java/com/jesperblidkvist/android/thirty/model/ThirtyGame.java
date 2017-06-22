@@ -41,6 +41,13 @@ public class ThirtyGame {
     }
 
     /**
+     * Returns the dice at a specific index
+     */
+    public Dice getDiceAtIndex(int i){
+        return dices[i];
+    }
+
+    /**
      * Returns the value of a dice at a specific index
      */
     public int getDiceValueAtIndex(int i){

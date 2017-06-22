@@ -58,7 +58,7 @@ public class ThirtyActivity extends AppCompatActivity {
      */
     private void initDices(){
 
-        int buttonNR = 1;
+        int buttonNR = 0;
         for(int id : DICE_BUTTON_IDS) {
             final int index = buttonNR++;
 
@@ -66,6 +66,7 @@ public class ThirtyActivity extends AppCompatActivity {
             diceButton.setOnClickListener(new Button.OnClickListener() {
                 public void onClick(View v) {
                    game.selectDice(index);
+                    updateDices();
                 }
             });
 
@@ -80,7 +81,20 @@ public class ThirtyActivity extends AppCompatActivity {
     private void updateDices() {
         int index = 0;
         for (ImageButton button : diceButtons) {
-            button.setImageResource(getResources().getIdentifier("dice_white" + game.getDiceValueAtIndex(index++), "mipmap", getPackageName()));
+
+            //build string for identifier
+            String identifier = "dice_";
+            if(game.getDiceAtIndex(index).isSelected()){
+                identifier += "red";
+            }
+            else{
+                identifier += "white";
+            }
+
+            //add value of dice att index
+            identifier += game.getDiceValueAtIndex(index++);
+
+            button.setImageResource(getResources().getIdentifier(identifier, "mipmap", getPackageName()));
         }
 
     }
