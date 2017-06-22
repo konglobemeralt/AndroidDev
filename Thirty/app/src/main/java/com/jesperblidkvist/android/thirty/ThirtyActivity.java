@@ -1,11 +1,13 @@
 package com.jesperblidkvist.android.thirty;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.jesperblidkvist.android.thirty.model.ThirtyGame;
 
@@ -51,7 +53,12 @@ public class ThirtyActivity extends AppCompatActivity {
                 }
                 else{
                     //TODO: Display a toast with some text like "Please unselect at least one dice"
+                    Context context = getApplicationContext();
+                    CharSequence text = "Please unselect at least one dice!";
+                    int duration = Toast.LENGTH_SHORT;
 
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
                 }
 
                 //Log.d("ThirtyActivity", game.toString());
