@@ -12,12 +12,14 @@ package com.jesperblidkvist.android.thirty.model;
 
 public class Dice {
     private int value;
+    private boolean selected;
 
     /**
      * Constructor that initializes a dice to 1
      */
     public Dice(){
         this.value = 1;
+        this.selected = false;
     }
 
     /**
@@ -34,6 +36,27 @@ public class Dice {
      */
     public int getValue(){
         return value;
+    }
+
+    /**
+     * Checks if a dice is selected
+     */
+    public boolean isSelected() {
+        return selected;
+    }
+
+    /**
+     * Sets a dice as selected or unselected
+     */
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+    /**
+     * toggle dice seletion
+     */
+    public void toggleSelection() {
+        this.selected = !selected;
     }
 
     /**

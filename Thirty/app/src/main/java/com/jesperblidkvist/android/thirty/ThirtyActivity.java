@@ -65,7 +65,7 @@ public class ThirtyActivity extends AppCompatActivity {
             ImageButton diceButton = (ImageButton) findViewById(id);
             diceButton.setOnClickListener(new Button.OnClickListener() {
                 public void onClick(View v) {
-                   //TODO: Set dice as selected
+                   game.selectDice(index);
                 }
             });
 

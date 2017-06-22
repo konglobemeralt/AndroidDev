@@ -52,9 +52,16 @@ public class ThirtyGame {
      */
     public void rollDices(){
         for (int i = 0; i < dices.length; ++i) {
-            dices[i].roll();
+            if(!dices[i].isSelected()){
+                dices[i].roll();
+            }
+
         }
 
+    }
+
+    public void selectDice(int index){
+        dices[index].toggleSelection();
     }
 
     /**
