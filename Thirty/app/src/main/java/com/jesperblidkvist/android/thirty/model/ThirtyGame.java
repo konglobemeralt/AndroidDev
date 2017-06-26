@@ -103,11 +103,11 @@ public class ThirtyGame {
     }
 
     /**
-     * Roll all the dices
+     * Roll all the dices that are not saved or selected
      */
     private void rollDices(){
         for (int i = 0; i < dices.length; ++i) {
-            if(!dices[i].isSelected()){
+            if(!dices[i].isSelected() && !dices[i].isSaved()){
                 dices[i].roll();
             }
         }
@@ -146,7 +146,9 @@ public class ThirtyGame {
         increaseTurnCount();
         resetRedoCounter();
         resetDice();
+
         totalScore = roundScore;
+        roundScore = 0;
     }
 
 

@@ -111,6 +111,7 @@ public class ThirtyActivity extends AppCompatActivity {
             diceButton.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
+                    //TODO: REMOVE? ONLY ONE VISUAL INDICATOR THAT IS SAVED THAT TRACKS SCORE?
                     game.saveDice(index);
                     updateDices();
                     updateScore();
