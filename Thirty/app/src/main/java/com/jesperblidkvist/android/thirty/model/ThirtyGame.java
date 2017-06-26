@@ -20,6 +20,8 @@ public class ThirtyGame {
     int roundCount;
 
     int totalScore;
+
+
     int roundScore;
 
     String gameStatus;
@@ -52,6 +54,21 @@ public class ThirtyGame {
     private void resetRedoCounter(){
         redoCount = 0;
     }
+
+    /**
+     * Gets the score of the current round.
+     */
+    public int getRoundScore() {
+        return roundScore;
+    }
+
+    /**
+     * Gets the total score.
+     */
+    public int getTotalScore() {
+        return roundScore;
+    }
+
 
     /**
      * Returns all the dices in the game.
@@ -129,7 +146,9 @@ public class ThirtyGame {
         increaseTurnCount();
         resetRedoCounter();
         resetDice();
+        totalScore = roundScore;
     }
+
 
 
     /**
@@ -137,6 +156,7 @@ public class ThirtyGame {
      */
     public void selectDice(int index){
         dices[index].toggleSelection();
+
     }
 
     /**
@@ -144,6 +164,12 @@ public class ThirtyGame {
      */
     public void saveDice(int index){
         dices[index].toggleSaved();
+        if(dices[index].isSaved()){
+            roundScore += dices[index].getValue();
+        }
+        else{
+            roundScore -= dices[index].getValue();
+        }
     }
 
     /**

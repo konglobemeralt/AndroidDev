@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jesperblidkvist.android.thirty.model.ThirtyGame;
@@ -19,6 +20,9 @@ public class ThirtyActivity extends AppCompatActivity {
     private ThirtyGame game;
     private Button mRollDiceButton;
     private Button mEndTurnButton;
+
+    private TextView mTotalPoints;
+    private TextView mRoundPoints;
 
     /**
      * List of each visual representation of dices.
@@ -78,7 +82,13 @@ public class ThirtyActivity extends AppCompatActivity {
             }
         });
 
+
+
         game = new ThirtyGame();
+
+        mRoundPoints = (TextView) findViewById(R.id.roundPointsString);
+        mTotalPoints = (TextView) findViewById(R.id.totalPointsString);
+        updateScore();
     }
 
     /**
@@ -103,6 +113,7 @@ public class ThirtyActivity extends AppCompatActivity {
                 public boolean onLongClick(View v) {
                     game.saveDice(index);
                     updateDices();
+                    updateScore();
                     return true;
                 }
             });
@@ -137,5 +148,10 @@ public class ThirtyActivity extends AppCompatActivity {
             button.setImageResource(getResources().getIdentifier(identifier, "mipmap", getPackageName()));
         }
 
+    }
+
+    private void updateScore(){
+        mRoundPoints.setText("Current selection: " + Integer.toString(game.getRoundScore()));
+        mTotalPoints.setText("Total Points: " + Integer.toString(game.getTotalScore()));
     }
 }
