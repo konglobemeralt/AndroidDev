@@ -20,8 +20,6 @@ public class ThirtyGame {
     int roundCount;
 
     int totalScore;
-
-
     int roundScore;
 
     String gameStatus;
@@ -32,6 +30,9 @@ public class ThirtyGame {
         for (int i = 0; i < dices.length; ++i) {
             dices[i] = new Dice();
         }
+
+        int roundScore = 0;
+        int totalScore = roundScore;
 
         int redoCount = 0;
         int roundCount = 0;
@@ -66,9 +67,8 @@ public class ThirtyGame {
      * Gets the total score.
      */
     public int getTotalScore() {
-        return roundScore;
+        return totalScore;
     }
-
 
     /**
      * Returns all the dices in the game.
@@ -107,7 +107,7 @@ public class ThirtyGame {
      */
     private void rollDices(){
         for (int i = 0; i < dices.length; ++i) {
-            if(!dices[i].isSelected() && !dices[i].isSaved()){
+            if(!dices[i].isSaved()){
                 dices[i].roll();
             }
         }

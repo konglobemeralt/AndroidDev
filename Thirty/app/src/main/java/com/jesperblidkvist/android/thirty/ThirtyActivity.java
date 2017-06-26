@@ -76,7 +76,7 @@ public class ThirtyActivity extends AppCompatActivity {
 
                     game.endTurn();
                     updateDices();
-
+                    updateScore();
 
                 //Log.d("ThirtyActivity", game.toString());
             }
@@ -103,19 +103,9 @@ public class ThirtyActivity extends AppCompatActivity {
             ImageButton diceButton = (ImageButton) findViewById(id);
             diceButton.setOnClickListener(new Button.OnClickListener() {
                 public void onClick(View v) {
-                   game.selectDice(index);
-                    updateDices();
-                }
-            });
-
-            diceButton.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    //TODO: REMOVE? ONLY ONE VISUAL INDICATOR THAT IS SAVED THAT TRACKS SCORE?
                     game.saveDice(index);
                     updateDices();
                     updateScore();
-                    return true;
                 }
             });
 
