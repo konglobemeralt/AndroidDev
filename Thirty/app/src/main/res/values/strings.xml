@@ -2,4 +2,6 @@
     <string name="app_name">Thirty</string>
     <string name="button_roll">Roll dice!</string>
     <string name="button_endTurn">End turn</string>
+    <string name="total_score">Total Points: </string>
+    <string name="round_score">Current selection: </string>
 </resources>

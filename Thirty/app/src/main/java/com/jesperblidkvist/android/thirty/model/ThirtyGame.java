@@ -19,6 +19,9 @@ public class ThirtyGame {
     int redoCount;
     int roundCount;
 
+    int totalScore;
+    int roundScore;
+
     String gameStatus;
 
 
