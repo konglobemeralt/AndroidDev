@@ -147,7 +147,7 @@ public class ThirtyGame {
         resetRedoCounter();
         resetDice();
 
-        totalScore = roundScore;
+        totalScore += roundScore;
         roundScore = 0;
     }
 
