@@ -18,6 +18,7 @@ public class ThirtyActivity extends AppCompatActivity {
 
     private ThirtyGame game;
     private Button mRollDiceButton;
+    private Button mEndTurnButton;
 
     /**
      * List of each visual representation of dices.
@@ -48,18 +49,30 @@ public class ThirtyActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if(game.playPossible()){
-                    game.rollDices();
+                    game.playTurn();
                     updateDices();
                 }
                 else{
                     //TODO: Display a toast with some text like "Please unselect at least one dice"
                     Context context = getApplicationContext();
-                    CharSequence text = "Please unselect at least one dice!";
+                    CharSequence text = game.getGameStatus();
                     int duration = Toast.LENGTH_SHORT;
 
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
                 }
+
+                //Log.d("ThirtyActivity", game.toString());
+            }
+        });
+
+        mEndTurnButton = (Button) findViewById(R.id.endTurnButton);
+        mEndTurnButton.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+
+                    game.endTurn();
+                    updateDices();
+
 
                 //Log.d("ThirtyActivity", game.toString());
             }

@@ -1,5 +1,8 @@
 package com.jesperblidkvist.android.thirty.model;
 
+import android.content.Context;
+import android.widget.Toast;
+
 /**
  *  This class represents a game of Thirty.
  *
@@ -13,6 +16,10 @@ package com.jesperblidkvist.android.thirty.model;
 public class ThirtyGame {
 
     private Dice[] dices;
+    int redoCount;
+    int roundCount;
+
+    String gameStatus;
 
 
     public ThirtyGame() {
@@ -20,6 +27,26 @@ public class ThirtyGame {
         for (int i = 0; i < dices.length; ++i) {
             dices[i] = new Dice();
         }
+
+        int redoCount = 0;
+        int roundCount = 0;
+    }
+
+    /**
+     * Sets all the dices in the game to 1.
+     */
+    private void resetDice(){
+        for (int i = 0; i < dices.length; ++i) {
+            dices[i].setValue(1);
+            dices[i].setSelected(false);
+        }
+    }
+
+    /**
+     * Sets redo counter to 0.
+     */
+    private void resetRedoCounter(){
+        redoCount = 0;
     }
 
     /**
@@ -57,7 +84,7 @@ public class ThirtyGame {
     /**
      * Roll all the dices
      */
-    public void rollDices(){
+    private void rollDices(){
         for (int i = 0; i < dices.length; ++i) {
             if(!dices[i].isSelected()){
                 dices[i].roll();
@@ -66,6 +93,42 @@ public class ThirtyGame {
         }
 
     }
+
+    private void increaseRoundCount(){
+        if(redoCount !=2 ){
+            redoCount++;
+        }else
+        {
+
+        }
+    }
+
+    private void increaseTurnCount(){
+        if(roundCount !=10 ){
+            roundCount++;
+        }else
+        {
+
+        }
+    }
+
+    /**
+     * Plays a turn
+     */
+    public void playTurn(){
+        rollDices();
+        increaseRoundCount();
+    }
+
+    /**
+     * Ends a turn
+     */
+    public void endTurn(){
+        increaseTurnCount();
+        resetRedoCounter();
+        resetDice();
+    }
+
 
     /**
      * Toggles selection on a dice
@@ -84,11 +147,16 @@ public class ThirtyGame {
                 selectedCount += 1;
             }
         }
-
-        if(selectedCount == 6){
+        if(selectedCount == 6 && redoCount < 3){
+            gameStatus = "Please deselect one or more dice...";
+            return false;
+        }
+        else if(selectedCount != 6 && redoCount == 2){
+            gameStatus = "Only two redos per turn!";
             return false;
         }
         else{
+            gameStatus = "Playing as normal";
             return true;
         }
     }
@@ -106,4 +174,7 @@ public class ThirtyGame {
         return diceString;
     }
 
+    public String getGameStatus() {
+        return gameStatus;
+    }
 }

@@ -39,6 +39,13 @@ public class Dice {
     }
 
     /**
+     * Sets the current value of a dice
+     */
+    public void setValue(int value){
+        this.value = value;
+    }
+
+    /**
      * Checks if a dice is selected
      */
     public boolean isSelected() {
