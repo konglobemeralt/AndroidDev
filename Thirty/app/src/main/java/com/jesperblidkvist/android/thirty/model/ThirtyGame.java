@@ -39,6 +39,7 @@ public class ThirtyGame {
         for (int i = 0; i < dices.length; ++i) {
             dices[i].setValue(1);
             dices[i].setSelected(false);
+            dices[i].setSaved(false);
         }
     }
 
@@ -139,7 +140,7 @@ public class ThirtyGame {
      * Toggles save on a dice
      */
     public void saveDice(int index){
-        dices[index].toggleSelection();
+        dices[index].toggleSaved();
     }
 
     /**

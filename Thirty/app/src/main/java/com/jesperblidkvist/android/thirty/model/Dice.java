@@ -69,6 +69,20 @@ public class Dice {
     }
 
     /**
+     * Sets a dice as saved or unsaved
+     */
+    public void setSaved(boolean saved) {
+        this.saved = saved;
+    }
+
+    /**
+     * toggle dice saved
+     */
+    public void toggleSaved() {
+        this.saved = !saved;
+    }
+
+    /**
      * toggle dice seletion
      */
     public void toggleSelection() {
