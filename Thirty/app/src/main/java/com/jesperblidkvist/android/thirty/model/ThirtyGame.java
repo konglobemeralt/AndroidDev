@@ -89,9 +89,7 @@ public class ThirtyGame {
             if(!dices[i].isSelected()){
                 dices[i].roll();
             }
-
         }
-
     }
 
     private void increaseRoundCount(){
@@ -134,6 +132,13 @@ public class ThirtyGame {
      * Toggles selection on a dice
      */
     public void selectDice(int index){
+        dices[index].toggleSelection();
+    }
+
+    /**
+     * Toggles save on a dice
+     */
+    public void saveDice(int index){
         dices[index].toggleSelection();
     }
 

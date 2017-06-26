@@ -13,6 +13,7 @@ package com.jesperblidkvist.android.thirty.model;
 public class Dice {
     private int value;
     private boolean selected;
+    private boolean saved;
 
     /**
      * Constructor that initializes a dice to 1
@@ -20,6 +21,7 @@ public class Dice {
     public Dice(){
         this.value = 1;
         this.selected = false;
+        this.saved = false;
     }
 
     /**
@@ -50,6 +52,13 @@ public class Dice {
      */
     public boolean isSelected() {
         return selected;
+    }
+
+    /**
+     * Checks if a dice is saved
+     */
+    public boolean isSaved() {
+        return saved;
     }
 
     /**

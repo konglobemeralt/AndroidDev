@@ -98,6 +98,15 @@ public class ThirtyActivity extends AppCompatActivity {
                 }
             });
 
+            diceButton.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    game.saveDice(index);
+                    updateDices();
+                    return true;
+                }
+            });
+
             diceButtons.add(diceButton);
         }
 
@@ -113,6 +122,9 @@ public class ThirtyActivity extends AppCompatActivity {
             //build string for identifier
             String identifier = "dice_";
             if(game.getDiceAtIndex(index).isSelected()){
+                identifier += "gray";
+            }
+            else if(game.getDiceAtIndex(index).isSaved()){
                 identifier += "red";
             }
             else{
