@@ -22,6 +22,10 @@ public class ThirtyGame {
     int totalScore;
     int roundScore;
 
+    int currentLow;
+
+    int pairCounter;
+
     String gameStatus;
 
 
@@ -31,11 +35,12 @@ public class ThirtyGame {
             dices[i] = new Dice();
         }
 
-        int roundScore = 0;
-        int totalScore = roundScore;
+        roundScore = 0;
+        totalScore = roundScore;
 
-        int redoCount = 0;
-        int roundCount = 0;
+        redoCount = 0;
+        roundCount = 0;
+        currentLow = 0;
     }
 
     /**
@@ -113,6 +118,9 @@ public class ThirtyGame {
         }
     }
 
+    /**
+     * Increase the roundCounter by one
+     */
     private void increaseRoundCount(){
         if(redoCount !=2 ){
             redoCount++;
@@ -122,6 +130,9 @@ public class ThirtyGame {
         }
     }
 
+    /**
+     * Increase the turncounter by one
+     */
     private void increaseTurnCount(){
         if(roundCount !=10 ){
             roundCount++;
@@ -144,11 +155,19 @@ public class ThirtyGame {
      */
     public void endTurn(){
         increaseTurnCount();
+        resetGame();
+        totalScore += roundScore;
+
+    }
+
+    /**
+     * Reset game variables
+     */
+    private void resetGame(){
         resetRedoCounter();
         resetDice();
-
-        totalScore += roundScore;
         roundScore = 0;
+        currentLow = 0;
     }
 
 
@@ -204,11 +223,36 @@ public class ThirtyGame {
     @Override
     public String toString() {
         String diceString = "";
-
         for (int i = 0; i < dices.length; ++i) {
             diceString += dices[i].toString() + "\n";
         }
         return diceString;
+    }
+
+    /**
+     * Sets the current low value to a sum of two dices values
+     */
+    private void setLow(int sum){
+        currentLow = sum;
+    }
+
+    /**
+     * checks a pair of dice against first sum.
+     */
+    private boolean checkLow(int diceA, int diceB){
+        if(diceA + diceB == currentLow){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    /**
+     * calculates the points awarded for choises made
+     */
+    private int calculatePoints(){
+        return pairCounter * currentLow;
     }
 
     public String getGameStatus() {
