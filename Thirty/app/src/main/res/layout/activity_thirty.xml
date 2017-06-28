@@ -12,8 +12,8 @@
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="183dp"
-        >
+        android:layout_height="134dp"
+        android:layout_weight="0.38">
 
         <TableRow
             android:layout_width="match_parent"
@@ -25,7 +25,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="#f9f9f9"
-                android:elevation="0dp"
                 app:srcCompat="@mipmap/dice_white1"/>
 
             <ImageButton
@@ -80,12 +79,6 @@
 
         </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </TableRow>
-
 
     </TableLayout>
 
@@ -93,46 +86,53 @@
         android:id="@+id/roundPointsString"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.33"
+        android:layout_weight="0.11"
         android:text="@string/round_score"/>
 
     <TextView
         android:id="@+id/lowString"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.33"
+        android:layout_weight="0.08"
         android:text="@string/low_string"/>
 
     <TextView
         android:id="@+id/totalPointsString"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.33"
+        android:layout_weight="0.06"
         android:text="@string/total_score"/>
 
-    <Button
-        android:id="@+id/endTurnButton"
-        android:layout_width="fill_parent"
-        android:layout_height="38dp"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center|bottom"
-        android:layout_marginTop="20dp"
-        android:background="#C01831"
-        android:onClick="meonFb"
-        android:text="@string/button_endTurn"
-        android:textColor="#ffffff"
-        />
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.08">
 
-    <Button
-        android:id="@+id/rollButton"
-        android:layout_width="fill_parent"
-        android:layout_height="38dp"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center|bottom"
-        android:layout_marginTop="20dp"
-        android:background="#C01831"
-        android:onClick="meonFb"
-        android:text="@string/button_roll"
-        android:textColor="#ffffff"/>
+        <Button
+            android:id="@+id/rollButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#C01831"
+            android:onClick="meonFb"
+            android:text="@string/button_roll"
+            android:textColor="#ffffff"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/endTurnButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#C01831"
+            android:onClick="meonFb"
+            android:text="@string/button_endTurn"
+            android:textColor="#ffffff"
+            />
+    </TableRow>
 
 </LinearLayout>
