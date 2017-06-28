@@ -47,7 +47,7 @@ public class ThirtyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thirty);
 
-        initDices();
+
 
         mRollDiceButton = (Button) findViewById(R.id.rollButton);
         mRollDiceButton.setOnClickListener(new Button.OnClickListener() {
@@ -58,13 +58,7 @@ public class ThirtyActivity extends AppCompatActivity {
                     updateDices();
                 }
                 else{
-                    //TODO: Display a toast with some text like "Please unselect at least one dice"
-                    Context context = getApplicationContext();
-                    CharSequence text = game.getGameStatus();
-                    int duration = Toast.LENGTH_SHORT;
-
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
+                   displayToast();
                 }
 
                 //Log.d("ThirtyActivity", game.toString());
@@ -74,18 +68,18 @@ public class ThirtyActivity extends AppCompatActivity {
         mEndTurnButton = (Button) findViewById(R.id.endTurnButton);
         mEndTurnButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-
-                    game.endTurn();
-                    updateDices();
-                    updateStrings();
+                        game.endTurn();
+                        updateDices();
+                        updateStrings();
 
                 //Log.d("ThirtyActivity", game.toString());
             }
         });
 
 
-
+        initDices();
         game = new ThirtyGame();
+        updateDices();
 
         mRoundPoints = (TextView) findViewById(R.id.roundPointsString);
         mTotalPoints = (TextView) findViewById(R.id.totalPointsString);
@@ -143,11 +137,29 @@ public class ThirtyActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * helper function that displays a toast
+     */
+    private void displayToast(){
+        Context context = getApplicationContext();
+        CharSequence text = game.getGameStatus();
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
+
+    /**
+     * updates all the strings in the view
+     */
     private void updateStrings(){
         mlowString.setText("Low: " + Integer.toString(game.getCurrentLow()));
         updateScore();
     }
 
+    /**
+     * updates the score in view
+     */
     private void updateScore(){
         mRoundPoints.setText("Current selection: " + Integer.toString(game.getRoundScore()));
         mTotalPoints.setText("Total Points: " + Integer.toString(game.getTotalScore()));

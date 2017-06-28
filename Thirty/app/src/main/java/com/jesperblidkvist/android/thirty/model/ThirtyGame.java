@@ -46,6 +46,8 @@ public class ThirtyGame {
         redoCount = 0;
         roundCount = 0;
         currentLow = 0;
+
+        rollDices();
     }
 
     /**
@@ -53,7 +55,6 @@ public class ThirtyGame {
      */
     private void resetDice(){
         for (int i = 0; i < dices.length; ++i) {
-            dices[i].setValue(1);
             dices[i].setSelected(false);
             dices[i].setSaved(false);
         }
@@ -192,7 +193,7 @@ public class ThirtyGame {
     }
 
    private boolean isSavePossible(int dice){
-       if(savedDice.size() < 2){
+       if(savedDice.size() < 2 ){
            return true;
        }
        else if((savedDice.size() % 2)!= 0){
@@ -216,14 +217,14 @@ public class ThirtyGame {
         if(dices[index].isSaved()){
             dices[index].toggleSaved();
             savedDice.remove(dices[index]);
-            Log.d("ThirtyActivity", "Removed: " + Integer.toString(dices[index].getValue()));
+            //Log.d("ThirtyActivity", "Removed: " + Integer.toString(dices[index].getValue()));
         }
         else{
             if(isSavePossible(dices[index].getValue())){
                 dices[index].toggleSaved();
 
                 savedDice.add(dices[index]);
-                Log.d("ThirtyActivity", "Added: " + Integer.toString(dices[index].getValue()));
+                //Log.d("ThirtyActivity", "Added: " + Integer.toString(dices[index].getValue()));
                 }
         }
 
@@ -249,6 +250,7 @@ private void calculateLow(){
 }
 
 
+
     /**
      * Checks if all dices are selected
      */
@@ -259,6 +261,7 @@ private void calculateLow(){
                 selectedCount += 1;
             }
         }
+
         if(selectedCount == 6 && redoCount < 3){
             gameStatus = "Please deselect one or more dice...";
             return false;
@@ -267,10 +270,7 @@ private void calculateLow(){
             gameStatus = "Only two redos per turn!";
             return false;
         }
-        else if(roundCount == 0 && roundScore == 0){
-            gameStatus = "Please roll once before ending turn!";
-            return false;
-        }
+
         else{
             gameStatus = "Playing as normal";
             return true;
