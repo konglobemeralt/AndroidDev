@@ -183,16 +183,26 @@ public class ThirtyGame {
     }
 
     private boolean savePossible(int index){
-        if(firstDice == 0){
+        if(firstDice == 0 && currentLow == 0){
             firstDice = dices[index].getValue();
             return true;
         }
         else if(firstDice != 0) {
             setLow(firstDice + dices[index].getValue());
             firstDice = 0;
+            pairCounter++;
             return true;
         }
-       else{
+        else if(currentLow != 0 && firstDice == 0){
+            firstDice = dices[index].getValue();
+            return true;
+        }
+        else if(currentLow != 0 && firstDice != 0){
+            if(firstDice + dices[index].getValue() == currentLow)
+            pairCounter++;
+            return true;
+        }
+        else{
             return false;
         }
 
@@ -208,16 +218,15 @@ public class ThirtyGame {
             dices[index].toggleSaved();
         }
 
-
-
-
-        if(dices[index].isSaved()){
-            roundScore += dices[index].getValue();
-        }
-        else{
-            roundScore -= dices[index].getValue();
-        }
+      // if(dices[index].isSaved()){
+      //     roundScore += dices[index].getValue();
+      // }
+      // else{
+      //     roundScore -= dices[index].getValue();
+      // }
     }
+
+
 
     /**
      * Checks if all dices are selected
@@ -237,7 +246,7 @@ public class ThirtyGame {
             gameStatus = "Only two redos per turn!";
             return false;
         }
-        else if(roundCount == 0){
+        else if(redoCount == 0){
             gameStatus = "Please roll once before ending turn!";
             return false;
         }
