@@ -176,6 +176,7 @@ public class ThirtyGame {
     private void resetGame(){
         resetRedoCounter();
         resetDice();
+        savedDice.clear();
         totalScore += roundScore;
         roundScore = 0;
         currentLow = 0;
@@ -192,14 +193,9 @@ public class ThirtyGame {
 
    private boolean isSavePossible(int dice){
        if(savedDice.size() < 2){
-           setLow(0);
            return true;
        }
-       if(savedDice.size() == 2){
-           setLow(savedDice.get(0).getValue()+ savedDice.get(1).getValue());
-           return true;
-       }
-       else if(getCurrentLow() != 0 ){
+       else if((savedDice.size() % 2) == 0){
            if(getCurrentLow() == dice + savedDice.get(savedDice.size() - 1).getValue()){
                return true;
            }
@@ -208,7 +204,9 @@ public class ThirtyGame {
            }
 
        }
-    return false;
+       else{
+           return true;
+       }
    }
 
     /**
@@ -234,10 +232,20 @@ public class ThirtyGame {
             // else{
             //     roundScore -= dices[index].getValue();
             // }
-            calculateRoundScore();
-        }
 
+        }
+        calculateLow();
+        calculateRoundScore();
     }
+
+private void calculateLow(){
+    if(savedDice.size() == 2){
+        setLow(savedDice.get(0).getValue()+ savedDice.get(1).getValue());
+    }
+    else if(savedDice.size() <= 1){
+        setLow(0);
+    }
+}
 
 
     /**
