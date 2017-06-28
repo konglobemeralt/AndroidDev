@@ -195,7 +195,7 @@ public class ThirtyGame {
        if(savedDice.size() < 2){
            return true;
        }
-       else if((savedDice.size() % 2) == 0){
+       else if((savedDice.size() % 2)!= 0){
            if(getCurrentLow() == dice + savedDice.get(savedDice.size() - 1).getValue()){
                return true;
            }
@@ -213,18 +213,19 @@ public class ThirtyGame {
      * Toggles save on a dice
      */
     public void saveDice(int index){
-        if(isSavePossible(dices[index].getValue())){
+        if(dices[index].isSaved()){
             dices[index].toggleSaved();
+            savedDice.remove(dices[index]);
+            Log.d("ThirtyActivity", "Removed: " + Integer.toString(dices[index].getValue()));
+        }
+        else{
+            if(isSavePossible(dices[index].getValue())){
+                dices[index].toggleSaved();
 
-            if(dices[index].isSaved()){
                 savedDice.add(dices[index]);
                 Log.d("ThirtyActivity", "Added: " + Integer.toString(dices[index].getValue()));
-            }
-            else{
-                savedDice.remove(dices[index]);
-                Log.d("ThirtyActivity", "Removed: " + Integer.toString(dices[index].getValue()));
-            }
-
+                }
+        }
 
             // if(dices[index].isSaved()){
             //     roundScore += dices[index].getValue();
@@ -233,7 +234,7 @@ public class ThirtyGame {
             //     roundScore -= dices[index].getValue();
             // }
 
-        }
+
         calculateLow();
         calculateRoundScore();
     }
