@@ -1,6 +1,7 @@
 package com.jesperblidkvist.android.thirty.model;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 /**
@@ -23,8 +24,6 @@ public class ThirtyGame {
     int roundScore;
 
     int currentLow;
-
-    int pairCounter;
 
     int firstDice;
 
@@ -76,6 +75,13 @@ public class ThirtyGame {
      */
     public int getTotalScore() {
         return totalScore;
+    }
+
+    /**
+     * Gets the current low.
+     */
+    public int getCurrentLow(){
+        return currentLow;
     }
 
     /**
@@ -159,8 +165,6 @@ public class ThirtyGame {
     public void endTurn(){
         increaseTurnCount();
         resetGame();
-        totalScore += roundScore;
-
     }
 
     /**
@@ -169,6 +173,7 @@ public class ThirtyGame {
     private void resetGame(){
         resetRedoCounter();
         resetDice();
+        totalScore += roundScore;
         roundScore = 0;
         currentLow = 0;
     }
@@ -190,7 +195,6 @@ public class ThirtyGame {
         else if(firstDice != 0) {
             setLow(firstDice + dices[index].getValue());
             firstDice = 0;
-            pairCounter++;
             return true;
         }
         else if(currentLow != 0 && firstDice == 0){
@@ -198,9 +202,12 @@ public class ThirtyGame {
             return true;
         }
         else if(currentLow != 0 && firstDice != 0){
-            if(firstDice + dices[index].getValue() == currentLow)
-            pairCounter++;
-            return true;
+            if(checkLow(firstDice, dices[index].getValue())){
+               return true;
+            }
+            else{
+                return false;
+            }
         }
         else{
             return false;
@@ -224,8 +231,8 @@ public class ThirtyGame {
       // else{
       //     roundScore -= dices[index].getValue();
       // }
+        calculateRoundScore();
     }
-
 
 
     /**
@@ -246,7 +253,7 @@ public class ThirtyGame {
             gameStatus = "Only two redos per turn!";
             return false;
         }
-        else if(redoCount == 0){
+        else if(roundCount == 0 && roundScore == 0){
             gameStatus = "Please roll once before ending turn!";
             return false;
         }
@@ -290,8 +297,17 @@ public class ThirtyGame {
     /**
      * calculates the points awarded for choises made
      */
-    private int calculatePoints(){
-        return pairCounter * currentLow;
+    private void calculateRoundScore() {
+        int pairs = 0;
+        for (int i = 0; i < dices.length; ++i) {
+            if (dices[i].isSaved()) {
+                pairs += 1;
+            }
+        }
+        pairs /=  2;
+
+        roundScore = pairs * currentLow;
+        Log.d("ThirtyGame", Integer.toString(roundScore));
     }
 
     public String getGameStatus() {

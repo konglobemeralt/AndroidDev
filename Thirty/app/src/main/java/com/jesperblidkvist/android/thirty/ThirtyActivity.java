@@ -23,6 +23,7 @@ public class ThirtyActivity extends AppCompatActivity {
 
     private TextView mTotalPoints;
     private TextView mRoundPoints;
+    private TextView mlowString;
 
     /**
      * List of each visual representation of dices.
@@ -76,7 +77,7 @@ public class ThirtyActivity extends AppCompatActivity {
 
                     game.endTurn();
                     updateDices();
-                    updateScore();
+                    updateStrings();
 
                 //Log.d("ThirtyActivity", game.toString());
             }
@@ -88,7 +89,8 @@ public class ThirtyActivity extends AppCompatActivity {
 
         mRoundPoints = (TextView) findViewById(R.id.roundPointsString);
         mTotalPoints = (TextView) findViewById(R.id.totalPointsString);
-        updateScore();
+        mlowString = (TextView) findViewById(R.id.lowString);
+        updateStrings();
     }
 
     /**
@@ -105,7 +107,7 @@ public class ThirtyActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     game.saveDice(index);
                     updateDices();
-                    updateScore();
+                    updateStrings();
                 }
             });
 
@@ -139,6 +141,11 @@ public class ThirtyActivity extends AppCompatActivity {
             button.setImageResource(getResources().getIdentifier(identifier, "mipmap", getPackageName()));
         }
 
+    }
+
+    private void updateStrings(){
+        mlowString.setText("Low: " + Integer.toString(game.getCurrentLow()));
+        updateScore();
     }
 
     private void updateScore(){
