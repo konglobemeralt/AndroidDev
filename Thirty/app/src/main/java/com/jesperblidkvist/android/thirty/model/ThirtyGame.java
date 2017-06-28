@@ -26,6 +26,9 @@ public class ThirtyGame {
 
     int pairCounter;
 
+    int firstDice;
+
+
     String gameStatus;
 
 
@@ -177,14 +180,37 @@ public class ThirtyGame {
      */
     public void selectDice(int index){
         dices[index].toggleSelection();
+    }
+
+    private boolean savePossible(int index){
+        if(firstDice == 0){
+            firstDice = dices[index].getValue();
+            return true;
+        }
+        else if(firstDice != 0) {
+            setLow(firstDice + dices[index].getValue());
+            firstDice = 0;
+            return true;
+        }
+       else{
+            return false;
+        }
 
     }
+
+
 
     /**
      * Toggles save on a dice
      */
     public void saveDice(int index){
-        dices[index].toggleSaved();
+        if(savePossible(index)){
+            dices[index].toggleSaved();
+        }
+
+
+
+
         if(dices[index].isSaved()){
             roundScore += dices[index].getValue();
         }
@@ -209,6 +235,10 @@ public class ThirtyGame {
         }
         else if(selectedCount != 6 && redoCount == 2){
             gameStatus = "Only two redos per turn!";
+            return false;
+        }
+        else if(roundCount == 0){
+            gameStatus = "Please roll once before ending turn!";
             return false;
         }
         else{
