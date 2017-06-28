@@ -4,6 +4,9 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *  This class represents a game of Thirty.
  *
@@ -25,7 +28,7 @@ public class ThirtyGame {
 
     int currentLow;
 
-    int firstDice;
+    private List<Dice> savedDice = new ArrayList<>();
 
 
     String gameStatus;
@@ -187,51 +190,53 @@ public class ThirtyGame {
         dices[index].toggleSelection();
     }
 
-    private boolean savePossible(int index){
-        if(firstDice == 0 && currentLow == 0){
-            firstDice = dices[index].getValue();
-            return true;
-        }
-        else if(firstDice != 0) {
-            setLow(firstDice + dices[index].getValue());
-            firstDice = 0;
-            return true;
-        }
-        else if(currentLow != 0 && firstDice == 0){
-            firstDice = dices[index].getValue();
-            return true;
-        }
-        else if(currentLow != 0 && firstDice != 0){
-            if(checkLow(firstDice, dices[index].getValue())){
+   private boolean isSavePossible(int dice){
+       if(savedDice.size() < 2){
+           setLow(0);
+           return true;
+       }
+       if(savedDice.size() == 2){
+           setLow(savedDice.get(0).getValue()+ savedDice.get(1).getValue());
+           return true;
+       }
+       else if(getCurrentLow() != 0 ){
+           if(getCurrentLow() == dice + savedDice.get(savedDice.size() - 1).getValue()){
                return true;
-            }
-            else{
-                return false;
-            }
-        }
-        else{
-            return false;
-        }
+           }
+           else{
+               return false;
+           }
 
-    }
-
-
+       }
+    return false;
+   }
 
     /**
      * Toggles save on a dice
      */
     public void saveDice(int index){
-        if(savePossible(index)){
+        if(isSavePossible(dices[index].getValue())){
             dices[index].toggleSaved();
+
+            if(dices[index].isSaved()){
+                savedDice.add(dices[index]);
+                Log.d("ThirtyActivity", "Added: " + Integer.toString(dices[index].getValue()));
+            }
+            else{
+                savedDice.remove(dices[index]);
+                Log.d("ThirtyActivity", "Removed: " + Integer.toString(dices[index].getValue()));
+            }
+
+
+            // if(dices[index].isSaved()){
+            //     roundScore += dices[index].getValue();
+            // }
+            // else{
+            //     roundScore -= dices[index].getValue();
+            // }
+            calculateRoundScore();
         }
 
-      // if(dices[index].isSaved()){
-      //     roundScore += dices[index].getValue();
-      // }
-      // else{
-      //     roundScore -= dices[index].getValue();
-      // }
-        calculateRoundScore();
     }
 
 
@@ -298,6 +303,7 @@ public class ThirtyGame {
      * calculates the points awarded for choises made
      */
     private void calculateRoundScore() {
+        Log.d("ThirtyActivity", "Calculating points....");
         int pairs = 0;
         for (int i = 0; i < dices.length; ++i) {
             if (dices[i].isSaved()) {
@@ -307,7 +313,7 @@ public class ThirtyGame {
         pairs /=  2;
 
         roundScore = pairs * currentLow;
-        Log.d("ThirtyGame", Integer.toString(roundScore));
+        Log.d("ThirtyActivity", Integer.toString(roundScore));
     }
 
     public String getGameStatus() {
