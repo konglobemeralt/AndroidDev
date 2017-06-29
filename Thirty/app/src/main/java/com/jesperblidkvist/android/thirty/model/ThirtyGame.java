@@ -61,8 +61,16 @@ public class ThirtyGame implements Parcelable {
 
         dices = new Dice[6];
         for (int i = 0; i < dices.length; ++i) {
+
             dices[i] = new Dice();
             dices[i].setValue(input.readInt());
+
+            int diceBool = input.readInt();
+            if(diceBool == 1){
+                dices[i].setSaved(true);
+            }
+
+
         }
 
         //dices[0].setValue(input.readInt());
@@ -394,12 +402,20 @@ private void calculateLow(){
                 this.roundScore,
                 this.roundCount,
                 this.dices[0].getValue(),
+                this.dices[0].isSaved() ? 1 : 0,
                 this.dices[1].getValue(),
+                this.dices[1].isSaved() ? 1 : 0,
                 this.dices[2].getValue(),
+                this.dices[2].isSaved() ? 1 : 0,
                 this.dices[3].getValue(),
+                this.dices[3].isSaved() ? 1 : 0,
                 this.dices[4].getValue(),
-                this.dices[5].getValue()
+                this.dices[4].isSaved() ? 1 : 0,
+                this.dices[5].getValue(),
+                this.dices[5].isSaved() ? 1 : 0,
         });
+
+
     }
 
  //  public ThirtyGame(Parcel in){
