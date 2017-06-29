@@ -52,6 +52,24 @@ public class ThirtyGame implements Parcelable {
         rollDices();
     }
 
+    public ThirtyGame(Parcel input ){
+        dices = new Dice[6];
+        for (int i = 0; i < dices.length; ++i) {
+            dices[i] = new Dice();
+        }
+
+        this.totalScore = input.readInt();
+        this.roundScore = input.readInt();
+        this.roundCount = input.readInt();
+
+        this.redoCount = 0;
+        this.currentLow = 0;
+
+        rollDices();
+
+
+    }
+
     /**
      * Sets all the dices in the game to 1.
      */
@@ -363,14 +381,14 @@ private void calculateLow(){
                 this.roundCount});
     }
 
-    public ThirtyGame(Parcel in){
-        int[] data = new int[3];
-        in.readIntArray(data);
-        // the order needs to be the same as in writeToParcel() method
-        this.totalScore = data[0];
-        this.roundScore = data[1];
-        this.roundCount = data[2];
-    }
+ //  public ThirtyGame(Parcel in){
+ //      int[] data = new int[3];
+ //      in.readIntArray(data);
+ //      // the order needs to be the same as in writeToParcel() method
+ //      this.totalScore = data[0];
+ //      this.roundScore = data[1];
+ //      this.roundCount = data[2];
+ //  }
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public ThirtyGame createFromParcel(Parcel in) {
             return new ThirtyGame(in);
