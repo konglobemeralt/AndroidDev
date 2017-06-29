@@ -89,19 +89,21 @@ public class ThirtyActivity extends AppCompatActivity {
         });
 
 
-        initDices();
-        game = new ThirtyGame();
-        updateDices();
+
+
 
         mRoundPoints = (TextView) findViewById(R.id.roundPointsString);
         mTotalPoints = (TextView) findViewById(R.id.totalPointsString);
         mlowString = (TextView) findViewById(R.id.lowString);
 
+        initDices();
+        game = new ThirtyGame();
 
         if(savedInstanceState != null){
             game = (ThirtyGame) savedInstanceState.getParcelable(GAME_STATE);
         }
 
+        updateDices();
         updateStrings();
     }
 

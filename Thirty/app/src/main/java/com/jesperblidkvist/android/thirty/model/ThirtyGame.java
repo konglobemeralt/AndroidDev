@@ -53,22 +53,32 @@ public class ThirtyGame implements Parcelable {
     }
 
     public ThirtyGame(Parcel input ){
-        dices = new Dice[6];
-        for (int i = 0; i < dices.length; ++i) {
-            dices[i] = new Dice();
-        }
+
 
         this.totalScore = input.readInt();
         this.roundScore = input.readInt();
         this.roundCount = input.readInt();
 
-        Log.d("ThirtyActivity", "Using extra constructor");
+        dices = new Dice[6];
+        for (int i = 0; i < dices.length; ++i) {
+            dices[i] = new Dice();
+            dices[i].setValue(input.readInt());
+        }
+
+        //dices[0].setValue(input.readInt());
+        //dices[1].setValue(input.readInt());
+        //dices[2].setValue(input.readInt());
+        //dices[3].setValue(input.readInt());
+        //dices[4].setValue(input.readInt());
+        //dices[5].setValue(input.readInt());
+
+
 
 
         this.redoCount = 0;
         this.currentLow = 0;
 
-        rollDices();
+        //rollDices();
 
 
     }
@@ -379,9 +389,17 @@ private void calculateLow(){
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeIntArray(new int[] {this.totalScore,
+        dest.writeIntArray(new int[] {
+                this.totalScore,
                 this.roundScore,
-                this.roundCount});
+                this.roundCount,
+                this.dices[0].getValue(),
+                this.dices[1].getValue(),
+                this.dices[2].getValue(),
+                this.dices[3].getValue(),
+                this.dices[4].getValue(),
+                this.dices[5].getValue()
+        });
     }
 
  //  public ThirtyGame(Parcel in){
