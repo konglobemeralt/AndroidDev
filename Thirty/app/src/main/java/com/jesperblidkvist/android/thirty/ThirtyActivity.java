@@ -50,7 +50,7 @@ public class ThirtyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thirty);
 
-
+        Intent intent = getIntent();
 
         mRollDiceButton = (Button) findViewById(R.id.rollButton);
         mRollDiceButton.setOnClickListener(new Button.OnClickListener() {
@@ -73,6 +73,7 @@ public class ThirtyActivity extends AppCompatActivity {
             public void onClick(View v) {
                         if(game.isGameOver()){
                             endGame(v);
+                            finish();
                         }
                         else{
                             game.endTurn();
