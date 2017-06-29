@@ -71,13 +71,14 @@ public class ThirtyActivity extends AppCompatActivity {
         mEndTurnButton = (Button) findViewById(R.id.endTurnButton);
         mEndTurnButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                        if(game.playPossible()){
-                            game.endTurn();
-                            updateDices();
-                            updateStrings();
+                        if(game.isGameOver()){
+                            endGame(v);
                         }
                         else{
-                            endGame(v);
+                            game.endTurn();
+                            g
+                            updateDices();
+                            updateStrings();
                         }
 
 
