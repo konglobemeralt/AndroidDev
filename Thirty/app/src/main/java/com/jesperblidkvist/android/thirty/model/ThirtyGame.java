@@ -1,6 +1,8 @@
 package com.jesperblidkvist.android.thirty.model;
 
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -17,7 +19,7 @@ import java.util.List;
  * Created by Jesper on 2017-06-22.
  */
 
-public class ThirtyGame {
+public class ThirtyGame implements Parcelable {
 
     private Dice[] dices;
     int redoCount;
@@ -241,6 +243,9 @@ public class ThirtyGame {
         calculateRoundScore();
     }
 
+ /**
+  * Calculates low
+  */
 private void calculateLow(){
     if(savedDice.size() == 2){
         setLow(savedDice.get(0).getValue()+ savedDice.get(1).getValue());
@@ -342,4 +347,39 @@ private void calculateLow(){
     public String getGameStatus() {
         return gameStatus;
     }
+
+
+    // Parcelling part
+    //TODO: Perhaps create a parcelData class that handles this?
+    @Override
+    public int describeContents(){
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeIntArray(new int[] {this.totalScore,
+                this.roundScore,
+                this.roundCount});
+    }
+
+    public ThirtyGame(Parcel in){
+        int[] data = new int[3];
+        in.readIntArray(data);
+        // the order needs to be the same as in writeToParcel() method
+        this.totalScore = data[0];
+        this.roundScore = data[1];
+        this.roundCount = data[2];
+    }
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public ThirtyGame createFromParcel(Parcel in) {
+            return new ThirtyGame(in);
+        }
+
+        public ThirtyGame[] newArray(int size) {
+            return new ThirtyGame[size];
+        }
+    };
+
+
 }

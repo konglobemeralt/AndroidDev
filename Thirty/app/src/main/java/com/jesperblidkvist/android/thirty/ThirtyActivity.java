@@ -96,6 +96,11 @@ public class ThirtyActivity extends AppCompatActivity {
         mTotalPoints = (TextView) findViewById(R.id.totalPointsString);
         mlowString = (TextView) findViewById(R.id.lowString);
         updateStrings();
+
+        if(savedInstanceState != null){
+            Bundle data = getIntent().getExtras();
+            //game = (Student) data.getParcelable("student");
+        }
     }
 
     /**
@@ -185,4 +190,17 @@ public class ThirtyActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_SCORE, totalScore);
         startActivity(intent);
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+
+    }
+
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+
+    }
+
 }
