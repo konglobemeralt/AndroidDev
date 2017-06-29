@@ -76,7 +76,6 @@ public class ThirtyActivity extends AppCompatActivity {
                         }
                         else{
                             game.endTurn();
-                            g
                             updateDices();
                             updateStrings();
                         }
