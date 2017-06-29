@@ -270,6 +270,10 @@ private void calculateLow(){
             gameStatus = "Only two redos per turn!";
             return false;
         }
+        else if(roundCount == 10){
+            gameStatus = "Game over!";
+            return false;
+        }
 
         else{
             gameStatus = "Playing as normal";

@@ -5,4 +5,6 @@
     <string name="total_score">Total Points: </string>
     <string name="round_score">Current selection: </string>
     <string name="low_string">Low: </string>
+    <string name="total_score_endgame">Total score was: </string>
+    <string name="play_again_button">Play again</string>
 </resources>

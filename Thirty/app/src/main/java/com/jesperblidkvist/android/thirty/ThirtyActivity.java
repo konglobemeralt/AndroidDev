@@ -1,6 +1,7 @@
 package com.jesperblidkvist.android.thirty;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ThirtyActivity extends AppCompatActivity {
+
+    public static final String EXTRA_SCORE = "com.example.ThirtyActivty.SCORE";
 
     private ThirtyGame game;
     private Button mRollDiceButton;
@@ -68,9 +71,16 @@ public class ThirtyActivity extends AppCompatActivity {
         mEndTurnButton = (Button) findViewById(R.id.endTurnButton);
         mEndTurnButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                        game.endTurn();
-                        updateDices();
-                        updateStrings();
+                        if(game.playPossible()){
+                            game.endTurn();
+                            updateDices();
+                            updateStrings();
+                        }
+                        else{
+                            endGame(v);
+                        }
+
+
 
                 //Log.d("ThirtyActivity", game.toString());
             }
@@ -163,5 +173,15 @@ public class ThirtyActivity extends AppCompatActivity {
     private void updateScore(){
         mRoundPoints.setText("Current selection: " + Integer.toString(game.getRoundScore()));
         mTotalPoints.setText("Total Points: " + Integer.toString(game.getTotalScore()));
+    }
+
+    /**
+     * Ends game, starting end game activity
+     */
+    public void endGame(View view) {
+        Intent intent = new Intent(this, EndGameActivity.class);
+        int totalScore = this.game.getTotalScore();
+        intent.putExtra(EXTRA_SCORE, totalScore);
+        startActivity(intent);
     }
 }
