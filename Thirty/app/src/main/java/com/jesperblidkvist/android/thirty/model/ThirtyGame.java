@@ -62,6 +62,9 @@ public class ThirtyGame implements Parcelable {
         this.roundScore = input.readInt();
         this.roundCount = input.readInt();
 
+        Log.d("ThirtyActivity", "Using extra constructor");
+
+
         this.redoCount = 0;
         this.currentLow = 0;
 
@@ -391,10 +394,12 @@ private void calculateLow(){
  //  }
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public ThirtyGame createFromParcel(Parcel in) {
+            Log.d("ThirtyActivity", "Returning that");
             return new ThirtyGame(in);
         }
 
         public ThirtyGame[] newArray(int size) {
+            Log.d("ThirtyActivity", "Returning this");
             return new ThirtyGame[size];
         }
     };

@@ -19,6 +19,7 @@ import java.util.List;
 public class ThirtyActivity extends AppCompatActivity {
 
     public static final String EXTRA_SCORE = "com.example.ThirtyActivty.SCORE";
+    private static final String GAME_STATE = "state_game" ;
 
     private ThirtyGame game;
     private Button mRollDiceButton;
@@ -95,12 +96,13 @@ public class ThirtyActivity extends AppCompatActivity {
         mRoundPoints = (TextView) findViewById(R.id.roundPointsString);
         mTotalPoints = (TextView) findViewById(R.id.totalPointsString);
         mlowString = (TextView) findViewById(R.id.lowString);
-        updateStrings();
+
 
         if(savedInstanceState != null){
-            Bundle data = getIntent().getExtras();
-            //game = (Student) data.getParcelable("student");
+            game = (ThirtyGame) savedInstanceState.getParcelable(GAME_STATE);
         }
+
+        updateStrings();
     }
 
     /**
@@ -194,12 +196,11 @@ public class ThirtyActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState){
         super.onSaveInstanceState(savedInstanceState);
-
+        savedInstanceState.putParcelable(GAME_STATE, this.game);
     }
 
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-
 
     }
 
