@@ -19,6 +19,13 @@
         android:text="@string/total_score_endgame"/>
 
 
+    <TextView
+        android:id="@+id/choicesStringEndGame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.50"
+        android:text="TextView"/>
+
     <Button
             android:id="@+id/playAgainButton"
             android:layout_width="match_parent"

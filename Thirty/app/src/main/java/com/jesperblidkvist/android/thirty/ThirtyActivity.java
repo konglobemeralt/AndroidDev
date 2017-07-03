@@ -19,7 +19,8 @@ import java.util.List;
 public class ThirtyActivity extends AppCompatActivity {
 
     public static final String EXTRA_SCORE = "com.example.ThirtyActivty.SCORE";
-    private static final String GAME_STATE = "state_game" ;
+    public static final String CHOICE_LIST = "com.example.ThirtyActivty.CHOICE_LIST";
+    private static final String GAME_STATE = "scom.example.ThirtyActivty.state_game" ;
 
     private ThirtyGame game;
     private Button mRollDiceButton;
@@ -81,9 +82,6 @@ public class ThirtyActivity extends AppCompatActivity {
                             updateDices();
                             updateStrings();
                         }
-
-
-
                 //Log.d("ThirtyActivity", game.toString());
             }
         });
@@ -192,6 +190,7 @@ public class ThirtyActivity extends AppCompatActivity {
         Intent intent = new Intent(this, EndGameActivity.class);
         int totalScore = this.game.getTotalScore();
         intent.putExtra(EXTRA_SCORE, totalScore);
+        intent.putStringArrayListExtra(CHOICE_LIST, (ArrayList<String>) this.game.getChoices());
         startActivity(intent);
     }
 
