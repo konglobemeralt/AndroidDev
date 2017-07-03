@@ -76,25 +76,9 @@ public class ThirtyGame implements Parcelable {
             if(diceBool == 1){
                 dices[i].setSaved(true);
             }
-
-
         }
-
-        //dices[0].setValue(input.readInt());
-        //dices[1].setValue(input.readInt());
-        //dices[2].setValue(input.readInt());
-        //dices[3].setValue(input.readInt());
-        //dices[4].setValue(input.readInt());
-        //dices[5].setValue(input.readInt());
-
-
-
-
         this.redoCount = 0;
         this.currentLow = 0;
-
-        //rollDices();
-
 
     }
 
@@ -196,11 +180,8 @@ public class ThirtyGame implements Parcelable {
      * Increase the turncounter by one
      */
     private void increaseTurnCount(){
-        if(roundCount !=10 ){
+        if(roundCount <10 ){
             roundCount++;
-        }else
-        {
-
         }
     }
 
@@ -223,8 +204,9 @@ public class ThirtyGame implements Parcelable {
     /**
      * Ends a turn
      */
-    public void endTurn(){
+    public void endTurn(String scoreChoice){
         increaseTurnCount();
+        scoringMehtods.remove(scoreChoice);
         saveChoices();
         resetGame();
     }
@@ -322,7 +304,7 @@ private void calculateLow(){
      * Checks if game is over
      */
     public boolean isGameOver(){
-         if(roundCount == 10){
+         if(roundCount == 9){
             gameStatus = "Game over!";
             return true;
         }

@@ -76,12 +76,15 @@ public class ThirtyActivity extends AppCompatActivity {
         mEndTurnButton = (Button) findViewById(R.id.endTurnButton);
         mEndTurnButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
+
+                game.endTurn(mScoringSpinner.getSelectedItem().toString());
+
                         if(game.isGameOver()){
                             endGame(v);
                             finish();
                         }
                         else{
-                            game.endTurn();
+                            updateSpinner();
                             updateDices();
                             updateStrings();
                         }
@@ -103,14 +106,10 @@ public class ThirtyActivity extends AppCompatActivity {
             game = (ThirtyGame) savedInstanceState.getParcelable(GAME_STATE);
         }
 
-        List<String> spinnerArray =  new ArrayList<>(game.getAvaliableScoringMethods());
-
 
         mScoringSpinner = (Spinner) findViewById(R.id.ScoringSpinner);
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray);
-        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mScoringSpinner.setAdapter(spinnerArrayAdapter);
 
+        updateSpinner();
         updateDices();
         updateStrings();
     }
@@ -182,6 +181,16 @@ public class ThirtyActivity extends AppCompatActivity {
      */
     private void updateStrings(){
         updateScore();
+    }
+
+    /**
+     * updates the spinner
+     */
+    private void updateSpinner(){
+        List<String> spinnerArray =  new ArrayList<>(game.getAvaliableScoringMethods());
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray);
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mScoringSpinner.setAdapter(spinnerArrayAdapter);
     }
 
     /**
