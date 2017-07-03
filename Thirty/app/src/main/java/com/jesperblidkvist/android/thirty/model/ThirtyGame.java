@@ -31,6 +31,7 @@ public class ThirtyGame implements Parcelable {
     int currentLow;
 
     private List<Dice> savedDice = new ArrayList<>();
+    private List<String> choices = new ArrayList<>();
 
 
     String gameStatus;
@@ -198,6 +199,14 @@ public class ThirtyGame implements Parcelable {
     }
 
     /**
+     * Gets the choices made during gameplay as a list of strings.
+     */
+    public List<String> getChoices() {
+        return choices;
+    }
+
+
+    /**
      * Plays a turn
      */
     public void playTurn(){
@@ -210,7 +219,16 @@ public class ThirtyGame implements Parcelable {
      */
     public void endTurn(){
         increaseTurnCount();
+        saveChoices();
         resetGame();
+    }
+
+    private void saveChoices(){
+        choices.add(savedDice.toString());
+        for(int i = 0; i < choices.size(); i++){
+            Log.d("ThirtyActivity", "round: " + (i + 1) + " " + choices.get(i).toString());
+        }
+
     }
 
     /**
@@ -428,12 +446,10 @@ private void calculateLow(){
  //  }
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public ThirtyGame createFromParcel(Parcel in) {
-            Log.d("ThirtyActivity", "Returning that");
             return new ThirtyGame(in);
         }
 
         public ThirtyGame[] newArray(int size) {
-            Log.d("ThirtyActivity", "Returning this");
             return new ThirtyGame[size];
         }
     };
