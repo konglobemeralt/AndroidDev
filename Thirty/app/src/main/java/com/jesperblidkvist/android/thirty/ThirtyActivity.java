@@ -6,8 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +31,8 @@ public class ThirtyActivity extends AppCompatActivity {
     private TextView mTotalPoints;
     private TextView mRoundPoints;
     private TextView mlowString;
+
+    private Spinner mScoringSpinner;
 
     /**
      * List of each visual representation of dices.
@@ -87,12 +91,15 @@ public class ThirtyActivity extends AppCompatActivity {
         });
 
 
-
-
-
         mRoundPoints = (TextView) findViewById(R.id.roundPointsString);
         mTotalPoints = (TextView) findViewById(R.id.totalPointsString);
         mlowString = (TextView) findViewById(R.id.lowString);
+
+        mScoringSpinner = (Spinner) findViewById(R.id.ScoringSpinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.scoring_methods, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mScoringSpinner.setAdapter(adapter);
 
         initDices();
         game = new ThirtyGame();

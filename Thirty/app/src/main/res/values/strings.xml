@@ -7,4 +7,18 @@
     <string name="low_string">Low: </string>
     <string name="total_score_endgame">Total score was: </string>
     <string name="play_again_button">Play again</string>
+
+    <string-array name="scoring_methods">
+        <item>low</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
+
 </resources>

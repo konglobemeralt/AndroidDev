@@ -280,12 +280,12 @@ public class ThirtyGame implements Parcelable {
             //Log.d("ThirtyActivity", "Removed: " + Integer.toString(dices[index].getValue()));
         }
         else{
-            if(isSavePossible(dices[index].getValue())){
+            //if(isSavePossible(dices[index].getValue())){
                 dices[index].toggleSaved();
 
                 savedDice.add(dices[index]);
                 //Log.d("ThirtyActivity", "Added: " + Integer.toString(dices[index].getValue()));
-                }
+              //  }
         }
 
             // if(dices[index].isSaved()){
@@ -388,17 +388,19 @@ private void calculateLow(){
      * calculates the points awarded for choises made
      */
     private void calculateRoundScore() {
-        Log.d("ThirtyActivity", "Calculating points....");
-        int pairs = 0;
-        for (int i = 0; i < dices.length; ++i) {
-            if (dices[i].isSaved()) {
-                pairs += 1;
-            }
-        }
-        pairs /=  2;
 
-        roundScore = pairs * currentLow;
-        Log.d("ThirtyActivity", Integer.toString(roundScore));
+
+        // Log.d("ThirtyActivity", "Calculating points....");
+      // int pairs = 0;
+      // for (int i = 0; i < dices.length; ++i) {
+      //     if (dices[i].isSaved()) {
+      //         pairs += 1;
+      //     }
+      // }
+      // pairs /=  2;
+
+      // roundScore = pairs * currentLow;
+      // Log.d("ThirtyActivity", Integer.toString(roundScore));
     }
 
     public String getGameStatus() {
