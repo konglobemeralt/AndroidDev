@@ -94,6 +94,6 @@ public class Dice {
      */
     @Override
     public String toString() {
-        return "This dice has the value " + value;
+        return Integer.toString(value);
     }
 }

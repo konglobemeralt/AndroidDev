@@ -224,9 +224,9 @@ public class ThirtyGame implements Parcelable {
     }
 
     private void saveChoices(){
-        choices.add(roundCount + " " + savedDice.toString() + "\n");
+        choices.add(roundCount + " " + savedDice.toString() + " For " + roundScore + " Points " + "\n");
         for(int i = 0; i < choices.size(); i++){
-            Log.d("ThirtyActivity", "round: " + (i + 1) + " " + choices.get(i).toString() + "\n");
+            Log.d("ThirtyActivity", "round " + (i + 1) + ": " + choices.get(i).toString() + "\n");
         }
 
     }
