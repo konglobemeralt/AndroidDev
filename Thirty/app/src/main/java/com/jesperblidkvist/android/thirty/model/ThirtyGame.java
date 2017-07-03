@@ -29,16 +29,13 @@ public class ThirtyGame implements Parcelable {
     int totalScore;
     int roundScore;
 
-    int currentLow;
-
     private List<Dice> savedDice = new ArrayList<>();
     private List<String> choices = new ArrayList<>();
     private List<String> scoringMehtods = new ArrayList<>();
 
-
-
     String gameStatus;
 
+    private SumOfSet scoring = new SumOfSet();
 
     public ThirtyGame() {
         dices = new Dice[6];
@@ -51,7 +48,6 @@ public class ThirtyGame implements Parcelable {
 
         redoCount = 0;
         roundCount = 0;
-        currentLow = 0;
 
         scoringMehtods = new ArrayList<>(
                 Arrays.asList("low", "4", "5", "6", "7", "8", "9", "10", "11", "12"));
@@ -78,7 +74,6 @@ public class ThirtyGame implements Parcelable {
             }
         }
         this.redoCount = 0;
-        this.currentLow = 0;
 
     }
 
@@ -115,13 +110,6 @@ public class ThirtyGame implements Parcelable {
     }
 
     /**
-     * Gets the current low.
-     */
-    public int getCurrentLow(){
-        return currentLow;
-    }
-
-    /**
      * Returns all the dices in the game.
      */
     public Dice[] getAllDices() {
@@ -131,10 +119,21 @@ public class ThirtyGame implements Parcelable {
     /**
      * Returns all the dices in the game.
      */
-    public int[] getAllDiceValues() {
-        int[] values = new int[6];
+    public ArrayList<Integer> getAllDiceValues() {
+        ArrayList<Integer> values = new ArrayList<>();
         for (int i = 0; i < dices.length; ++i) {
-            values[i] = dices[i].getValue();
+            values.add(dices[i].getValue());
+        }
+        return values;
+    }
+
+    /**
+     * Returns all the selected dices in the game.
+     */
+    public ArrayList<Integer> getAllSelectedDiceValues() {
+        ArrayList<Integer> values = new ArrayList<>();
+        for (int i = 0; i < dices.length; ++i) {
+            values.add(dices[i].getValue());
         }
         return values;
     }
@@ -207,12 +206,19 @@ public class ThirtyGame implements Parcelable {
     public void endTurn(String scoreChoice){
         increaseTurnCount();
         scoringMehtods.remove(scoreChoice);
-        saveChoices();
+        if(scoreChoice != "low"){
+            roundScore += calculatePoints(Integer.parseInt(scoreChoice));
+        }else
+        {
+            roundScore += calculateLow();
+        }
+
+        saveChoices(scoreChoice);
         resetGame();
     }
 
-    private void saveChoices(){
-        choices.add(roundCount + " " + savedDice.toString() + " For " + roundScore + " Points " + "\n");
+    private void saveChoices(String scoreChoice){
+        choices.add("Plaved " + scoreChoice + " and selected: " + savedDice.toString() + " For " + roundScore + " Points " + "\n");
         for(int i = 0; i < choices.size(); i++){
             Log.d("ThirtyActivity", "round " + (i + 1) + ": " + choices.get(i).toString() + "\n");
         }
@@ -227,9 +233,7 @@ public class ThirtyGame implements Parcelable {
         resetDice();
         savedDice.clear();
         totalScore += roundScore;
-        roundScore = 0;
-        currentLow = 0;
-    }
+        roundScore = 0;}
 
 
 
@@ -240,23 +244,6 @@ public class ThirtyGame implements Parcelable {
         dices[index].toggleSelection();
     }
 
-   private boolean isSavePossible(int dice){
-       if(savedDice.size() < 2 ){
-           return true;
-       }
-       else if((savedDice.size() % 2)!= 0){
-           if(getCurrentLow() == dice + savedDice.get(savedDice.size() - 1).getValue()){
-               return true;
-           }
-           else{
-               return false;
-           }
-
-       }
-       else{
-           return true;
-       }
-   }
 
     /**
      * Toggles save on a dice
@@ -265,39 +252,24 @@ public class ThirtyGame implements Parcelable {
         if(dices[index].isSaved()){
             dices[index].toggleSaved();
             savedDice.remove(dices[index]);
-            //Log.d("ThirtyActivity", "Removed: " + Integer.toString(dices[index].getValue()));
         }
         else{
-            //if(isSavePossible(dices[index].getValue())){
                 dices[index].toggleSaved();
-
                 savedDice.add(dices[index]);
-                //Log.d("ThirtyActivity", "Added: " + Integer.toString(dices[index].getValue()));
-              //  }
         }
-
-            // if(dices[index].isSaved()){
-            //     roundScore += dices[index].getValue();
-            // }
-            // else{
-            //     roundScore -= dices[index].getValue();
-            // }
-
-
-        calculateLow();
-        calculateRoundScore();
     }
 
  /**
   * Calculates low
   */
-private void calculateLow(){
-    if(savedDice.size() == 2){
-        setLow(savedDice.get(0).getValue()+ savedDice.get(1).getValue());
+private int calculateLow(){
+    int score = 0;
+    for (int i = 0; i < dices.length; ++i) {
+        if(dices[i].isSaved() && dices[i].getValue() <= 3){
+            score++;
+        }
     }
-    else if(savedDice.size() <= 1){
-        setLow(0);
-    }
+    return score;
 }
 
     /**
@@ -354,41 +326,15 @@ private void calculateLow(){
     }
 
     /**
-     * Sets the current low value to a sum of two dices values
+     * Calculate score from set of selected dices
      */
-    private void setLow(int sum){
-        currentLow = sum;
-    }
-
-    /**
-     * checks a pair of dice against first sum.
-     */
-    private boolean checkLow(int diceA, int diceB){
-        if(diceA + diceB == currentLow){
-            return true;
+    private int calculatePoints(int scoringMethod){
+        int[] set = new int[getAllSelectedDiceValues().size()];
+        for (int i=0; i < set.length; i++) {
+            set[i] = getAllSelectedDiceValues().get(i).intValue();
         }
-        else{
-            return false;
-        }
-    }
 
-    /**
-     * calculates the points awarded for choises made
-     */
-    private void calculateRoundScore() {
-
-
-        // Log.d("ThirtyActivity", "Calculating points....");
-      // int pairs = 0;
-      // for (int i = 0; i < dices.length; ++i) {
-      //     if (dices[i].isSaved()) {
-      //         pairs += 1;
-      //     }
-      // }
-      // pairs /=  2;
-
-      // roundScore = pairs * currentLow;
-      // Log.d("ThirtyActivity", Integer.toString(roundScore));
+        return scoring.sumOfSubset(set, scoringMethod);
     }
 
     public List<String> getAvaliableScoringMethods(){
