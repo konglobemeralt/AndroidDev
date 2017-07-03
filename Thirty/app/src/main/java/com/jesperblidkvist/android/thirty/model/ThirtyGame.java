@@ -35,7 +35,6 @@ public class ThirtyGame implements Parcelable {
 
     String gameStatus;
 
-    private SumOfSet scoring = new SumOfSet();
 
     public ThirtyGame() {
         dices = new Dice[6];
@@ -207,12 +206,15 @@ public class ThirtyGame implements Parcelable {
         increaseTurnCount();
         scoringMehtods.remove(scoreChoice);
         if(scoreChoice != "low"){
-            roundScore += calculatePoints(Integer.parseInt(scoreChoice));
+            roundScore = calculatePoints(Integer.parseInt(scoreChoice));
+            Log.d("ThirtyActivity", "RouncScoreCalc " + Integer.toString(roundScore));
         }else
         {
-            roundScore += calculateLow();
-        }
+            roundScore = calculateLow();
+            Log.d("ThirtyActivity", "LowScoreCalc " + Integer.toString(roundScore));
 
+        }
+        Log.d("ThirtyActivity", "CalcPoints " + Integer.toString(roundScore));
         saveChoices(scoreChoice);
         resetGame();
     }
@@ -255,7 +257,10 @@ public class ThirtyGame implements Parcelable {
         }
         else{
                 dices[index].toggleSaved();
-                savedDice.add(dices[index]);
+                if(!dices[index].isSaved()){
+                    savedDice.add(dices[index]);
+                }
+
         }
     }
 
@@ -329,12 +334,12 @@ private int calculateLow(){
      * Calculate score from set of selected dices
      */
     private int calculatePoints(int scoringMethod){
-        int[] set = new int[getAllSelectedDiceValues().size()];
+        Integer [] set = new Integer[getAllSelectedDiceValues().size()];
         for (int i=0; i < set.length; i++) {
             set[i] = getAllSelectedDiceValues().get(i).intValue();
         }
-
-        return scoring.sumOfSubset(set, scoringMethod);
+        SetHelper scoring = new SetHelper();
+        return scoring.getCombinations(set, scoringMethod);
     }
 
     public List<String> getAvaliableScoringMethods(){
