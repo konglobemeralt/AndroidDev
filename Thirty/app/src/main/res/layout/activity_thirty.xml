@@ -96,13 +96,6 @@
         android:text="@string/round_score"/>
 
     <TextView
-        android:id="@+id/lowString"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.08"
-        android:text="@string/low_string"/>
-
-    <TextView
         android:id="@+id/totalPointsString"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

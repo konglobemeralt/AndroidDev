@@ -30,7 +30,6 @@ public class ThirtyActivity extends AppCompatActivity {
 
     private TextView mTotalPoints;
     private TextView mRoundPoints;
-    private TextView mlowString;
 
     private Spinner mScoringSpinner;
 
@@ -93,13 +92,9 @@ public class ThirtyActivity extends AppCompatActivity {
 
         mRoundPoints = (TextView) findViewById(R.id.roundPointsString);
         mTotalPoints = (TextView) findViewById(R.id.totalPointsString);
-        mlowString = (TextView) findViewById(R.id.lowString);
 
-        mScoringSpinner = (Spinner) findViewById(R.id.ScoringSpinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.scoring_methods, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mScoringSpinner.setAdapter(adapter);
+
+
 
         initDices();
         game = new ThirtyGame();
@@ -107,6 +102,14 @@ public class ThirtyActivity extends AppCompatActivity {
         if(savedInstanceState != null){
             game = (ThirtyGame) savedInstanceState.getParcelable(GAME_STATE);
         }
+
+        List<String> spinnerArray =  new ArrayList<>(game.getAvaliableScoringMethods());
+
+
+        mScoringSpinner = (Spinner) findViewById(R.id.ScoringSpinner);
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray);
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mScoringSpinner.setAdapter(spinnerArrayAdapter);
 
         updateDices();
         updateStrings();
@@ -178,7 +181,6 @@ public class ThirtyActivity extends AppCompatActivity {
      * updates all the strings in the view
      */
     private void updateStrings(){
-        mlowString.setText("Low: " + Integer.toString(game.getCurrentLow()));
         updateScore();
     }
 

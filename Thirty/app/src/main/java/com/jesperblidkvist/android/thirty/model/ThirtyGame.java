@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -32,6 +33,8 @@ public class ThirtyGame implements Parcelable {
 
     private List<Dice> savedDice = new ArrayList<>();
     private List<String> choices = new ArrayList<>();
+    private List<String> scoringMehtods = new ArrayList<>();
+
 
 
     String gameStatus;
@@ -49,6 +52,9 @@ public class ThirtyGame implements Parcelable {
         redoCount = 0;
         roundCount = 0;
         currentLow = 0;
+
+        scoringMehtods = new ArrayList<>(
+                Arrays.asList("low", "4", "5", "6", "7", "8", "9", "10", "11", "12"));
 
         rollDices();
     }
@@ -401,6 +407,11 @@ private void calculateLow(){
 
       // roundScore = pairs * currentLow;
       // Log.d("ThirtyActivity", Integer.toString(roundScore));
+    }
+
+    public List<String> getAvaliableScoringMethods(){
+        return scoringMehtods;
+
     }
 
     public String getGameStatus() {
