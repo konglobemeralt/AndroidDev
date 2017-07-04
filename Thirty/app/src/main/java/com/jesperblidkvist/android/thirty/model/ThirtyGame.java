@@ -220,7 +220,7 @@ public class ThirtyGame implements Parcelable {
     }
 
     private void saveChoices(String scoreChoice){
-        choices.add("Plaved " + scoreChoice + " and selected: " + savedDice.toString() + " For " + roundScore + " Points " + "\n");
+        choices.add("Played " + scoreChoice + " and selected: " + savedDice.toString() + " For " + roundScore + " Points " + "\n");
         for(int i = 0; i < choices.size(); i++){
             Log.d("ThirtyActivity", "round " + (i + 1) + ": " + choices.get(i).toString() + "\n");
         }
@@ -281,7 +281,7 @@ private int calculateLow(){
      * Checks if game is over
      */
     public boolean isGameOver(){
-         if(roundCount == 9){
+         if(roundCount == 10){
             gameStatus = "Game over!";
             return true;
         }
@@ -334,7 +334,7 @@ private int calculateLow(){
      * Calculate score from set of selected dices
      */
     private int calculatePoints(int scoringMethod){
-        Integer [] set = new Integer[getAllSelectedDiceValues().size()];
+        int [] set = new int[getAllSelectedDiceValues().size()];
         for (int i=0; i < set.length; i++) {
             set[i] = getAllSelectedDiceValues().get(i).intValue();
         }
