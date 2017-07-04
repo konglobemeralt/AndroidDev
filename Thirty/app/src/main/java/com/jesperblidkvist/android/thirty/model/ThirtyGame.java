@@ -11,12 +11,12 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- *  This class represents a game of Thirty.
+ * This class represents a game of Thirty.
  *
- * @author  Jesper Blidkvist
+ * @author Jesper Blidkvist
  * @version 1.0
- * @since   2017-06-22.
- *
+ * @since 2017-06-22.
+ * <p>
  * Created by Jesper on 2017-06-22.
  */
 
@@ -54,9 +54,7 @@ public class ThirtyGame implements Parcelable {
         rollDices();
     }
 
-    public ThirtyGame(Parcel input ){
-
-
+    public ThirtyGame(Parcel input) {
         this.totalScore = input.readInt();
         this.roundScore = input.readInt();
         this.roundCount = input.readInt();
@@ -68,7 +66,7 @@ public class ThirtyGame implements Parcelable {
             dices[i].setValue(input.readInt());
 
             int diceBool = input.readInt();
-            if(diceBool == 1){
+            if (diceBool == 1) {
                 dices[i].setSaved(true);
             }
         }
@@ -79,7 +77,7 @@ public class ThirtyGame implements Parcelable {
     /**
      * Sets all the dices in the game to 1.
      */
-    private void resetDice(){
+    private void resetDice() {
         for (int i = 0; i < dices.length; ++i) {
             dices[i].setSelected(false);
             dices[i].setSaved(false);
@@ -90,7 +88,7 @@ public class ThirtyGame implements Parcelable {
     /**
      * Sets redo counter to 0.
      */
-    private void resetRedoCounter(){
+    private void resetRedoCounter() {
         redoCount = 0;
     }
 
@@ -132,7 +130,7 @@ public class ThirtyGame implements Parcelable {
     public ArrayList<Integer> getAllSelectedDiceValues() {
         ArrayList<Integer> values = new ArrayList<>();
         for (int i = 0; i < dices.length; ++i) {
-            if(dices[i].isSaved()){
+            if (dices[i].isSaved()) {
                 values.add(dices[i].getValue());
             }
 
@@ -143,23 +141,23 @@ public class ThirtyGame implements Parcelable {
     /**
      * Returns the dice at a specific index
      */
-    public Dice getDiceAtIndex(int i){
+    public Dice getDiceAtIndex(int i) {
         return dices[i];
     }
 
     /**
      * Returns the value of a dice at a specific index
      */
-    public int getDiceValueAtIndex(int i){
+    public int getDiceValueAtIndex(int i) {
         return dices[i].getValue();
     }
 
     /**
      * Roll all the dices that are not saved or selected
      */
-    private void rollDices(){
+    private void rollDices() {
         for (int i = 0; i < dices.length; ++i) {
-            if(!dices[i].isSaved()){
+            if (!dices[i].isSaved()) {
                 dices[i].roll();
             }
         }
@@ -168,11 +166,10 @@ public class ThirtyGame implements Parcelable {
     /**
      * Increase the roundCounter by one
      */
-    private void increaseRoundCount(){
-        if(redoCount !=2 ){
+    private void increaseRoundCount() {
+        if (redoCount != 2) {
             redoCount++;
-        }else
-        {
+        } else {
 
         }
     }
@@ -180,8 +177,8 @@ public class ThirtyGame implements Parcelable {
     /**
      * Increase the turncounter by one
      */
-    private void increaseTurnCount(){
-        if(roundCount <10 ){
+    private void increaseTurnCount() {
+        if (roundCount < 10) {
             roundCount++;
         }
     }
@@ -193,11 +190,10 @@ public class ThirtyGame implements Parcelable {
         return choices;
     }
 
-
     /**
      * Plays a turn
      */
-    public void playTurn(){
+    public void playTurn() {
         rollDices();
         increaseRoundCount();
     }
@@ -205,14 +201,13 @@ public class ThirtyGame implements Parcelable {
     /**
      * Ends a turn
      */
-    public void endTurn(String scoreChoice){
+    public void endTurn(String scoreChoice) {
         increaseTurnCount();
         scoringMehtods.remove(scoreChoice);
-        if(scoreChoice != "low"){
+        if (scoreChoice != "low") {
             roundScore = calculatePoints(Integer.parseInt(scoreChoice));
             Log.d("ThirtyActivity", "RouncScoreCalc " + Integer.toString(roundScore));
-        }else
-        {
+        } else {
             roundScore = calculateLow();
             Log.d("ThirtyActivity", "LowScoreCalc " + Integer.toString(roundScore));
 
@@ -222,9 +217,9 @@ public class ThirtyGame implements Parcelable {
         resetGame();
     }
 
-    private void saveChoices(String scoreChoice){
+    private void saveChoices(String scoreChoice) {
         choices.add("Played " + scoreChoice + " and selected: " + savedDice.toString() + " For " + roundScore + " Points " + "\n");
-        for(int i = 0; i < choices.size(); i++){
+        for (int i = 0; i < choices.size(); i++) {
             Log.d("ThirtyActivity", "round " + (i + 1) + ": " + choices.get(i).toString() + "\n");
         }
 
@@ -233,19 +228,18 @@ public class ThirtyGame implements Parcelable {
     /**
      * Reset game variables
      */
-    private void resetGame(){
+    private void resetGame() {
         resetRedoCounter();
         resetDice();
         savedDice.clear();
         totalScore += roundScore;
-        roundScore = 0;}
-
-
+        roundScore = 0;
+    }
 
     /**
      * Toggles selection on a dice
      */
-    public void selectDice(int index){
+    public void selectDice(int index) {
         dices[index].toggleSelection();
     }
 
@@ -253,44 +247,40 @@ public class ThirtyGame implements Parcelable {
     /**
      * Toggles save on a dice
      */
-    public void saveDice(int index){
+    public void saveDice(int index) {
         dices[index].toggleSaved();
-        if(!dices[index].isSaved()){
+        if (!dices[index].isSaved()) {
             savedDice.remove(dices[index]);
-        }
-        else{
+        } else {
             savedDice.add(dices[index]);
         }
     }
 
- /**
-  * Calculates low
-  */
-private int calculateLow(){
-    int score = 0;
-    for (int i = 0; i < dices.length; ++i) {
-        if(dices[i].isSaved() && dices[i].getValue() <= 3){
-            score++;
+    /**
+     * Calculates low
+     */
+    private int calculateLow() {
+        int score = 0;
+        for (int i = 0; i < dices.length; ++i) {
+            if (dices[i].isSaved() && dices[i].getValue() <= 3) {
+                score++;
+            }
         }
+        return score;
     }
-    return score;
-}
 
     /**
      * Checks if game is over
      */
-    public boolean isGameOver(){
-         if(roundCount == 10){
+    public boolean isGameOver() {
+        if (roundCount == 10) {
             gameStatus = "Game over!";
             return true;
+        } else {
+            return false;
         }
-        else{
-             return false;
-         }
 
     }
-
-
 
     /**
      * Checks if all dices are selected
@@ -303,15 +293,13 @@ private int calculateLow(){
             }
         }
 
-        if(selectedCount == 6 && redoCount < 3){
+        if (selectedCount == 6 && redoCount < 3) {
             gameStatus = "Please deselect one or more dice...";
             return false;
-        }
-        else if(selectedCount != 6 && redoCount == 2){
+        } else if (selectedCount != 6 && redoCount == 2) {
             gameStatus = "Only two redos per turn!";
             return false;
-        }
-        else{
+        } else {
             gameStatus = "Playing as normal";
             return true;
         }
@@ -332,17 +320,17 @@ private int calculateLow(){
     /**
      * Calculate score from set of selected dices
      */
-    private int calculatePoints(int scoringMethod){
-        int [] set = new int[getAllSelectedDiceValues().size()];
-        for (int i=0; i < set.length; i++) {
+    private int calculatePoints(int scoringMethod) {
+        int[] set = new int[getAllSelectedDiceValues().size()];
+        for (int i = 0; i < set.length; i++) {
             set[i] = getAllSelectedDiceValues().get(i).intValue();
         }
-        int []set2 = {};
+        int[] set2 = {};
         SetHelper scoring = new SetHelper();
         return scoring.getCombinations(set, scoringMethod);
     }
 
-    public List<String> getAvaliableScoringMethods(){
+    public List<String> getAvaliableScoringMethods() {
         return scoringMehtods;
 
     }
@@ -351,17 +339,16 @@ private int calculateLow(){
         return gameStatus;
     }
 
-
     // Parcelling part
     //TODO: Perhaps create a parcelData class that handles this?
     @Override
-    public int describeContents(){
+    public int describeContents() {
         return 0;
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeIntArray(new int[] {
+        dest.writeIntArray(new int[]{
                 this.totalScore,
                 this.roundScore,
                 this.roundCount,
@@ -382,14 +369,6 @@ private int calculateLow(){
 
     }
 
- //  public ThirtyGame(Parcel in){
- //      int[] data = new int[3];
- //      in.readIntArray(data);
- //      // the order needs to be the same as in writeToParcel() method
- //      this.totalScore = data[0];
- //      this.roundScore = data[1];
- //      this.roundCount = data[2];
- //  }
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public ThirtyGame createFromParcel(Parcel in) {
             return new ThirtyGame(in);

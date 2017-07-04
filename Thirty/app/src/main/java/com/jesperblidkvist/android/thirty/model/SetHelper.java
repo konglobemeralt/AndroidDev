@@ -73,8 +73,7 @@ public class SetHelper {
 
 
     public int getCombinations(int[] set, int sum){
-        //permute(set);
-        int counter = 1;
+        int counter = 0;
 
         if(set.length < 1){
             return 0;
@@ -82,9 +81,14 @@ public class SetHelper {
 
         SetHelper.findTargetSumSubsets(set, sum, "", 0);
         for (String str: allSubsets) {
-            System.out.println(counter + ") " + str);
+            Log.d("ThirtyActivity", counter + ") " + str);
             counter++;
         }
+
+
+
+        counter -= 1;
+
         allSubsets.clear();
         allSubsets = new HashSet<>();
 
