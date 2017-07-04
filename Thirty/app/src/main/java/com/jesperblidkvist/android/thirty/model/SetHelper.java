@@ -1,13 +1,13 @@
 package com.jesperblidkvist.android.thirty.model;
 
 import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.StringTokenizer;
 
 /**
  *  Helper class to deal Scoring the set consisting of all dice values
@@ -21,45 +21,75 @@ import java.util.Set;
 
 public class SetHelper {
 
-    public static void permute(int[] arr){
-        permuteHelper(arr, 0);
-    }
 
-    private static void permuteHelper(int[] arr, int index){
-        if(index >= arr.length - 1){ //If we are at the last element - nothing left to permute
-            //System.out.println(Arrays.toString(arr));
-            //Print the array
-            System.out.print("[");
-            for(int i = 0; i < arr.length - 1; i++){
-                System.out.print(arr[i] + ", ");
+    /**
+     * The collection for storing the unique sets that sum to a target.
+     */
+    private static HashSet<String> allSubsets = new HashSet<>();
+
+    /**
+     * The String token
+     */
+    private static final String token = " ";
+
+    /**
+     * The method for finding the subsets that sum to a target.
+     *
+     * @param input  The input array to be processed for subset with particular sum
+     * @param target The target sum we are looking for
+     * @param ramp   The Temporary String to be beefed up during recursive iterations(By default value an empty String)
+     * @param index  The index used to traverse the array during recursive calls
+     */
+    public static void findTargetSumSubsets(int[] input, int target, String ramp, int index) {
+
+        if(index > (input.length - 1)) {
+            if(getSum(ramp) == target) {
+                allSubsets.add(ramp);
             }
-            if(arr.length > 0)
-                System.out.print(arr[arr.length - 1]);
-            System.out.println("]");
             return;
         }
 
-        for(int i = index; i < arr.length; i++){ //For each index in the sub array arr[index...end]
-
-            //Swap the elements at indices index and i
-            int t = arr[index];
-            arr[index] = arr[i];
-            arr[i] = t;
-
-            //Recurse on the sub array arr[index+1...end]
-            permuteHelper(arr, index+1);
-
-            //Swap the elements back
-            t = arr[index];
-            arr[index] = arr[i];
-            arr[i] = t;
-        }
-
+        //First recursive call going ahead selecting the int at the currenct index value
+        findTargetSumSubsets(input, target, ramp + input[index] + token, index + 1);
+        //Second recursive call going ahead WITHOUT selecting the int at the currenct index value
+        findTargetSumSubsets(input, target, ramp, index + 1);
     }
 
+    /**
+     * A helper Method for calculating the sum from a string of integers
+     *
+     * @param intString the string subset
+     * @return the sum of the string subset
+     */
+    private static int getSum(String intString) {
+        int sum = 0;
+        StringTokenizer sTokens = new StringTokenizer(intString, token);
+        while (sTokens.hasMoreElements()) {
+            sum += Integer.parseInt((String) sTokens.nextElement());
+        }
+        return sum;
+    }
+
+
+
     public int getCombinations(int[] set, int sum){
-        permute(set);
-        return 5;
+        //permute(set);
+        int counter = 1;
+
+        if(set.length < 1){
+            return 0;
+        }
+
+        SetHelper.findTargetSumSubsets(set, sum, "", 0);
+        for (String str: allSubsets) {
+            System.out.println(counter + ") " + str);
+            counter++;
+        }
+        allSubsets.clear();
+        allSubsets = new HashSet<>();
+
+
+        return counter;
 
 
 

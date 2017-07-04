@@ -132,7 +132,10 @@ public class ThirtyGame implements Parcelable {
     public ArrayList<Integer> getAllSelectedDiceValues() {
         ArrayList<Integer> values = new ArrayList<>();
         for (int i = 0; i < dices.length; ++i) {
-            values.add(dices[i].getValue());
+            if(dices[i].isSaved()){
+                values.add(dices[i].getValue());
+            }
+
         }
         return values;
     }
@@ -251,16 +254,12 @@ public class ThirtyGame implements Parcelable {
      * Toggles save on a dice
      */
     public void saveDice(int index){
-        if(dices[index].isSaved()){
-            dices[index].toggleSaved();
+        dices[index].toggleSaved();
+        if(!dices[index].isSaved()){
             savedDice.remove(dices[index]);
         }
         else{
-                dices[index].toggleSaved();
-                if(!dices[index].isSaved()){
-                    savedDice.add(dices[index]);
-                }
-
+            savedDice.add(dices[index]);
         }
     }
 
@@ -338,6 +337,7 @@ private int calculateLow(){
         for (int i=0; i < set.length; i++) {
             set[i] = getAllSelectedDiceValues().get(i).intValue();
         }
+        int []set2 = {};
         SetHelper scoring = new SetHelper();
         return scoring.getCombinations(set, scoringMethod);
     }
