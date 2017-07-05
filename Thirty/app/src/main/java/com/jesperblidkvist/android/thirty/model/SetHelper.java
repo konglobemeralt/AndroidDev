@@ -1,58 +1,36 @@
 package com.jesperblidkvist.android.thirty.model;
 
 import android.util.Log;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import java.util.StringTokenizer;
 
 /**
  *  Helper class to deal Scoring the set consisting of all dice values
+ *  Implementation of algorithm suggested by Anirudh at:
+ *  https://stackoverflow.com/a/30222026/6559839
  *
- * @author  Jesper Blidkvist
- * @version 1.0
- * @since   2017-06-22.
- *
- * Created by Jesper on 2017-07-03.
  */
 
 public class SetHelper {
 
+    private static HashSet<String> subsetWithSum = new HashSet<>();
 
-    /**
-     * The collection for storing the unique sets that sum to a target.
-     */
-    private static HashSet<String> allSubsets = new HashSet<>();
-
-    /**
-     * The String token
-     */
     private static final String token = " ";
 
     /**
      * The method for finding the subsets that sum to a target.
-     *
-     * @param input  The input array to be processed for subset with particular sum
-     * @param target The target sum we are looking for
-     * @param ramp   The Temporary String to be beefed up during recursive iterations(By default value an empty String)
-     * @param index  The index used to traverse the array during recursive calls
      */
-    public static void findTargetSumSubsets(int[] input, int target, String ramp, int index) {
+    public static void findSumSubsets(int[] inputSet, int targetSum, String ramp, int index) {
 
-        if(index > (input.length - 1)) {
-            if(getSum(ramp) == target) {
-                allSubsets.add(ramp);
+        if(index > (inputSet.length - 1)) {
+            if(getSum(ramp) == targetSum) {
+                subsetWithSum.add(ramp);
             }
             return;
         }
 
-        //First recursive call going ahead selecting the int at the currenct index value
-        findTargetSumSubsets(input, target, ramp + input[index] + token, index + 1);
-        //Second recursive call going ahead WITHOUT selecting the int at the currenct index value
-        findTargetSumSubsets(input, target, ramp, index + 1);
+        findSumSubsets(inputSet, targetSum, ramp + inputSet[index] + token, index + 1);
+        findSumSubsets(inputSet, targetSum, ramp, index + 1);
     }
 
     /**
@@ -71,7 +49,9 @@ public class SetHelper {
     }
 
 
-
+    /**
+     * A method that uses the setSum funtions to find the number of sets that which have a given sum.
+     */
     public int getCombinations(int[] set, int sum){
         int counter = 0;
 
@@ -79,18 +59,23 @@ public class SetHelper {
             return 0;
         }
 
-        SetHelper.findTargetSumSubsets(set, sum, "", 0);
-        for (String str: allSubsets) {
+        for(int i = 0; i<set.length ; i++){
+            if(set[i]==sum){
+                counter++;
+            }
+        }
+        if(counter != 0){
+            counter--;
+        }
+
+        SetHelper.findSumSubsets(set, sum, "", 0);
+        for (String str: subsetWithSum) {
             Log.d("ThirtyActivity", counter + ") " + str);
             counter++;
         }
 
-
-
-        counter -= 1;
-
-        allSubsets.clear();
-        allSubsets = new HashSet<>();
+        subsetWithSum.clear();
+        subsetWithSum = new HashSet<>();
 
 
         return counter;

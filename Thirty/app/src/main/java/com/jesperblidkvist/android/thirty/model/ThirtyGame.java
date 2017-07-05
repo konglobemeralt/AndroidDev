@@ -1,11 +1,8 @@
 package com.jesperblidkvist.android.thirty.model;
 
-import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
-import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -35,33 +32,34 @@ public class ThirtyGame implements Parcelable {
 
     String gameStatus;
 
-
+    /**
+     * New Game constructor.
+     */
     public ThirtyGame() {
         dices = new Dice[6];
         for (int i = 0; i < dices.length; ++i) {
             dices[i] = new Dice();
         }
-
         roundScore = 0;
         totalScore = roundScore;
-
-        redoCount = 0;
-        roundCount = 0;
+        redoCount = roundCount = 0;
 
         scoringMehtods = new ArrayList<>(
                 Arrays.asList("low", "4", "5", "6", "7", "8", "9", "10", "11", "12"));
-
         rollDices();
     }
 
+    /**
+     * New Game from parcel constructor.
+     */
     public ThirtyGame(Parcel input) {
         this.totalScore = input.readInt();
         this.roundScore = input.readInt();
         this.roundCount = input.readInt();
 
         dices = new Dice[6];
-        for (int i = 0; i < dices.length; ++i) {
 
+        for (int i = 0; i < dices.length; ++i) {
             dices[i] = new Dice();
             dices[i].setValue(input.readInt());
 
@@ -71,11 +69,10 @@ public class ThirtyGame implements Parcelable {
             }
         }
         this.redoCount = 0;
-
     }
 
     /**
-     * Sets all the dices in the game to 1.
+     * Sets all the dices in the game to 1 amd resets saved and selected values.
      */
     private void resetDice() {
         for (int i = 0; i < dices.length; ++i) {
@@ -109,13 +106,6 @@ public class ThirtyGame implements Parcelable {
     /**
      * Returns all the dices in the game.
      */
-    public Dice[] getAllDices() {
-        return dices;
-    }
-
-    /**
-     * Returns all the dices in the game.
-     */
     public ArrayList<Integer> getAllDiceValues() {
         ArrayList<Integer> values = new ArrayList<>();
         for (int i = 0; i < dices.length; ++i) {
@@ -133,7 +123,6 @@ public class ThirtyGame implements Parcelable {
             if (dices[i].isSaved()) {
                 values.add(dices[i].getValue());
             }
-
         }
         return values;
     }
@@ -217,6 +206,9 @@ public class ThirtyGame implements Parcelable {
         resetGame();
     }
 
+    /**
+     * Save choices made as a string
+     */
     private void saveChoices(String scoreChoice) {
         choices.add("Played " + scoreChoice + " and selected: " + savedDice.toString() + " For " + roundScore + " Points " + "\n");
         for (int i = 0; i < choices.size(); i++) {
@@ -237,15 +229,7 @@ public class ThirtyGame implements Parcelable {
     }
 
     /**
-     * Toggles selection on a dice
-     */
-    public void selectDice(int index) {
-        dices[index].toggleSelection();
-    }
-
-
-    /**
-     * Toggles save on a dice
+     * Toggles save on a dice and adds to list of saved dices
      */
     public void saveDice(int index) {
         dices[index].toggleSaved();
@@ -330,17 +314,20 @@ public class ThirtyGame implements Parcelable {
         return scoring.getCombinations(set, scoringMethod);
     }
 
+    /**
+     * Returns a list of scoring methods avaliable
+     */
     public List<String> getAvaliableScoringMethods() {
         return scoringMehtods;
-
     }
 
+    /**
+     * Get the status of the game as a string.
+     */
     public String getGameStatus() {
         return gameStatus;
     }
 
-    // Parcelling part
-    //TODO: Perhaps create a parcelData class that handles this?
     @Override
     public int describeContents() {
         return 0;

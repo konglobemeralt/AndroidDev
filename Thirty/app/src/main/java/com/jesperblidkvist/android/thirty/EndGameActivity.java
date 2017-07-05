@@ -48,6 +48,9 @@ public class EndGameActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * format choice strings before display
+     */
     private String formatChoicesStrings(){
         String choices = "";
         for(int i = 0; i < listChoices.size(); i++){
