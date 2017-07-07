@@ -2,6 +2,7 @@ package com.jesperblidkvist.android.thirty;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -145,23 +146,25 @@ public class ThirtyActivity extends AppCompatActivity {
 
         for (ImageButton button : diceButtons) {
             //build string for identifier
-            String identifier = "";
+            String identifier = "drawable/";
             if(game.getDiceAtIndex(index).isSelected()){
                 identifier += "red";
             }
             else if(game.getDiceAtIndex(index).isSaved()){
-                identifier += "gray";
+                identifier += "grey";
             }
             else{
                 identifier += "white";
             }
             //add value of dice
-            identifier += game.getDiceValueAtIndex(index++);
+            identifier +=  game.getDiceValueAtIndex(index++);
 
             button.setImageResource(getResources().getIdentifier(identifier, "drawable", getPackageName()));
+
         }
 
     }
+
 
     /**
      * helper function that displays a toast
