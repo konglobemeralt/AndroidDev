@@ -113,7 +113,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#C01831"
-            android:onClick="meonFb"
             android:text="@string/button_roll"
             android:textColor="#ffffff"/>
 
@@ -128,7 +127,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#C01831"
-            android:onClick="meonFb"
             android:text="@string/button_endTurn"
             android:textColor="#ffffff"
             />

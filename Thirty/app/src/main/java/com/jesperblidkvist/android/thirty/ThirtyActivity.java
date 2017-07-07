@@ -3,6 +3,7 @@ package com.jesperblidkvist.android.thirty;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -58,46 +59,12 @@ public class ThirtyActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        mRollDiceButton = (Button) findViewById(R.id.rollButton);
-        mRollDiceButton.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View v) {
-
-                if(game.playPossible()){
-                    game.playTurn();
-                    updateDices();
-                }
-                else{
-                   displayToast();
-                }
-
-                //Log.d("ThirtyActivity", game.toString());
-            }
-        });
-
-        mEndTurnButton = (Button) findViewById(R.id.endTurnButton);
-        mEndTurnButton.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View v) {
-
-                game.endTurn(mScoringSpinner.getSelectedItem().toString());
-
-                        if(game.isGameOver()){
-                            endGame(v);
-                            finish();
-                        }
-                        else{
-                            updateSpinner();
-                            updateDices();
-                            updateStrings();
-                        }
-                //Log.d("ThirtyActivity", game.toString());
-            }
-        });
+        initRollDiceButton();
+        initEndTurnButton();
 
 
         mRoundPoints = (TextView) findViewById(R.id.roundPointsString);
         mTotalPoints = (TextView) findViewById(R.id.totalPointsString);
-
-
 
 
         initDices();
@@ -109,10 +76,83 @@ public class ThirtyActivity extends AppCompatActivity {
 
         mScoringSpinner = (Spinner) findViewById(R.id.ScoringSpinner);
 
+       updateView();
+    }
+
+    /**
+     * updates graphical elements
+     */
+    private void updateView(){
         updateSpinner();
         updateDices();
         updateStrings();
+
     }
+
+    /**
+     * Initiate the RollDiceButton
+     */
+    private void initRollDiceButton(){
+        mRollDiceButton = (Button) findViewById(R.id.rollButton);
+        mRollDiceButton.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                int redoCount = game.getRedoCount();
+                if(redoCount < 2){
+                    game.playTurn();
+                    updateDices();
+                    if(redoCount == 1){
+                       disableButton(mRollDiceButton);
+                    }
+                }
+                else{
+                    displayToast();
+                }
+            }
+
+        });
+    }
+
+    /**
+     * Disable a Button
+     */
+    private void disableButton(Button button){
+        button.setEnabled(false);
+        button.setBackgroundColor(Color.GRAY);
+    }
+
+    /**
+     * Enable a Button
+     */
+    private void enableButton(Button button){
+        button.setEnabled(true);
+        button.setBackgroundColor(Color.parseColor("#C01831"));
+    }
+
+
+    /**
+     * Initiate the RollDiceButton
+     */
+    private void initEndTurnButton(){
+        mEndTurnButton = (Button) findViewById(R.id.endTurnButton);
+        mEndTurnButton.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+
+                game.endTurn(mScoringSpinner.getSelectedItem().toString());
+
+                if(game.isGameOver()){
+                    endGame(v);
+                    finish();
+                }
+                else{
+                    updateView();
+                    enableButton(mRollDiceButton);
+                }
+            }
+        });
+    }
+
+
+
 
     /**
      * Initiate the diceButtons

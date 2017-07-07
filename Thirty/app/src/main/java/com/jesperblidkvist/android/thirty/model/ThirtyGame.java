@@ -104,6 +104,13 @@ public class ThirtyGame implements Parcelable {
     }
 
     /**
+     * Gets the redo count.
+     */
+    public int getRedoCount() {
+        return redoCount;
+    }
+
+    /**
      * Returns all the dices in the game.
      */
     public ArrayList<Integer> getAllDiceValues() {
