@@ -23,6 +23,7 @@
                 android:id="@+id/diceButton1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="#f9f9f9"
                 app:srcCompat="@drawable/white1"/>
@@ -31,6 +32,7 @@
                 android:id="@+id/diceButton2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="#f9f9f9"
                 app:srcCompat="@drawable/white1"/>
@@ -39,6 +41,7 @@
                 android:id="@+id/diceButton3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="#f9f9f9"
                 app:srcCompat="@drawable/white1"/>
@@ -52,6 +55,7 @@
                 android:id="@+id/diceButton4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="#f9f9f9"
                 app:srcCompat="@drawable/white1"/>
@@ -60,6 +64,7 @@
                 android:id="@+id/diceButton5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="#f9f9f9"
                 app:srcCompat="@drawable/white1"/>
@@ -68,6 +73,7 @@
                 android:id="@+id/diceButton6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="#f9f9f9"
                 app:srcCompat="@drawable/white1"/>
@@ -81,6 +87,7 @@
                 android:id="@+id/totalPointsString"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:layout_weight="0.06"
                 android:text="@string/total_score"
                 android:textStyle="bold"/>
@@ -89,6 +96,7 @@
                 android:id="@+id/roundPointsString"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:layout_weight="0.11"
                 android:text="@string/round_score"
                 android:textStyle="bold"/>
@@ -97,6 +105,7 @@
                 android:id="@+id/spinnerLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:text="@string/spinner_label"
                 android:textStyle="bold"/>
 
@@ -110,31 +119,27 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.08">
+            android:layout_weight="1">
 
             <Button
                 android:id="@+id/rollButton"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="#C01831"
                 android:text="@string/button_roll"
                 android:textColor="#ffffff"/>
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-
             <Button
                 android:id="@+id/endTurnButton"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="#C01831"
                 android:text="@string/button_endTurn"
-                android:textColor="#ffffff"
-                />
+                android:textColor="#ffffff"/>
         </TableRow>
 
 
