@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="fill_parent"
-    android:layout_margin="12dp"
-    android:background="#f9f9f9"
-    android:orientation="vertical"
-    android:padding="10dp"
-    android:gravity="bottom|center"
-    android:weightSum="1">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_margin="12dp"
+              android:background="#f9f9f9"
+              android:gravity="bottom|center"
+              android:orientation="vertical"
+              android:padding="10dp"
+              android:weightSum="1">
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.38">
+        android:layout_weight="0.57">
 
         <TableRow
             android:layout_width="match_parent"
@@ -34,11 +34,6 @@
                 android:layout_weight="1"
                 android:background="#f9f9f9"
                 app:srcCompat="@drawable/white1"/>
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
             <ImageButton
                 android:id="@+id/diceButton3"
@@ -47,6 +42,11 @@
                 android:layout_weight="1"
                 android:background="#f9f9f9"
                 app:srcCompat="@drawable/white1"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <ImageButton
                 android:id="@+id/diceButton4"
@@ -55,11 +55,6 @@
                 android:layout_weight="1"
                 android:background="#f9f9f9"
                 app:srcCompat="@drawable/white1"/>
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
             <ImageButton
                 android:id="@+id/diceButton5"
@@ -76,14 +71,27 @@
                 android:layout_weight="1"
                 android:background="#f9f9f9"
                 app:srcCompat="@drawable/white1"/>
-
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.38"
-            >
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/totalPointsString"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.06"
+                android:text="@string/total_score"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/roundPointsString"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.11"
+                android:text="@string/round_score"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/spinnerLabel"
@@ -96,29 +104,7 @@
                 android:id="@+id/ScoringSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.16"/>
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.38">
-
-            <TextView
-                android:id="@+id/totalPointsString"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.06"
-                android:text="@string/total_score"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/roundPointsString"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.11"
-                android:text="@string/round_score"
-                android:textStyle="bold"/>
+                />
         </TableRow>
 
         <TableRow

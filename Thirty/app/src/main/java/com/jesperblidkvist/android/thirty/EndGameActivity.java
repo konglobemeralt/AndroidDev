@@ -66,7 +66,12 @@ public class EndGameActivity extends AppCompatActivity {
 
     private void exitActivity(){
         Intent intent = new Intent(this, ThirtyActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
-        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        exitActivity();
     }
 }

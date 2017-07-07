@@ -7,6 +7,7 @@
     <string name="low_string">Low: </string>
     <string name="total_score_endgame">Total score was: </string>
     <string name="play_again_button">Play again</string>
+    <string name="spinner_label">Score using: </string>
 
     <string-array name="scoring_methods">
         <item>low</item>

@@ -1,6 +1,8 @@
 package com.jesperblidkvist.android.thirty;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -59,12 +61,7 @@ public class ThirtyActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        initRollDiceButton();
-        initEndTurnButton();
-
-
-        mRoundPoints = (TextView) findViewById(R.id.roundPointsString);
-        mTotalPoints = (TextView) findViewById(R.id.totalPointsString);
+        initView();
 
 
         initDices();
@@ -74,9 +71,17 @@ public class ThirtyActivity extends AppCompatActivity {
             game = (ThirtyGame) savedInstanceState.getParcelable(GAME_STATE);
         }
 
-        mScoringSpinner = (Spinner) findViewById(R.id.ScoringSpinner);
 
        updateView();
+    }
+
+    /**
+     * initiates elements in view
+     */
+    private void initView(){
+        initRollDiceButton();
+        initEndTurnButton();
+        initTextElements();
     }
 
     /**
@@ -86,9 +91,18 @@ public class ThirtyActivity extends AppCompatActivity {
         updateSpinner();
         updateDices();
         updateStrings();
-
     }
 
+    /**
+     * Initiate the text Elements
+     */
+    private void initTextElements(){
+
+        mRoundPoints = (TextView) findViewById(R.id.roundPointsString);
+        mTotalPoints = (TextView) findViewById(R.id.totalPointsString);
+        mScoringSpinner = (Spinner) findViewById(R.id.ScoringSpinner);
+
+    }
     /**
      * Initiate the RollDiceButton
      */
@@ -136,12 +150,10 @@ public class ThirtyActivity extends AppCompatActivity {
         mEndTurnButton = (Button) findViewById(R.id.endTurnButton);
         mEndTurnButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-
                 game.endTurn(mScoringSpinner.getSelectedItem().toString());
-
                 if(game.isGameOver()){
                     endGame(v);
-                    finish();
+                    //finish();
                 }
                 else{
                     updateView();
@@ -252,6 +264,7 @@ public class ThirtyActivity extends AppCompatActivity {
         int totalScore = this.game.getTotalScore();
         intent.putExtra(EXTRA_SCORE, totalScore);
         intent.putStringArrayListExtra(CHOICE_LIST, (ArrayList<String>) this.game.getChoices());
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
@@ -264,6 +277,24 @@ public class ThirtyActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Closing Activity")
+                .setMessage("Are you sure you want to stop Playing?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+
+                })
+                .setNegativeButton("No", null)
+                .show();
     }
 
 }
