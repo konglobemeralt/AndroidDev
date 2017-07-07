@@ -110,6 +110,10 @@ public class ThirtyGame implements Parcelable {
         return redoCount;
     }
 
+    public int getRoundCount(){
+        return roundCount;
+    }
+
     /**
      * Returns all the dices in the game.
      */

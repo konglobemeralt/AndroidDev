@@ -8,6 +8,8 @@
     <string name="total_score_endgame">Total score was: </string>
     <string name="play_again_button">Play again</string>
     <string name="spinner_label">Score using: </string>
+    <string name="end_turn_nr_string">End turn Nr </string>
+    <string name="last_turn_string">End last turn</string>
 
     <string-array name="scoring_methods">
         <item>low</item>

@@ -236,7 +236,16 @@ public class ThirtyActivity extends AppCompatActivity {
      */
     private void updateStrings(){
         updateScore();
+        updateButtons();
     }
+
+    private void updateButtons(){
+        mEndTurnButton.setText(getResources().getString(R.string.end_turn_nr_string) + (game.getRoundCount()+ 1));
+        if(game.getRoundCount() == 9){
+            mEndTurnButton.setText(getResources().getString(R.string.last_turn_string));
+        }
+    }
+
 
     /**
      * updates the spinner
