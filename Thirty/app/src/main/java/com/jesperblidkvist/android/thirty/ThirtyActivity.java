@@ -145,21 +145,20 @@ public class ThirtyActivity extends AppCompatActivity {
 
         for (ImageButton button : diceButtons) {
             //build string for identifier
-            String identifier = "dice_";
+            String identifier = "";
             if(game.getDiceAtIndex(index).isSelected()){
-                identifier += "gray";
+                identifier += "red";
             }
             else if(game.getDiceAtIndex(index).isSaved()){
-                identifier += "red";
+                identifier += "gray";
             }
             else{
                 identifier += "white";
             }
-
             //add value of dice
             identifier += game.getDiceValueAtIndex(index++);
 
-            button.setImageResource(getResources().getIdentifier(identifier, "mipmap", getPackageName()));
+            button.setImageResource(getResources().getIdentifier(identifier, "drawable", getPackageName()));
         }
 
     }
