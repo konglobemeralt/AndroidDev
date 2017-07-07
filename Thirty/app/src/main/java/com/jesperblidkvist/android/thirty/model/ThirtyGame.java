@@ -210,7 +210,6 @@ public class ThirtyGame implements Parcelable {
         } else {
             roundScore = calculateLow();
             Log.d("ThirtyActivity", "LowScoreCalc " + Integer.toString(roundScore));
-
         }
         Log.d("ThirtyActivity", "CalcPoints " + Integer.toString(roundScore));
         saveChoices(scoreChoice);
@@ -274,30 +273,6 @@ public class ThirtyGame implements Parcelable {
         } else {
             return false;
         }
-
-    }
-
-    /**
-     * Checks if all dices are selected
-     */
-    public boolean playPossible() {
-        int selectedCount = 0;
-        for (int i = 0; i < dices.length; ++i) {
-            if (dices[i].isSelected()) {
-                selectedCount += 1;
-            }
-        }
-
-        if (selectedCount == 6 && redoCount < 3) {
-            gameStatus = "Please deselect one or more dice...";
-            return false;
-        } else if (selectedCount != 6 && redoCount == 2) {
-            gameStatus = "Only two redos per turn!";
-            return false;
-        } else {
-            gameStatus = "Playing as normal";
-            return true;
-        }
     }
 
     /**
@@ -320,7 +295,6 @@ public class ThirtyGame implements Parcelable {
         for (int i = 0; i < set.length; i++) {
             set[i] = getAllSelectedDiceValues().get(i).intValue();
         }
-        int[] set2 = {};
         SetHelper scoring = new SetHelper();
         return scoring.getCombinations(set, scoringMethod);
     }
@@ -363,8 +337,15 @@ public class ThirtyGame implements Parcelable {
                 this.dices[5].getValue(),
                 this.dices[5].isSaved() ? 1 : 0,
         });
+    }
 
-
+    public int getRoundScore(String scoringMethod){
+        if (scoringMethod != "low") {
+            roundScore = calculatePoints(Integer.parseInt(scoringMethod));
+        } else {
+            roundScore = calculateLow();
+        }
+        return roundScore;
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {

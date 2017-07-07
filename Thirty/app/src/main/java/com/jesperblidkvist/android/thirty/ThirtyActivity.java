@@ -61,24 +61,21 @@ public class ThirtyActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        initView();
-
-
-        initDices();
         game = new ThirtyGame();
+
+        initView();
 
         if(savedInstanceState != null){
             game = (ThirtyGame) savedInstanceState.getParcelable(GAME_STATE);
         }
-
-
-       updateView();
+        updateView();
     }
 
     /**
      * initiates elements in view
      */
     private void initView(){
+        initDices();
         initRollDiceButton();
         initEndTurnButton();
         initTextElements();
@@ -103,6 +100,8 @@ public class ThirtyActivity extends AppCompatActivity {
         mScoringSpinner = (Spinner) findViewById(R.id.ScoringSpinner);
 
     }
+
+
     /**
      * Initiate the RollDiceButton
      */
@@ -255,13 +254,14 @@ public class ThirtyActivity extends AppCompatActivity {
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray);
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mScoringSpinner.setAdapter(spinnerArrayAdapter);
+        game.getRoundScore(mScoringSpinner.getSelectedItem().toString());
     }
 
     /**
      * updates the score in view
      */
     private void updateScore(){
-        mRoundPoints.setText("Current selection: " + Integer.toString(game.getRoundScore()));
+        mRoundPoints.setText("Current selection: " + Integer.toString(game.getRoundScore(mScoringSpinner.getSelectedItem().toString())));
         mTotalPoints.setText("Total Points: " + Integer.toString(game.getTotalScore()));
     }
 
