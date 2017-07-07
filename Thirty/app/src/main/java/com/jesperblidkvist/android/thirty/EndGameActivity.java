@@ -27,12 +27,19 @@ public class EndGameActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         int totalScore = intent.getIntExtra(ThirtyActivity.EXTRA_SCORE, 0);
-
         listChoices = intent.getStringArrayListExtra(ThirtyActivity.CHOICE_LIST);
 
+        initLayout(totalScore);
+
+    }
+
+    /**
+     * Initiates the layout of end Game activity
+     *
+     */
+    private void initLayout(int totalScore){
         mTotalPoints = (TextView) findViewById(R.id.totalPointsStringEndGame);
         mTotalPoints.setText("Total Score: " + Integer.toString(totalScore));
-
 
         mChoicesMade = (TextView) findViewById(R.id.choicesStringEndGame);
         mChoicesMade.setText(formatChoicesStrings());
@@ -44,8 +51,6 @@ public class EndGameActivity extends AppCompatActivity {
                 exitActivity();
             }
         });
-
-
     }
 
     /**

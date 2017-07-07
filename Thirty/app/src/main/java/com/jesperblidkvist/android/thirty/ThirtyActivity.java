@@ -107,7 +107,6 @@ public class ThirtyActivity extends AppCompatActivity {
             game = (ThirtyGame) savedInstanceState.getParcelable(GAME_STATE);
         }
 
-
         mScoringSpinner = (Spinner) findViewById(R.id.ScoringSpinner);
 
         updateSpinner();
@@ -132,10 +131,8 @@ public class ThirtyActivity extends AppCompatActivity {
                     updateStrings();
                 }
             });
-
             diceButtons.add(diceButton);
         }
-
     }
 
     /**
@@ -146,23 +143,27 @@ public class ThirtyActivity extends AppCompatActivity {
 
         for (ImageButton button : diceButtons) {
             //build string for identifier
-            String identifier = "drawable/";
-            if(game.getDiceAtIndex(index).isSelected()){
-                identifier += "red";
-            }
-            else if(game.getDiceAtIndex(index).isSaved()){
-                identifier += "grey";
-            }
-            else{
-                identifier += "white";
-            }
-            //add value of dice
+            String identifier = generateDiceString(index);
             identifier +=  game.getDiceValueAtIndex(index++);
-
             button.setImageResource(getResources().getIdentifier(identifier, "drawable", getPackageName()));
-
         }
+    }
 
+    /**
+     * Generates a String to be used when setting the current imageResource on one of the buttons representing a dice
+     */
+    private String generateDiceString(int index){
+        String identifier = "drawable/";
+        if(game.getDiceAtIndex(index).isSelected()){
+            identifier += "red";
+        }
+        else if(game.getDiceAtIndex(index).isSaved()){
+            identifier += "grey";
+        }
+        else{
+            identifier += "white";
+        }
+        return identifier;
     }
 
 
