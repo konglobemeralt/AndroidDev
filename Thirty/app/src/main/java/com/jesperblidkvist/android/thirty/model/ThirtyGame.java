@@ -26,6 +26,8 @@ public class ThirtyGame implements Parcelable {
     int totalScore;
     int roundScore;
 
+    SetHelper scoring;
+
     private List<Dice> savedDice = new ArrayList<>();
     private List<String> choices = new ArrayList<>();
     private List<String> scoringMehtods = new ArrayList<>();
@@ -43,6 +45,8 @@ public class ThirtyGame implements Parcelable {
         roundScore = 0;
         totalScore = roundScore;
         redoCount = roundCount = 0;
+
+        scoring = new SetHelper();
 
         scoringMehtods = new ArrayList<>(
                 Arrays.asList("low", "4", "5", "6", "7", "8", "9", "10", "11", "12"));
@@ -251,13 +255,15 @@ public class ThirtyGame implements Parcelable {
     }
 
     /**
-     * Calculates low
+     * Calculates low by looping through all dices in the game
+     * and adding the value of saved dices to a scoring variable if less than 4.
+     * @return calculated score from dices
      */
     private int calculateLow() {
         int score = 0;
         for (int i = 0; i < dices.length; ++i) {
-            if (dices[i].isSaved() && dices[i].getValue() <= 3) {
-                score++;
+            if (dices[i].isSaved() && dices[i].getValue() < 4) {
+                score += dices[i].getValue();
             }
         }
         return score;
@@ -297,7 +303,7 @@ public class ThirtyGame implements Parcelable {
         for (int i = 0; i < set.length; i++) {
             set[i] = getAllSelectedDiceValues().get(i).intValue();
         }
-        SetHelper scoring = new SetHelper();
+
         return scoring.getCombinations(set, scoringMethod);
     }
 
