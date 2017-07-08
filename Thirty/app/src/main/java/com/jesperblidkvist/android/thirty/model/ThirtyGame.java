@@ -288,7 +288,9 @@ public class ThirtyGame implements Parcelable {
     }
 
     /**
-     * Calculate score from set of selected dices
+     * Calculate score from set of selected dices whose subsets sum equals the scoringMethod
+     * @param  scoringMethod int value from 4-12 representing scoring method.
+     * @return The score calculated using specified scoring method.
      */
     private int calculatePoints(int scoringMethod) {
         int[] set = new int[getAllSelectedDiceValues().size()];
@@ -339,6 +341,11 @@ public class ThirtyGame implements Parcelable {
         });
     }
 
+    /**
+     * Check scoring method and decide wheather to score using low or 4-12
+     * @param  scoringMethod String value from "low" and numbers 4-12 representing scoring method.
+     * @return The score calculated using specified scoring method.
+     */
     public int getRoundScore(String scoringMethod){
         if (scoringMethod != "low") {
             roundScore = calculatePoints(Integer.parseInt(scoringMethod));

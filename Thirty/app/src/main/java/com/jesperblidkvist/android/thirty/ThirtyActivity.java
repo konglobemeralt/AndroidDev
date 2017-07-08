@@ -202,6 +202,8 @@ public class ThirtyActivity extends AppCompatActivity {
 
     /**
      * Generates a String to be used when setting the current imageResource on one of the buttons representing a dice
+     * @param  index integer index for specific dice
+     * @return A string formatted to find relevant drawable for specific dice.
      */
     private String generateDiceString(int index){
         String identifier = "drawable/";
