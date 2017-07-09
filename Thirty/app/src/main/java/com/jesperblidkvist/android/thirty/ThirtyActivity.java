@@ -66,7 +66,7 @@ public class ThirtyActivity extends AppCompatActivity {
         initView();
 
         if(savedInstanceState != null){
-            game = (ThirtyGame) savedInstanceState.getParcelable(GAME_STATE);
+            game = savedInstanceState.getParcelable(GAME_STATE);
         }
         updateView();
     }
