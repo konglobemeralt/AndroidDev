@@ -13,10 +13,6 @@ import java.util.StringTokenizer;
 
 public class SetHelper {
 
-
-    private int counter;
-    static int points;
-
     private static HashSet<String> subsetWithSum = new HashSet<>();
 
     private static final String token = " ";
@@ -57,6 +53,7 @@ public class SetHelper {
      * A method that uses the setSum funtions to find the number of sets that which have a given sum.
      */
     public int getCombinations(int[] set, int sum){
+        int counter = 0;
 
         if(set.length < 1){
             return 0;
@@ -67,24 +64,13 @@ public class SetHelper {
                 counter++;
             }
         }
-
         if(counter != 0){
             counter--;
         }
 
         SetHelper.findSumSubsets(set, sum, "", 0);
         for (String str: subsetWithSum) {
-            String[] bits = str.split(" ");
-            Log.d("ThirtyActivity", "ARRAY " + counter + ": " + str);
-            int i = 0;
-            for (String s: bits){
-                Log.d("ThirtyActivity", "Splitted: " + counter + ": "+ bits[i++]);
-                points =+ Integer.parseInt(s);
-                Log.d("ThirtyActivity", "Added tp points: " + Integer.parseInt(s));
-                Log.d("ThirtyActivity", "Total is now: " + points);
-            }
-
-
+            Log.d("ThirtyActivity", counter + ") " + str);
             counter++;
         }
 
@@ -92,11 +78,9 @@ public class SetHelper {
         subsetWithSum = new HashSet<>();
 
 
-        return points;
+        return counter * sum;
+
 
 
     }
-
-
 }
-
