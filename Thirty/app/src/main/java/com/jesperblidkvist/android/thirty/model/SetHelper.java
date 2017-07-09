@@ -55,10 +55,6 @@ public class SetHelper {
     public int getCombinations(int[] set, int sum){
         int counter = 0;
 
-        if(set.length < 1){
-            return 0;
-        }
-
         for(int i = 0; i<set.length ; i++){
             if(set[i]==sum){
                 counter++;
@@ -67,20 +63,11 @@ public class SetHelper {
         if(counter != 0){
             counter--;
         }
-
         SetHelper.findSumSubsets(set, sum, "", 0);
         for (String str: subsetWithSum) {
             Log.d("ThirtyActivity", counter + ") " + str);
             counter++;
         }
-
-        subsetWithSum.clear();
-        subsetWithSum = new HashSet<>();
-
-
         return counter * sum;
-
-
-
     }
 }
