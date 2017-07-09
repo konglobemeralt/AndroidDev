@@ -68,6 +68,9 @@ public class SetHelper {
             Log.d("ThirtyActivity", counter + ") " + str);
             counter++;
         }
+        subsetWithSum.clear();
+        subsetWithSum = new HashSet<>();
+
         return counter * sum;
     }
 }
