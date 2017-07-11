@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.security.acl.LastOwnerException;
 import java.util.List;
@@ -39,7 +40,8 @@ public class CrimeListFragment extends Fragment {
         mCrimeRecyclerView.setAdapter(mAdapter);
     }
 
-    public class CrimeHolder extends RecyclerView.ViewHolder{
+    public class CrimeHolder extends RecyclerView.ViewHolder
+        implements View.OnClickListener{
         private Crime mCrime;
 
         private TextView mTitleTextView;
@@ -51,6 +53,13 @@ public class CrimeListFragment extends Fragment {
             mTitleTextView = (TextView)itemView.findViewById(R.id.list_item_crime_title_text_view);
             mDateTextView = (TextView) itemView.findViewById(R.id.list_item_crime_date_text_view);
             mSolvedCheckBox = (CheckBox) itemView.findViewById(R.id.list_item_crime_solved_check_box);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(getActivity(),
+                    mCrime.getTitle() + " clicked!", Toast.LENGTH_SHORT).show();
         }
 
         public void bindCrime(Crime crime){
