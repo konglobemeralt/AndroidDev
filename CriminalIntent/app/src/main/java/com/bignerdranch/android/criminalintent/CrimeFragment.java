@@ -14,15 +14,22 @@ import android.widget.EditText;
 
 import java.util.UUID;
 
+import static com.bignerdranch.android.criminalintent.R.id.parent;
+
 /**
  * Created by Jesper on 2017-06-21.
  */
 
 public class CrimeFragment extends Fragment {
+    public static final String EXTRA_CRIME_ID = "criminalintent.CRIME_ID";
+
     private Crime mCrime;
     private EditText mTitleField;
     private Button mDateButton;
     private CheckBox mSolvedCheckBox;
+
+
+
 
     @Override
     public void onCreate(Bundle savedInstance){
@@ -33,39 +40,34 @@ public class CrimeFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View v = inflater.inflate(R.layout.fragment_crime, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_crime, parent, false);
 
         mTitleField = (EditText)v.findViewById(R.id.crime_title);
         mTitleField.setText(mCrime.getTitle());
-
         mTitleField.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+            public void onTextChanged(CharSequence c, int start, int before, int count) {
+                mCrime.setTitle(c.toString());
             }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mCrime.setTitle(s.toString());
+            public void beforeTextChanged(CharSequence c, int start, int count, int after) {
+                // this space intentionally left blank
             }
 
-            @Override
-            public void afterTextChanged(Editable s) {
-
+            public void afterTextChanged(Editable c) {
+                // this one too
             }
         });
 
-        mDateButton = (Button) v.findViewById(R.id.crime_date);
+        mDateButton = (Button)v.findViewById(R.id.crime_date);
         mDateButton.setText(mCrime.getDate().toString());
         mDateButton.setEnabled(false);
 
         mSolvedCheckBox = (CheckBox)v.findViewById(R.id.crime_solved);
         mSolvedCheckBox.setChecked(mCrime.isSolved());
         mSolvedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // set solved status
+                // set the crime's solved property
                 mCrime.setSolved(isChecked);
             }
         });
