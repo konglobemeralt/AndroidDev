@@ -20,19 +20,19 @@ import java.util.List;
 public class ThirtyGame implements Parcelable {
 
     private Dice[] dices;
-    int redoCount;
-    int roundCount;
+    private int redoCount;
+    private int roundCount;
 
-    int totalScore;
-    int roundScore;
+    private int totalScore;
+    private int roundScore;
 
-    SetHelper scoring;
+    private SetHelper scoring;
 
     private List<Dice> savedDice = new ArrayList<>();
     private List<String> choices = new ArrayList<>();
     private List<String> scoringMehtods = new ArrayList<>();
 
-    String gameStatus;
+    private String gameStatus;
 
     /**
      * New Game constructor.
@@ -56,7 +56,7 @@ public class ThirtyGame implements Parcelable {
     /**
      * New Game from parcel constructor.
      */
-    public ThirtyGame(Parcel input) {
+    private ThirtyGame(Parcel input) {
         this.totalScore = input.readInt();
         this.roundScore = input.readInt();
         this.roundCount = input.readInt();
@@ -80,7 +80,6 @@ public class ThirtyGame implements Parcelable {
      */
     private void resetDice() {
         for (int i = 0; i < dices.length; ++i) {
-            dices[i].setSelected(false);
             dices[i].setSaved(false);
         }
         rollDices();
@@ -114,7 +113,7 @@ public class ThirtyGame implements Parcelable {
     /**
      * Returns all the selected dices in the game.
      */
-    public ArrayList<Integer> getAllSelectedDiceValues() {
+    private ArrayList<Integer> getAllSelectedDiceValues() {
         ArrayList<Integer> values = new ArrayList<>();
         for (int i = 0; i < dices.length; ++i) {
             if (dices[i].isSaved()) {
@@ -155,8 +154,6 @@ public class ThirtyGame implements Parcelable {
     private void increaseRoundCount() {
         if (redoCount != 2) {
             redoCount++;
-        } else {
-
         }
     }
 
@@ -190,7 +187,7 @@ public class ThirtyGame implements Parcelable {
     public void endTurn(String scoreChoice) {
         increaseTurnCount();
         scoringMehtods.remove(scoreChoice);
-        if (scoreChoice != "low") {
+        if (!scoreChoice.equals("low")) {
             roundScore = calculatePoints(Integer.parseInt(scoreChoice));
             Log.d("ThirtyActivity", "RouncScoreCalc " + Integer.toString(roundScore));
         } else {
@@ -208,7 +205,7 @@ public class ThirtyGame implements Parcelable {
     private void saveChoices(String scoreChoice) {
         choices.add("Played " + scoreChoice + " and selected: " + savedDice.toString() + " For " + roundScore + " Points " + "\n");
         for (int i = 0; i < choices.size(); i++) {
-            Log.d("ThirtyActivity", "round " + (i + 1) + ": " + choices.get(i).toString() + "\n");
+            Log.d("ThirtyActivity", "round " + (i + 1) + ": " + choices.get(i) + "\n");
         }
 
     }
@@ -335,7 +332,7 @@ public class ThirtyGame implements Parcelable {
      * @return The score calculated using specified scoring method.
      */
     public int getRoundScore(String scoringMethod){
-        if (scoringMethod != "low") {
+        if (!scoringMethod.equals("low")) {
             roundScore = calculatePoints(Integer.parseInt(scoringMethod));
         } else {
             roundScore = calculateLow();

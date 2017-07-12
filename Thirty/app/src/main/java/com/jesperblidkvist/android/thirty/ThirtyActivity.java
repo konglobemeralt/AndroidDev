@@ -4,11 +4,9 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -136,7 +134,7 @@ public class ThirtyActivity extends AppCompatActivity {
      */
     private void enableButton(Button button){
         button.setEnabled(true);
-        button.setBackgroundColor(Color.parseColor("#C01831"));
+        button.setBackgroundColor(Color.parseColor("#00bfff"));
     }
 
 
@@ -149,8 +147,7 @@ public class ThirtyActivity extends AppCompatActivity {
             public void onClick(View v) {
                 game.endTurn(mScoringSpinner.getSelectedItem().toString());
                 if(game.isGameOver()){
-                    endGame(v);
-                    //finish();
+                    endGame();
                 }
                 else{
                     updateView();
@@ -205,10 +202,7 @@ public class ThirtyActivity extends AppCompatActivity {
      */
     private String generateDiceString(int index){
         String identifier = "drawable/";
-        if(game.getDiceAtIndex(index).isSelected()){
-            identifier += "red";
-        }
-        else if(game.getDiceAtIndex(index).isSaved()){
+        if(game.getDiceAtIndex(index).isSaved()){
             identifier += "grey";
         }
         else{
@@ -251,7 +245,7 @@ public class ThirtyActivity extends AppCompatActivity {
      */
     private void updateSpinner(){
         List<String> spinnerArray =  new ArrayList<>(game.getAvaliableScoringMethods());
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray);
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, spinnerArray);
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mScoringSpinner.setAdapter(spinnerArrayAdapter);
         game.getRoundScore(mScoringSpinner.getSelectedItem().toString());
@@ -268,7 +262,7 @@ public class ThirtyActivity extends AppCompatActivity {
     /**
      * Ends game, starting end game activity
      */
-    public void endGame(View view) {
+    private void endGame() {
         Intent intent = new Intent(this, EndGameActivity.class);
         int totalScore = this.game.getTotalScore();
         intent.putExtra(EXTRA_SCORE, totalScore);

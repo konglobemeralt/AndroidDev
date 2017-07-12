@@ -12,7 +12,6 @@ package com.jesperblidkvist.android.thirty.model;
 
 public class Dice {
     private int value;
-    private boolean selected;
     private boolean saved;
 
     /**
@@ -20,7 +19,6 @@ public class Dice {
      */
     public Dice(){
         this.value = 1;
-        this.selected = false;
         this.saved = false;
     }
 
@@ -28,9 +26,8 @@ public class Dice {
      * This function rolls the dice assigning and returns a
      * random integer in the range 1-6 as the dices value
      */
-    public int roll(){
+    public void roll(){
         this.value = (int)(Math.random()*6) + 1;
-        return this.value;
     }
 
     /**
@@ -48,27 +45,13 @@ public class Dice {
     }
 
     /**
-     * Checks if a dice is selected
-     */
-    public boolean isSelected() {
-        return selected;
-    }
-
-    /**
      * Checks if a dice is saved
      */
     public boolean isSaved() {
         return saved;
     }
 
-    /**
-     * Sets a dice as selected or unselected
-     */
-    public void setSelected(boolean selected) {
-        this.selected = selected;
-    }
-
-    /**
+     /**
      * Sets a dice as saved or unsaved
      */
     public void setSaved(boolean saved) {

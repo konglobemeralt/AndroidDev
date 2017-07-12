@@ -20,7 +20,7 @@ public class SetHelper {
     /**
      * The method for finding the subsets that sum to a target.
      */
-    public static void findSumSubsets(int[] inputSet, int targetSum, String ramp, int index) {
+    private static void findSumSubsets(int[] inputSet, int targetSum, String ramp, int index) {
 
         if(index > (inputSet.length - 1)) {
             if(getSum(ramp) == targetSum) {
