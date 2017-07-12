@@ -38,6 +38,8 @@ public class CrimeFragment extends Fragment {
         return fragment;
     }
 
+
+
     @Override
     public void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
