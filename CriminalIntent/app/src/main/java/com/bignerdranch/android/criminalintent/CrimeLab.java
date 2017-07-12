@@ -12,18 +12,20 @@ import java.util.UUID;
  */
 
 public class CrimeLab {
+
     private static CrimeLab sCrimeLab;
+    private ArrayList<Crime> mCrimes;
+    private Context mAppContext;
 
-    private List<Crime> mCrimes;
-
-    public static CrimeLab get(Context context){
-        if(sCrimeLab == null){
-            sCrimeLab = new CrimeLab(context);
+    public static CrimeLab get(Context context) {
+        if (sCrimeLab == null) {
+            sCrimeLab = new CrimeLab(context.getApplicationContext());
         }
         return sCrimeLab;
     }
 
     private CrimeLab(Context context){
+        mAppContext = context;
         mCrimes = new ArrayList<>();
 
         //DUMMY CRIMES
@@ -35,7 +37,7 @@ public class CrimeLab {
         }
     }
 
-    public List<Crime> getCrimes() {
+    public ArrayList<Crime> getCrimes() {
         return mCrimes;
     }
 

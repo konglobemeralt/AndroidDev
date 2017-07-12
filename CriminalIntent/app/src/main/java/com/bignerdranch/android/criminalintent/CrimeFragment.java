@@ -21,7 +21,7 @@ import static com.bignerdranch.android.criminalintent.R.id.parent;
  */
 
 public class CrimeFragment extends Fragment {
-    private static final String ARG_CRIME_ID = "crime_id";
+    public static final String EXTRA_CRIME_ID = "criminalintent.CRIME_ID";
 
 
     private Crime mCrime;
@@ -32,20 +32,24 @@ public class CrimeFragment extends Fragment {
 
     public static CrimeFragment newInstance(UUID crimeId) {
         Bundle args = new Bundle();
-        args.putSerializable(ARG_CRIME_ID, crimeId);
+        args.putSerializable(EXTRA_CRIME_ID, crimeId);
+
         CrimeFragment fragment = new CrimeFragment();
         fragment.setArguments(args);
+
         return fragment;
     }
 
 
 
     @Override
-    public void onCreate(Bundle savedInstance){
-        super.onCreate(savedInstance);
-        UUID crimeId = (UUID) getArguments().getSerializable(ARG_CRIME_ID);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        UUID crimeId = (UUID)getArguments().getSerializable(EXTRA_CRIME_ID);
         mCrime = CrimeLab.get(getActivity()).getCrime(crimeId);
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
