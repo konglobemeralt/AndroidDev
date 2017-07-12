@@ -10,9 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.security.acl.LastOwnerException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,9 +19,12 @@ import java.util.List;
  */
 
 public class CrimeListFragment extends Fragment {
+    private ArrayList<Crime> mCrimes;
 
     private RecyclerView mCrimeRecyclerView;
     private CrimeAdapter mAdapter;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

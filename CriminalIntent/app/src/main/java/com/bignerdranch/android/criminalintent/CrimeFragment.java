@@ -21,7 +21,8 @@ import static com.bignerdranch.android.criminalintent.R.id.parent;
  */
 
 public class CrimeFragment extends Fragment {
-    public static final String EXTRA_CRIME_ID = "criminalintent.CRIME_ID";
+    private static final String ARG_CRIME_ID = "crime_id";
+
 
     private Crime mCrime;
     private EditText mTitleField;
@@ -29,13 +30,18 @@ public class CrimeFragment extends Fragment {
     private CheckBox mSolvedCheckBox;
 
 
-
+    public static CrimeFragment newInstance(UUID crimeId) {
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_CRIME_ID, crimeId);
+        CrimeFragment fragment = new CrimeFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
-        UUID crimeId = (UUID) getActivity().getIntent()
-                .getSerializableExtra(CrimeActivity.EXTRA_CRIME_ID);
+        UUID crimeId = (UUID) getArguments().getSerializable(ARG_CRIME_ID);
         mCrime = CrimeLab.get(getActivity()).getCrime(crimeId);
     }
 
