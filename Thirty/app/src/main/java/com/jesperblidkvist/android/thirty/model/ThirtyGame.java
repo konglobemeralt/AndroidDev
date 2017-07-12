@@ -94,13 +94,6 @@ public class ThirtyGame implements Parcelable {
     }
 
     /**
-     * Gets the score of the current round.
-     */
-    public int getRoundScore() {
-        return roundScore;
-    }
-
-    /**
      * Gets the total score.
      */
     public int getTotalScore() {
@@ -116,17 +109,6 @@ public class ThirtyGame implements Parcelable {
 
     public int getRoundCount(){
         return roundCount;
-    }
-
-    /**
-     * Returns all the dices in the game.
-     */
-    public ArrayList<Integer> getAllDiceValues() {
-        ArrayList<Integer> values = new ArrayList<>();
-        for (int i = 0; i < dices.length; ++i) {
-            values.add(dices[i].getValue());
-        }
-        return values;
     }
 
     /**

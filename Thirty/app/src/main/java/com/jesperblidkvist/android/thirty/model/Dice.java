@@ -83,13 +83,6 @@ public class Dice {
     }
 
     /**
-     * toggle dice seletion
-     */
-    public void toggleSelection() {
-        this.selected = !selected;
-    }
-
-    /**
      * Get the value as a string
      */
     @Override

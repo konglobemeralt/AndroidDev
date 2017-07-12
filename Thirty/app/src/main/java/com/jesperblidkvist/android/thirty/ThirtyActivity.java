@@ -59,8 +59,6 @@ public class ThirtyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thirty);
 
-        Intent intent = getIntent();
-
         game = new ThirtyGame();
 
         initView();

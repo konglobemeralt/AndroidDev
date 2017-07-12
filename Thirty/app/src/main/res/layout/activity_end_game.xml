@@ -27,14 +27,14 @@
         android:text="TextView"/>
 
     <Button
-            android:id="@+id/playAgainButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.06"
-            android:background="#C01831"
-            android:onClick="meonFb"
-            android:text="@string/play_again_button"
-            android:textColor="#ffffff"/>
+        android:id="@+id/playAgainButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.06"
+        android:background="#00bfff"
+        android:onClick="meonFb"
+        android:text="@string/play_again_button"
+        android:textColor="#ffffff"/>
 
 
 
