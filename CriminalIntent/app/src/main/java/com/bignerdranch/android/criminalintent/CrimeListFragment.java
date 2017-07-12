@@ -33,7 +33,7 @@ public class CrimeListFragment extends ListFragment {
         Crime c = ((CrimeAdapter)getListAdapter()).getItem(position);
         // start an instance of CrimeActivity
         Intent i = new Intent(getActivity(), CrimeActivity.class);
-        i.putExtra(CrimeFragment.EXTRA_CRIME_ID, c.getID());
+        i.putExtra(CrimeFragment.EXTRA_CRIME_ID, c.getId());
         startActivityForResult(i, 0);
     }
 
@@ -59,13 +59,13 @@ public class CrimeListFragment extends ListFragment {
             Crime c = getItem(position);
 
             TextView titleTextView =
-                    (TextView)convertView.findViewById(R.id.list_item_crime_title_text_view);
+                    (TextView)convertView.findViewById(R.id.crime_list_item_titleTextView);
             titleTextView.setText(c.getTitle());
             TextView dateTextView =
-                    (TextView)convertView.findViewById(R.id.list_item_crime_date_text_view);
+                    (TextView)convertView.findViewById(R.id.crime_list_item_dateTextView);
             dateTextView.setText(c.getDate().toString());
             CheckBox solvedCheckBox =
-                    (CheckBox)convertView.findViewById(R.id.list_item_crime_solved_check_box);
+                    (CheckBox)convertView.findViewById(R.id.crime_list_item_solvedCheckBox);
             solvedCheckBox.setChecked(c.isSolved());
 
             return convertView;

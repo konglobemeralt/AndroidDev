@@ -1,52 +1,44 @@
 package com.bignerdranch.android.criminalintent;
 
+import java.util.ArrayList;
+import java.util.UUID;
 
 import android.content.Context;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
-/**
- * Created by Jesper on 2017-07-07.
- */
-
 public class CrimeLab {
+    private ArrayList<Crime> mCrimes;
 
     private static CrimeLab sCrimeLab;
-    private ArrayList<Crime> mCrimes;
     private Context mAppContext;
 
-    public static CrimeLab get(Context context) {
+    private CrimeLab(Context appContext) {
+        mAppContext = appContext;
+        mCrimes = new ArrayList<Crime>();
+        for (int i = 0; i < 100; i++) {
+            Crime c = new Crime();
+            c.setTitle("Crime #" + i);
+            c.setSolved(i % 2 == 0); // every other one
+            mCrimes.add(c);
+        }
+    }
+
+    public static CrimeLab get(Context c) {
         if (sCrimeLab == null) {
-            sCrimeLab = new CrimeLab(context.getApplicationContext());
+            sCrimeLab = new CrimeLab(c.getApplicationContext());
         }
         return sCrimeLab;
     }
 
-    private CrimeLab(Context context){
-        mAppContext = context;
-        mCrimes = new ArrayList<>();
-
-        //DUMMY CRIMES
-        for (int i = 0; i < 100; i++) {
-            Crime crime = new Crime();
-            crime.setTitle("Crime #" + i);
-            crime.setSolved(i % 2 == 0); // Every other one
-            mCrimes.add(crime);
+    public Crime getCrime(UUID id) {
+        for (Crime c : mCrimes) {
+            if (c.getId().equals(id))
+                return c;
         }
+        return null;
     }
 
     public ArrayList<Crime> getCrimes() {
         return mCrimes;
     }
-
-    public Crime getCrime(UUID id){
-        for(Crime crime: mCrimes){
-            if(crime.getID().equals(id)){
-                return crime;
-            }
-        }
-        return null;
-    }
 }
+

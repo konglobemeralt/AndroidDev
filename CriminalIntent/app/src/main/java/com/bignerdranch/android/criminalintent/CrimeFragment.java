@@ -1,5 +1,7 @@
 package com.bignerdranch.android.criminalintent;
 
+import java.util.UUID;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -10,25 +12,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
-
-import java.util.UUID;
-
-import static com.bignerdranch.android.criminalintent.R.id.parent;
-
-/**
- * Created by Jesper on 2017-06-21.
- */
 
 public class CrimeFragment extends Fragment {
     public static final String EXTRA_CRIME_ID = "criminalintent.CRIME_ID";
 
-
-    private Crime mCrime;
-    private EditText mTitleField;
-    private Button mDateButton;
-    private CheckBox mSolvedCheckBox;
-
+    Crime mCrime;
+    EditText mTitleField;
+    Button mDateButton;
+    CheckBox mSolvedCheckBox;
 
     public static CrimeFragment newInstance(UUID crimeId) {
         Bundle args = new Bundle();
@@ -40,8 +33,6 @@ public class CrimeFragment extends Fragment {
         return fragment;
     }
 
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +40,6 @@ public class CrimeFragment extends Fragment {
         UUID crimeId = (UUID)getArguments().getSerializable(EXTRA_CRIME_ID);
         mCrime = CrimeLab.get(getActivity()).getCrime(crimeId);
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -77,7 +67,7 @@ public class CrimeFragment extends Fragment {
 
         mSolvedCheckBox = (CheckBox)v.findViewById(R.id.crime_solved);
         mSolvedCheckBox.setChecked(mCrime.isSolved());
-        mSolvedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        mSolvedCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // set the crime's solved property
                 mCrime.setSolved(isChecked);

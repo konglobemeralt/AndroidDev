@@ -3,29 +3,32 @@ package com.bignerdranch.android.criminalintent;
 import java.util.Date;
 import java.util.UUID;
 
-/**
- * Created by Jesper on 2017-06-21.
- */
-
 public class Crime {
-
-    private UUID mID;
+    private UUID mId;
     private String mTitle;
     private Date mDate;
     private boolean mSolved;
 
-    public Crime(){
-        // Generate unique identifier
-        mID = UUID.randomUUID();
+    public Crime() {
+        mId = UUID.randomUUID();
         mDate = new Date();
     }
 
-    public Date getDate() {
-        return mDate;
+    @Override
+    public String toString() {
+        return mTitle;
     }
 
-    public void setDate(Date date) {
-        mDate = date;
+    public String getTitle() {
+        return mTitle;
+    }
+
+    public void setTitle(String title) {
+        mTitle = title;
+    }
+
+    public UUID getId() {
+        return mId;
     }
 
     public boolean isSolved() {
@@ -36,15 +39,13 @@ public class Crime {
         mSolved = solved;
     }
 
-    public UUID getID() {
-        return mID;
+    public Date getDate() {
+        return mDate;
     }
 
-    public String getTitle() {
-        return mTitle;
+    public void setDate(Date date) {
+        mDate = date;
     }
 
-    public void setTitle(String title) {
-        mTitle = title;
-    }
+
 }
