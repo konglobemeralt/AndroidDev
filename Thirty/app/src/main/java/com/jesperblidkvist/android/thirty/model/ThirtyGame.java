@@ -187,13 +187,7 @@ public class ThirtyGame implements Parcelable {
     public void endTurn(String scoreChoice) {
         increaseTurnCount();
         scoringMehtods.remove(scoreChoice);
-        if (!scoreChoice.equals("low")) {
-            roundScore = calculatePoints(Integer.parseInt(scoreChoice));
-            Log.d("ThirtyActivity", "RouncScoreCalc " + Integer.toString(roundScore));
-        } else {
-            roundScore = calculateLow();
-            Log.d("ThirtyActivity", "LowScoreCalc " + Integer.toString(roundScore));
-        }
+        totalScore = getRoundScore(scoreChoice);
         Log.d("ThirtyActivity", "CalcPoints " + Integer.toString(roundScore));
         saveChoices(scoreChoice);
         resetGame();
@@ -333,11 +327,10 @@ public class ThirtyGame implements Parcelable {
      */
     public int getRoundScore(String scoringMethod){
         if (!scoringMethod.equals("low")) {
-            roundScore = calculatePoints(Integer.parseInt(scoringMethod));
+            return calculatePoints(Integer.parseInt(scoringMethod));
         } else {
-            roundScore = calculateLow();
+            return calculateLow();
         }
-        return roundScore;
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {

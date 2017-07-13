@@ -248,7 +248,7 @@ public class ThirtyActivity extends AppCompatActivity {
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, spinnerArray);
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mScoringSpinner.setAdapter(spinnerArrayAdapter);
-        game.getRoundScore(mScoringSpinner.getSelectedItem().toString());
+        //game.getRoundScore(mScoringSpinner.getSelectedItem().toString());
     }
 
     /**

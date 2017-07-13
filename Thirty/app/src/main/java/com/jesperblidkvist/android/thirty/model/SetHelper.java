@@ -15,7 +15,7 @@ import java.util.StringTokenizer;
 
 public class SetHelper {
 
-    private static String subsetStringSums;
+    private static String subsetStringSums = "";
 
     void subsetSums(int arr[], int l, int r, int sum)
     {
@@ -33,6 +33,21 @@ public class SetHelper {
         subsetSums(arr, l+1, r, sum);
     }
 
+    /**
+     * A helper Method for calculating the sum from a string of integers
+     *
+     * @param intString the string subset
+     * @return the sum of the string subset
+     */
+    private static int getSum(String intString) {
+        int sum = 0;
+        StringTokenizer sTokens = new StringTokenizer(intString, " ");
+        while (sTokens.hasMoreElements()) {
+            sum += Integer.parseInt((String) sTokens.nextElement());
+        }
+        return sum;
+    }
+
 
     /**
      * A method that uses the setSum funtions to find the number of sets that which have a given sum.
@@ -42,8 +57,9 @@ public class SetHelper {
         subsetSums(set, 0, set.length-1, 0);
 
         Log.d("Sums", " : " + subsetStringSums);
+        int returnVar = getSum(subsetStringSums);
         subsetStringSums = "";
-        return 55;
+        return returnVar;
 }
 }
 
