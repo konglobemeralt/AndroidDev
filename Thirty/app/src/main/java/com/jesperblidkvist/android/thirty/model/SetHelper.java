@@ -1,6 +1,8 @@
 package com.jesperblidkvist.android.thirty.model;
 
 import android.util.Log;
+
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.StringTokenizer;
 
@@ -13,64 +15,53 @@ import java.util.StringTokenizer;
 
 public class SetHelper {
 
-    private static HashSet<String> subsetWithSum = new HashSet<>();
+        // Returns true if there is a subset of set[] with sun equal to given sum
+        static boolean isSubsetSum(int set[], int n, int sum)
+        {
+            // The value of subset[i][j] will be true if there
+            // is a subset of set[0..j-1] with sum equal to i
+            boolean subset[][] = new boolean[sum+1][n+1];
 
-    private static final String token = " ";
+            // If sum is 0, then answer is true
+            for (int i = 0; i <= n; i++)
+                subset[0][i] = true;
 
-    /**
-     * The method for finding the subsets that sum to a target.
-     */
-    private static void findSumSubsets(int[] inputSet, int targetSum, String ramp, int index) {
+            // If sum is not 0 and set is empty, then answer is false
+            for (int i = 1; i <= sum; i++)
+                subset[i][0] = false;
 
-        if(index > (inputSet.length - 1)) {
-            if(getSum(ramp) == targetSum) {
-                subsetWithSum.add(ramp);
+            // Fill the subset table in botton up manner
+            for (int i = 1; i <= sum; i++)
+            {
+                for (int j = 1; j <= n; j++)
+                {
+                    subset[i][j] = subset[i][j-1];
+                    if (i >= set[j-1])
+                        subset[i][j] = subset[i][j] ||
+                                subset[i - set[j-1]][j-1];
+                }
             }
-            return;
-        }
 
-        findSumSubsets(inputSet, targetSum, ramp + inputSet[index] + token, index + 1);
-        findSumSubsets(inputSet, targetSum, ramp, index + 1);
-    }
+        /* // uncomment this code to print table
+         for (int i = 0; i <= sum; i++)
+         {
+           for (int j = 0; j <= n; j++)
+              printf ("%4d", subset[i][j]);
+           printf("\n");
+         } */
 
-    /**
-     * A helper Method for calculating the sum from a string of integers
-     *
-     * @param intString the string subset
-     * @return the sum of the string subset
-     */
-    private static int getSum(String intString) {
-        int sum = 0;
-        StringTokenizer sTokens = new StringTokenizer(intString, token);
-        while (sTokens.hasMoreElements()) {
-            sum += Integer.parseInt((String) sTokens.nextElement());
+            return subset[sum][n];
         }
-        return sum;
-    }
 
 
     /**
      * A method that uses the setSum funtions to find the number of sets that which have a given sum.
      */
     public int getCombinations(int[] set, int sum){
-        int counter = 0;
 
-        for(int i = 0; i<set.length ; i++){
-            if(set[i]==sum){
-                counter++;
-            }
-        }
-        if(counter != 0){
-            counter--;
-        }
-        SetHelper.findSumSubsets(set, sum, "", 0);
-        for (String str: subsetWithSum) {
-            Log.d("ThirtyActivity", counter + ") " + str);
-            counter++;
-        }
-        subsetWithSum.clear();
-        subsetWithSum = new HashSet<>();
+        if (isSubsetSum(set, set.length, sum) == true)
+            System.out.println("Found a subset with given sum");
+        else
+            return 0;
 
-        return counter * sum;
-    }
 }
