@@ -3,6 +3,7 @@ package com.jesperblidkvist.android.thirty.model;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.StringTokenizer;
 
@@ -16,6 +17,7 @@ import java.util.StringTokenizer;
 public class SetHelper {
 
     private static String subsetStringSums = "";
+    private static HashSet<String> sets = new HashSet<>();
 
     void subsetSums(int arr[], int l, int r, int sum)
     {
@@ -23,6 +25,8 @@ public class SetHelper {
         if (l > r)
         {
             subsetStringSums += sum + " ";
+            sets.add(Arrays.toString(arr));
+
             return;
         }
 
@@ -60,9 +64,12 @@ public class SetHelper {
 
         subsetSums(set, 0, set.length-1, 0);
 
-        Log.d("Sums", " : " + subsetStringSums);
+        Log.d("Sumz", " : " + subsetStringSums);
+        Log.d("array", " Arrays: " + Arrays.toString(sets.toArray(new String[sets.size()])));
         int returnVar = getSum(subsetStringSums, sum);
         subsetStringSums = "";
+        sets.clear();
+        sets = new HashSet<>();
         return returnVar;
 }
 }
