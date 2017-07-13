@@ -15,42 +15,23 @@ import java.util.StringTokenizer;
 
 public class SetHelper {
 
-        private static int combinationCount = 0;
+    private static String subsetStringSums;
 
-        // Returns true if there is a subset of set[] with sun equal to given sum
-        static boolean isSubsetSum(int set[], int n, int sum)
+    void subsetSums(int arr[], int l, int r, int sum)
+    {
+        // Print current subset
+        if (l > r)
         {
-            // The value of subset[i][j] will be true if there
-            // is a subset of set[0..j-1] with sum equal to i
-            boolean subset[][] = new boolean[sum+1][n+1];
-
-            // If sum is 0, then answer is true
-            for (int i = 0; i <= n; i++){
-                subset[0][i] = true;
-            }
-
-            // If sum is not 0 and set is empty, then answer is false
-            for (int i = 1; i <= sum; i++){
-                subset[i][0] = false;
-            }
-
-
-            // Fill the subset table in botton up manner
-            for (int i = 1; i <= sum; i++)
-            {
-                for (int j = 1; j <= n; j++)
-                {
-                    subset[i][j] = subset[i][j-1];
-                    if (i >= set[j-1])
-                        subset[i][j] = subset[i][j] ||
-                                subset[i - set[j-1]][j-1];
-                }
-            }
-
-
-
-            return subset[sum][n];
+            subsetStringSums += sum + " ";
+            return;
         }
+
+        // Subset including arr[l]
+        subsetSums(arr, l+1, r, sum+arr[l]);
+
+        // Subset excluding arr[l]
+        subsetSums(arr, l+1, r, sum);
+    }
 
 
     /**
@@ -58,11 +39,11 @@ public class SetHelper {
      */
     public int getCombinations(int[] set, int sum){
 
-        isSubsetSum(set, set.length, sum);
+        subsetSums(set, 0, set.length-1, 0);
 
-        int returnVar = combinationCount;
-        combinationCount = 0;
-        return returnVar;
+        Log.d("Sums", " : " + subsetStringSums);
+        subsetStringSums = "";
+        return 55;
 }
 }
 
