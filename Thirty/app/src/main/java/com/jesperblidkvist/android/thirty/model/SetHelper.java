@@ -39,11 +39,15 @@ public class SetHelper {
      * @param intString the string subset
      * @return the sum of the string subset
      */
-    private static int getSum(String intString) {
+    private static int getSum(String intString, int targetSum) {
         int sum = 0;
         StringTokenizer sTokens = new StringTokenizer(intString, " ");
         while (sTokens.hasMoreElements()) {
-            sum += Integer.parseInt((String) sTokens.nextElement());
+            int number = Integer.parseInt((String) sTokens.nextElement());
+            if(number == targetSum){
+                sum += number;
+            }
+
         }
         return sum;
     }
@@ -57,7 +61,7 @@ public class SetHelper {
         subsetSums(set, 0, set.length-1, 0);
 
         Log.d("Sums", " : " + subsetStringSums);
-        int returnVar = getSum(subsetStringSums);
+        int returnVar = getSum(subsetStringSums, sum);
         subsetStringSums = "";
         return returnVar;
 }

@@ -277,7 +277,7 @@ public class ThirtyGame implements Parcelable {
             set[i] = getAllSelectedDiceValues().get(i).intValue();
         }
 
-        return scoring.getCombinations(set, scoringMethod) * scoringMethod;
+        return scoring.getCombinations(set, scoringMethod);
     }
 
     /**
