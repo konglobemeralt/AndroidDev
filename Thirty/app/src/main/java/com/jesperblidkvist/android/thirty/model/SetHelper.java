@@ -5,6 +5,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.StringTokenizer;
 
 /**
@@ -16,44 +17,35 @@ import java.util.StringTokenizer;
 
 public class SetHelper {
 
-    private static String subsetStringSums = "";
-    private static HashSet<String> sets = new HashSet<>();
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        List<Integer> curr = new ArrayList<Integer>();
+        Arrays.sort(candidates);
+        System.out.println("****Candidates****");
+        System.out.println(Arrays.toString(candidates));
+        System.out.println("****Candidates****");
+        helper(result, curr, 0, target, candidates);
+        return result;
+    }
 
-    void subsetSums(int arr[], int l, int r, int sum)
-    {
-        // Print current subset
-        if (l > r)
-        {
-            subsetStringSums += sum + " ";
-            sets.add(Arrays.toString(arr));
-
+    public void helper(List<List<Integer>> result, List<Integer> curr, int start, int target, int[] candidates){
+        if(target==0){
+            result.add(new ArrayList<Integer>(curr));
+            return;
+        }
+        if(target<0){
             return;
         }
 
-        // Subset including arr[l]
-        subsetSums(arr, l+1, r, sum+arr[l]);
-
-        // Subset excluding arr[l]
-        subsetSums(arr, l+1, r, sum);
-    }
-
-    /**
-     * A helper Method for calculating the sum from a string of integers
-     *
-     * @param intString the string subset
-     * @return the sum of the string subset
-     */
-    private static int getSum(String intString, int targetSum) {
-        int sum = 0;
-        StringTokenizer sTokens = new StringTokenizer(intString, " ");
-        while (sTokens.hasMoreElements()) {
-            int number = Integer.parseInt((String) sTokens.nextElement());
-            if(number == targetSum){
-                sum += number;
+        int prev=-1;
+        for(int i=start; i<candidates.length; i++){
+            if(prev!=candidates[i]){ // each time start from different element
+                curr.add(candidates[i]);
+                helper(result, curr, i+1, target-candidates[i], candidates); // and use next element only
+                curr.remove(curr.size()-1);
+                prev=candidates[i];
             }
-
         }
-        return sum;
     }
 
 
@@ -61,16 +53,17 @@ public class SetHelper {
      * A method that uses the setSum funtions to find the number of sets that which have a given sum.
      */
     public int getCombinations(int[] set, int sum){
-
-        subsetSums(set, 0, set.length-1, 0);
-
-        Log.d("Sumz", " : " + subsetStringSums);
-        Log.d("array", " Arrays: " + Arrays.toString(sets.toArray(new String[sets.size()])));
-        int returnVar = getSum(subsetStringSums, sum);
-        subsetStringSums = "";
-        sets.clear();
-        sets = new HashSet<>();
-        return returnVar;
+        System.out.println("****START****");
+        for(List<Integer> a: combinationSum(set, sum)){
+            System.out.print("[");
+            for(int b: a){
+                System.out.print(b + ", ");
+            }
+            System.out.println("]");
+        }
+        System.out.println(combinationSum(set, sum).size());
+        System.out.println("****END****");
+        return combinationSum(set, sum).size();
 }
 }
 
