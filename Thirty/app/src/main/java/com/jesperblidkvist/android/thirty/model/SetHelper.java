@@ -2,6 +2,7 @@ package com.jesperblidkvist.android.thirty.model;
 
 import android.util.Log;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -17,36 +18,53 @@ import java.util.StringTokenizer;
 
 public class SetHelper {
 
-    public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        List<List<Integer>> result = new ArrayList<List<Integer>>();
-        List<Integer> curr = new ArrayList<Integer>();
-        Arrays.sort(candidates);
-        System.out.println("****Candidates****");
-        System.out.println(Arrays.toString(candidates));
-        System.out.println("****Candidates****");
-        helper(result, curr, 0, target, candidates);
-        return result;
-    }
+        /**
+         * The collection for storing the unique sets that sum to a target.
+         */
+        private static ArrayList<String> allSubsets = new ArrayList<>();
 
-    public void helper(List<List<Integer>> result, List<Integer> curr, int start, int target, int[] candidates){
-        if(target==0){
-            result.add(new ArrayList<Integer>(curr));
-            return;
-        }
-        if(target<0){
-            return;
-        }
+        /**
+         * The String token
+         */
+        private static final String token = " ";
 
-        int prev=-1;
-        for(int i=start; i<candidates.length; i++){
-            if(prev!=candidates[i]){ // each time start from different element
-                curr.add(candidates[i]);
-                helper(result, curr, i+1, target-candidates[i], candidates); // and use next element only
-                curr.remove(curr.size()-1);
-                prev=candidates[i];
+        /**
+         * The method for finding the subsets that sum to a target.
+         *
+         * @param input  The input array to be processed for subset with particular sum
+         * @param target The target sum we are looking for
+         * @param ramp   The Temporary String to be beefed up during recursive iterations(By default value an empty String)
+         * @param index  The index used to traverse the array during recursive calls
+         */
+        public static void findTargetSumSubsets(int[] input, int target, String ramp, int index) {
+
+            if(index > (input.length - 1)) {
+                if(getSum(ramp) == target) {
+                    allSubsets.add(ramp);
+                }
+                return;
             }
+
+            //First recursive call going ahead selecting the int at the currenct index value
+            findTargetSumSubsets(input, target, ramp + input[index] + token, index + 1);
+            //Second recursive call going ahead WITHOUT selecting the int at the currenct index value
+            findTargetSumSubsets(input, target, ramp, index + 1);
         }
-    }
+
+        /**
+         * A helper Method for calculating the sum from a string of integers
+         *
+         * @param intString the string subset
+         * @return the sum of the string subset
+         */
+        private static int getSum(String intString) {
+            int sum = 0;
+            StringTokenizer sTokens = new StringTokenizer(intString, token);
+            while (sTokens.hasMoreElements()) {
+                sum += Integer.parseInt((String) sTokens.nextElement());
+            }
+            return sum;
+        }
 
 
     /**
@@ -54,16 +72,17 @@ public class SetHelper {
      */
     public int getCombinations(int[] set, int sum){
         System.out.println("****START****");
-        for(List<Integer> a: combinationSum(set, sum)){
-            System.out.print("[");
-            for(int b: a){
-                System.out.print(b + ", ");
-            }
-            System.out.println("]");
+        int counter = 0;
+        SetHelper.findTargetSumSubsets(set, sum, "", 0);
+        for (String str: allSubsets) {
+            System.out.println(counter + ") " + str);
+            counter++;
         }
-        System.out.println(combinationSum(set, sum).size());
         System.out.println("****END****");
-        return combinationSum(set, sum).size();
+        allSubsets = new ArrayList<>();
+        return counter;
+    }
+
 }
-}
+
 
