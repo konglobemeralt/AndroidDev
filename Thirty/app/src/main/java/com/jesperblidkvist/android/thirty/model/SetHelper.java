@@ -73,10 +73,21 @@ public class SetHelper {
     public int getCombinations(int[] set, int sum){
         System.out.println("****START****");
         int counter = 0;
+        int remainingDices = 6;
         SetHelper.findTargetSumSubsets(set, sum, "", 0);
+
+        java.util.Collections.sort(allSubsets, new StringComparator(""));
+
         for (String str: allSubsets) {
             System.out.println(counter + ") " + str);
-            counter++;
+
+
+            if((str.replaceAll("\\D", "").length()) >= 0){
+                remainingDices -= str.replaceAll("\\D", "").length();
+                System.out.println("Remaining dices:  " + remainingDices);
+                counter++;
+            }
+
         }
         System.out.println("****END****");
         allSubsets = new ArrayList<>();
@@ -84,5 +95,7 @@ public class SetHelper {
     }
 
 }
+
+
 
 
