@@ -82,9 +82,9 @@ public class SetHelper {
             System.out.println(counter + ") " + str);
 
 
-            if((str.replaceAll("\\D", "").length()) >= 0){
+            if((str.replaceAll("\\D", "").length()) >= 0 && remainingDices > 0){
                 remainingDices -= str.replaceAll("\\D", "").length();
-                System.out.println("Remaining dices:  " + remainingDices);
+                System.out.println("Amount of emaining dices:  " + remainingDices);
                 counter++;
             }
 
