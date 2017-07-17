@@ -70,7 +70,6 @@ public class SetHelper {
         return sum;
     }
 
-
     /**
      * A method that uses the setSum funtions to find the number of sets that which have a given sum.
      */
@@ -119,10 +118,11 @@ public class SetHelper {
        String[] array = str.split(" ");
 
        for(int i=0; i < array.length; i++){
-           if(values[Integer.parseInt(array[i])-1] < 0 ){
+           if(values[Integer.parseInt(array[i])-1]-1 < 0 ){
                return false;
            }
            values[Integer.parseInt(array[i])-1]--;
+           System.out.println("Removed a " + array[i]);
        }
 
         return true;
