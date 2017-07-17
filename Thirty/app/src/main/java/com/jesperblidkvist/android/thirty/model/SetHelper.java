@@ -78,6 +78,10 @@ public class SetHelper {
         System.out.println("****START****");
 
         countOccurences(set);
+        System.out.println("****DICE COUNT****");
+        for(int j=0; j<values.length; j++){
+            System.out.println("Amount of" + j+1 + "s: "+ values[j]);
+        }
 
         int counter = 0;
         SetHelper.findTargetSumSubsets(set, sum, "", 0);
@@ -86,14 +90,17 @@ public class SetHelper {
 
         for (String str : allSubsets) {
             System.out.println(counter + ") " + str);
-
                 if(dicesAvaliable(str)){
                     counter++;
                 }
-
-
-
         }
+
+        System.out.println("****DICE COUNTED****");
+        for(int j=0; j<values.length; j++){
+            System.out.println("Amount of" + j+1 + "s: "+ values[j]);
+        }
+
+
         System.out.println("****END****");
         allSubsets = new ArrayList<>();
         return counter;
@@ -109,14 +116,11 @@ public class SetHelper {
     private boolean dicesAvaliable(String str){
        String[] array = str.split(" ");
 
-       int[] ints = new int[array.length];
-       for(int i=0; i<array.length; i++)
-       {
-           try {
-               ints[i] = Integer.parseInt(array[i]);
-           } catch (NumberFormatException nfe) {
-               //Not an integer
+       for(int i=0; i < array.length; i++){
+           if(values[Integer.parseInt(array[i])-1] < 0 ){
+               return false;
            }
+           values[Integer.parseInt(array[i])-1]--;
        }
 
         return true;
