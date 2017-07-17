@@ -26,7 +26,7 @@ public class SetHelper {
     /**
      * An array keeping track of how many instances of a given dice value is used.
      */
-    private int[] values = {0, 0, 0 ,0 ,0 ,0};
+    private int[] values;
     /**
      * The String token
      */
@@ -77,11 +77,12 @@ public class SetHelper {
     public int getCombinations(int[] set, int sum) {
         System.out.println("****START****");
 
+        values = new int[]{0, 0, 0 ,0 ,0 ,0};
         countOccurences(set);
-        System.out.println("****DICE COUNT****");
-        for(int j=0; j<values.length; j++){
-            System.out.println("Amount of" + j+1 + "s: "+ values[j]);
-        }
+       // System.out.println("****DICE COUNT****");
+       // for(int j=0; j<values.length; j++){
+       //     System.out.println("Amount of " + (j+1) + "s: "+ values[j]);
+       // }
 
         int counter = 0;
         SetHelper.findTargetSumSubsets(set, sum, "", 0);
@@ -95,9 +96,9 @@ public class SetHelper {
                 }
         }
 
-        System.out.println("****DICE COUNTED****");
+        System.out.println("****DICE LEFT****");
         for(int j=0; j<values.length; j++){
-            System.out.println("Amount of" + j+1 + "s: "+ values[j]);
+            System.out.println("Amount of " + (j+1) + "s: "+ values[j]);
         }
 
 
@@ -110,6 +111,7 @@ public class SetHelper {
     private void countOccurences(int[] array){
         for(int i=0; i < array.length; i++ ){
             values[array[i]-1]++; //Add one to the place in the array;
+            System.out.println("Added a " + array[i]);
         }
     }
 
