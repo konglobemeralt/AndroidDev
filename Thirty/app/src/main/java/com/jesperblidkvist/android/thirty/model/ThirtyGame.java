@@ -197,7 +197,7 @@ public class ThirtyGame implements Parcelable {
      * Save choices made as a string
      */
     private void saveChoices(String scoreChoice) {
-        // TODO: UNCOMMENT THIS choices.add("Played " + scoreChoice + " and selected: " + savedDice.toString() + " For " + getRoundScore(scoreChoice) + " Points " + "\n");
+        choices.add("Played " + scoreChoice + " and selected: " + savedDice.toString() + " For " + getRoundScore(scoreChoice) + " Points " + "\n");
         for (int i = 0; i < choices.size(); i++) {
             Log.d("ThirtyActivity", "round " + (i + 1) + ": " + choices.get(i) + "\n");
         }
