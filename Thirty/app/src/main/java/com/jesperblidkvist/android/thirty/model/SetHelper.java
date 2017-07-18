@@ -89,8 +89,10 @@ public class SetHelper {
         java.util.Collections.sort(allSubsets, new StringComparator(""));
 
         for (String str : allSubsets) {
-            System.out.println(counter + ") " + str);
+
+                System.out.println(counter + ":st set to test:  " + str);
                 if(dicesAvaliable(str)){
+                    System.out.println(counter + ":st Valid set:  " + str);
                     counter++;
                 }
         }
