@@ -78,15 +78,22 @@ public class SetHelper {
 
         values = new int[]{0, 0, 0 ,0 ,0 ,0};
         countOccurences(set);
-       // System.out.println("****DICE COUNT****");
-       // for(int j=0; j<values.length; j++){
-       //     System.out.println("Amount of " + (j+1) + "s: "+ values[j]);
-       // }
+
 
         int counter = 0;
         SetHelper.findTargetSumSubsets(set, sum, "", 0);
 
+        System.out.println("****Before Sort****");
+        for (String str : allSubsets) {
+            System.out.println(str);
+        }
+
         java.util.Collections.sort(allSubsets, new StringComparator(""));
+
+        System.out.println("****After Sort****");
+        for (String str : allSubsets) {
+            System.out.println(str);
+        }
 
         for (String str : allSubsets) {
 
@@ -118,12 +125,19 @@ public class SetHelper {
 
     private boolean dicesAvaliable(String str){
        String[] array = str.split(" ");
+        List<Integer> removedDices = new ArrayList<>();
 
        for(int i=0; i < array.length; i++){
            if(values[Integer.parseInt(array[i])-1]-1 < 0 ){
+               //Add removed dices back if false
+               for(int j=0; j<removedDices.size(); j++){
+                   values[removedDices.get(j)]++;
+               }
+
                return false;
            }
            values[Integer.parseInt(array[i])-1]--;
+           removedDices.add(Integer.parseInt(array[i]));
            System.out.println("Removed a " + array[i]);
        }
 
