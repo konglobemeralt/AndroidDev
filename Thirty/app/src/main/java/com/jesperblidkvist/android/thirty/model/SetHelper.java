@@ -133,7 +133,6 @@ public class SetHelper {
                for(int j=0; j<removedDices.size(); j++){
                    values[removedDices.get(j)-1]++;
                }
-
                return false;
            }
            values[Integer.parseInt(array[i])-1]--;
