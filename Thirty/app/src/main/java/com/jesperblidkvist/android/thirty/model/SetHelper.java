@@ -131,7 +131,7 @@ public class SetHelper {
            if(values[Integer.parseInt(array[i])-1]-1 < 0 ){
                //Add removed dices back if false
                for(int j=0; j<removedDices.size(); j++){
-                   values[removedDices.get(j)]++;
+                   values[removedDices.get(j)-1]++;
                }
 
                return false;

@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -94,6 +95,17 @@ public class ThirtyActivity extends AppCompatActivity {
         mRoundPoints = (TextView) findViewById(R.id.roundPointsString);
         mTotalPoints = (TextView) findViewById(R.id.totalPointsString);
         mScoringSpinner = (Spinner) findViewById(R.id.ScoringSpinner);
+
+        mScoringSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                updateStrings();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+
+            }
+        });
 
     }
 
