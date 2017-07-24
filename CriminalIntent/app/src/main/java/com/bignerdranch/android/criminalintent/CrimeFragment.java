@@ -2,11 +2,10 @@ package com.bignerdranch.android.criminalintent;
 
 import java.util.UUID;
 
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
 
-import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -70,7 +69,7 @@ public class CrimeFragment extends Fragment {
         mDateButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                FragmentManager manager = getFragmentManager();
+                FragmentManager manager = getActivity().getFragmentManager();
                 DatePickerFragment dialog = new DatePickerFragment();
                 dialog.show(manager, DIALOG_DATE);
             }
