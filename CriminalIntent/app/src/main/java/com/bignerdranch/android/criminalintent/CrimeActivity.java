@@ -1,8 +1,10 @@
 package com.bignerdranch.android.criminalintent;
 
+import android.support.v4.app.Fragment;
+
 import java.util.UUID;
 
-import android.support.v4.app.Fragment;
+
 
 public class CrimeActivity extends SingleFragmentActivity {
     @Override
