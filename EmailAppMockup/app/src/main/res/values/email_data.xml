@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="adobe_products">
+    <string-array name="email_list">
         <item>Temp Email 1</item>
         <item>Temp Email 2</item>
         <item>Temp Email 3</item>

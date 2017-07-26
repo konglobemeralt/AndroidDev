@@ -1,5 +1,6 @@
 package com.jesperblidkvist.android.emailappmockup;
 
+import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,26 +11,29 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class MainMailActivity extends ListActivity {
+public class MainMailActivity extends Activity {
+    ListView listview;
+
+    /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // storing string resources into Array
-        String[] adobe_products = getResources().getStringArray(R.array.adobe_products);
+        String[] emails = getResources().getStringArray(R.array.email_list);
 
-        // Binding resources Array to ListAdapter
-        this.setListAdapter(new ArrayAdapter<String>(this, R.layout.activity_main_mail, R.id.label, adobe_products));
+        setContentView(R.layout.activity_main_mail);
+        listview = (ListView) findViewById(R.id.listview);
+        listview.setAdapter(new EmailAdapter(this, emails));
 
-        ListView lv = getListView();
 
         // listening to single list item on click
-        lv.setOnItemClickListener(new OnItemClickListener() {
+        listview.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
                 // selected item
-                String emailTitle = ((TextView) view).getText().toString();
+                String emailTitle = (listview.getItemAtPosition(position).toString());
 
                 // Launching new Activity on selecting single List Item
                 Intent i = new Intent(getApplicationContext(), SingleEmailActivity.class);
@@ -42,3 +46,4 @@ public class MainMailActivity extends ListActivity {
 
     }
 }
+
