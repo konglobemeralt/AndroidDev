@@ -14,13 +14,15 @@ import android.widget.TextView;
 class EmailAdapter extends BaseAdapter {
 
     Context context;
-    String[] data;
+    String[] headers;
+    String[] bodies;
     private static LayoutInflater inflater = null;
 
-    public EmailAdapter(Context context, String[] data) {
+    public EmailAdapter(Context context, String[] headers, String[] bodies) {
         // TODO Auto-generated constructor stub
         this.context = context;
-        this.data = data;
+        this.headers = headers;
+        this.bodies = bodies;
         inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -28,13 +30,13 @@ class EmailAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         // TODO Auto-generated method stub
-        return data.length;
+        return headers.length;
     }
 
     @Override
     public Object getItem(int position) {
         // TODO Auto-generated method stub
-        return data[position];
+        return headers[position];
     }
 
     @Override
@@ -49,8 +51,10 @@ class EmailAdapter extends BaseAdapter {
         View vi = convertView;
         if (vi == null)
             vi = inflater.inflate(R.layout.single_row, null);
-        TextView text = (TextView) vi.findViewById(R.id.text);
-        text.setText(data[position]);
+        TextView text = (TextView) vi.findViewById(R.id.email_header);
+        TextView body = (TextView) vi.findViewById(R.id.email_body);
+        text.setText(headers[position]);
+        body.setText(bodies[position]);
         return vi;
     }
 }

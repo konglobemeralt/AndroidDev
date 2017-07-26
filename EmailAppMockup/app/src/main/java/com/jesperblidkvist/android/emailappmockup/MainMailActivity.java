@@ -20,11 +20,12 @@ public class MainMailActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         // storing string resources into Array
-        String[] emails = getResources().getStringArray(R.array.email_list);
+        String[] emailHeaders = getResources().getStringArray(R.array.email_list);
+        String[] emailBodies = getResources().getStringArray(R.array.email_body_list);
 
         setContentView(R.layout.activity_main_mail);
         listview = (ListView) findViewById(R.id.listview);
-        listview.setAdapter(new EmailAdapter(this, emails));
+        listview.setAdapter(new EmailAdapter(this, emailHeaders, emailBodies));
 
 
         // listening to single list item on click
