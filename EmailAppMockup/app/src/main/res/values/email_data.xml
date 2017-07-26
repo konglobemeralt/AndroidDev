@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="adobe_products">
+        <item>Temp Email 1</item>
+        <item>Temp Email 2</item>
+        <item>Temp Email 3</item>
+        <item>Temp Email 4</item>
+        <item>Temp Email 5</item>
+        <item>Temp Email 6</item>
+        <item>Temp Email 7</item>
+        <item>Temp Email 8</item>
+        <item>Temp Email 9</item>
+        <item>Temp Email 10</item>
+        <item>Temp Email 11</item>
+        <item>Temp Email 12</item>
+        <item>Temp Email 13</item>
+        <item>Temp Email 14</item>
+
+    </string-array>
+</resources>
