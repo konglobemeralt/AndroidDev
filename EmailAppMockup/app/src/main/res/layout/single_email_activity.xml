@@ -10,4 +10,10 @@
               android:textSize="25dip"
               android:textStyle="bold"
               android:padding="10dip" />
+
+    <TextView android:id="@+id/email_body"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:textSize="25dip"
+              android:padding="10dip" />
 </LinearLayout>

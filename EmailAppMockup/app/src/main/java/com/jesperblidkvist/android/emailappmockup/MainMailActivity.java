@@ -40,6 +40,7 @@ public class MainMailActivity extends Activity {
                 Intent i = new Intent(getApplicationContext(), SingleEmailActivity.class);
                 // sending data to new activity
                 i.putExtra("email", emailTitle);
+                i.putExtra("body", emailTitle);
                 startActivity(i);
 
             }
