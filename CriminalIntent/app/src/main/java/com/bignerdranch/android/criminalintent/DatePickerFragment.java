@@ -20,14 +20,16 @@ import android.widget.DatePicker.OnDateChangedListener;
  * Created by Jesper on 2017-07-22.
  */
 
-public class DatePickerFragment extends DialogFragment{
+public class DatePickerFragment extends DialogFragment {
 
-    public static final String EXTRA_DATE = "com.bignerdranch.android.criminalintent.date";
+    public static final String EXTRA_DATE =
+            "com.bignerdranch.android.criminalintent.date";
+
     private static final String ARG_DATE = "date";
 
     private DatePicker mDatePicker;
 
-    public static DatePickerFragment newInstance(Date date){
+    public static DatePickerFragment newInstance(Date date) {
         Bundle args = new Bundle();
         args.putSerializable(ARG_DATE, date);
 
@@ -36,22 +38,8 @@ public class DatePickerFragment extends DialogFragment{
         return fragment;
     }
 
-    private void sendResult(int resultCode, Date date){
-        if (getTargetFragment() == null){
-            return;
-        }
-
-        Intent intent = new Intent();
-        intent.putExtra(EXTRA_DATE, date);
-
-        getTargetFragment()
-                .onActivityResult(getTargetRequestCode(), resultCode, intent);
-
-    }
-
-
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState){
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
         Date date = (Date) getArguments().getSerializable(ARG_DATE);
 
         Calendar calendar = Calendar.getInstance();
@@ -63,7 +51,7 @@ public class DatePickerFragment extends DialogFragment{
         View v = LayoutInflater.from(getActivity())
                 .inflate(R.layout.dialog_date, null);
 
-        mDatePicker = (DatePicker) v.findViewById(R.id.dialog_date_date_picker);
+        mDatePicker = (DatePicker) v.findViewById(R.id.dialog_date_picker);
         mDatePicker.init(year, month, day, null);
 
         return new AlertDialog.Builder(getActivity())
@@ -79,7 +67,19 @@ public class DatePickerFragment extends DialogFragment{
                                 Date date = new GregorianCalendar(year, month, day).getTime();
                                 sendResult(Activity.RESULT_OK, date);
                             }
-                })
+                        })
                 .create();
+    }
+
+    private void sendResult(int resultCode, Date date) {
+        if (getTargetFragment() == null) {
+            return;
+        }
+
+        Intent intent = new Intent();
+        intent.putExtra(EXTRA_DATE, date);
+
+        getTargetFragment()
+                .onActivityResult(getTargetRequestCode(), resultCode, intent);
     }
 }
