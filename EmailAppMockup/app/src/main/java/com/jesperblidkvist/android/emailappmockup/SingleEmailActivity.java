@@ -3,6 +3,7 @@ package com.jesperblidkvist.android.emailappmockup;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 /**
@@ -17,7 +18,6 @@ public class SingleEmailActivity extends Activity {
 
         TextView txtProduct = (TextView) findViewById(R.id.email_label);
         TextView txtBody = (TextView) findViewById(R.id.email_body);
-
         Intent i = getIntent();
         // getting attached intent data
         String product = i.getStringExtra("email");

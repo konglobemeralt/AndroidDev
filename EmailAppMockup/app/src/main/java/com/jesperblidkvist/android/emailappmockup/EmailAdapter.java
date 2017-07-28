@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 /**
@@ -53,8 +54,11 @@ class EmailAdapter extends BaseAdapter {
             vi = inflater.inflate(R.layout.single_row, null);
         TextView text = (TextView) vi.findViewById(R.id.email_header);
         TextView body = (TextView) vi.findViewById(R.id.email_body);
+        Button button = (Button) vi.findViewById(R.id.button);
+
         text.setText(headers[position]);
         body.setText(bodies[position]);
+
         return vi;
     }
 }
