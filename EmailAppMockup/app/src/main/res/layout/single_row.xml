@@ -12,15 +12,22 @@
             android:id="@+id/email_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Header"/>
+            android:text="Header"
+            android:textStyle="bold"/>
 
     </TableRow>
+
+    <TextView
+        android:id="@+id/email_subject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Subject"/>
 
     <TextView
         android:id="@+id/email_body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:text="Body"/>
 
     <TableRow
         android:layout_width="match_parent"
