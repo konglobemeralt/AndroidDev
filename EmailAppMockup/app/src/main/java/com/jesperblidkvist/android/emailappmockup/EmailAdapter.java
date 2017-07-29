@@ -54,7 +54,7 @@ class EmailAdapter extends BaseAdapter {
             vi = inflater.inflate(R.layout.single_row, null);
         TextView text = (TextView) vi.findViewById(R.id.email_header);
         TextView body = (TextView) vi.findViewById(R.id.email_body);
-        Button button = (Button) vi.findViewById(R.id.button);
+
 
         text.setText(headers[position]);
         body.setText(bodies[position]);

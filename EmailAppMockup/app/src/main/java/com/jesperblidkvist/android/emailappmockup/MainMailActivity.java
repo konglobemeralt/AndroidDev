@@ -1,9 +1,12 @@
 package com.jesperblidkvist.android.emailappmockup;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -13,6 +16,13 @@ import android.widget.TextView;
 
 public class MainMailActivity extends Activity {
     ListView listview;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.email_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
     /** Called when the activity is first created. */
     @Override
@@ -45,6 +55,8 @@ public class MainMailActivity extends Activity {
 
             }
         });
+
+
 
     }
 }
