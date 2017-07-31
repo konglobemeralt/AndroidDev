@@ -30,12 +30,16 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.72"/>
+        android:layout_weight="0.96"/>
 
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="87dp"
         android:layout_gravity="bottom">
+
+        <Space
+            android:layout_width="230dp"
+            android:layout_height="50dp"/>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab2"
