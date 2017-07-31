@@ -1,5 +1,6 @@
 package com.jesperblidkvist.android.emailappmockup;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,9 +18,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class MainEmailActivity extends AppCompatActivity {
+
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -99,6 +103,8 @@ public class MainEmailActivity extends AppCompatActivity {
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
 
+        ListView listview;
+
         public PlaceholderFragment() {
         }
 
@@ -120,6 +126,36 @@ public class MainEmailActivity extends AppCompatActivity {
             View rootView = inflater.inflate(R.layout.activity_main_mail, container, false);
       //      TextView textView = (TextView) rootView.findViewById(R.id.section_label);
       //      textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+
+            // storing string resources into Array
+            String[] emailHeaders = getResources().getStringArray(R.array.email_list);
+            String[] emailBodies = getResources().getStringArray(R.array.email_body_list);
+
+            //setContentView(R.layout.activity_main_mail);
+            listview = (ListView) rootView.findViewById(R.id.listview);
+            listview.setAdapter(new EmailAdapter(rootView.getContext(), emailHeaders, emailBodies));
+
+
+          // // listening to single list item on click
+          // listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+          //     public void onItemClick(AdapterView<?> parent, View view,
+          //                             int position, long id) {
+
+          //         // selected item
+          //         String emailTitle = (listview.getItemAtPosition(position).toString());
+
+          //         // Launching new Activity on selecting single List Item
+          //         Intent i = new Intent(this.getApplicationContext(), SingleEmailActivity.class);
+          //         // sending data to new activity
+          //         i.putExtra("email", emailTitle);
+          //         i.putExtra("body", emailTitle);
+          //         startActivity(i);
+
+          //     }
+          // });
+
+
+
             return rootView;
         }
     }
