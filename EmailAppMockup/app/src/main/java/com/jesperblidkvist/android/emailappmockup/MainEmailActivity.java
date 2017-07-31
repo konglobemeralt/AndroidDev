@@ -41,6 +41,7 @@ public class MainEmailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_email);
 
+        getSupportActionBar().setTitle("Account Name");
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -68,6 +69,7 @@ public class MainEmailActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.menu_main_email, menu);
         return true;
     }
@@ -115,9 +117,9 @@ public class MainEmailActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main_email, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            View rootView = inflater.inflate(R.layout.activity_main_mail, container, false);
+      //      TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+      //      textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
         }
     }
