@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:weightSum="1">
 
     <TextView android:id="@+id/email_label"
               android:layout_width="fill_parent"
@@ -24,4 +26,32 @@
               android:layout_height="wrap_content"
               android:textSize="25dip"
               android:padding="10dip" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.72"/>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="87dp"
+        android:layout_gravity="bottom">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab2"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            android:layout_weight="0.03"
+            app:srcCompat="@drawable/ic_action_reply"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab1"
+            android:layout_width="56dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            android:layout_weight="0.04"
+            app:srcCompat="@drawable/ic_action_replyall"/>
+    </TableRow>
+
 </LinearLayout>
