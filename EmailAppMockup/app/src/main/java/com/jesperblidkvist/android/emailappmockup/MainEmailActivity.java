@@ -136,23 +136,23 @@ public class MainEmailActivity extends AppCompatActivity {
             listview.setAdapter(new EmailAdapter(rootView.getContext(), emailHeaders, emailBodies));
 
 
-          // // listening to single list item on click
-          // listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-          //     public void onItemClick(AdapterView<?> parent, View view,
-          //                             int position, long id) {
+            // listening to single list item on click
+            listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                public void onItemClick(AdapterView<?> parent, View view,
+                                        int position, long id) {
 
-          //         // selected item
-          //         String emailTitle = (listview.getItemAtPosition(position).toString());
+                    // selected item
+                    String emailTitle = (listview.getItemAtPosition(position).toString());
 
-          //         // Launching new Activity on selecting single List Item
-          //         Intent i = new Intent(this.getApplicationContext(), SingleEmailActivity.class);
-          //         // sending data to new activity
-          //         i.putExtra("email", emailTitle);
-          //         i.putExtra("body", emailTitle);
-          //         startActivity(i);
+                    // Launching new Activity on selecting single List Item
+                    Intent i = new Intent(getContext(), SingleEmailActivity.class);
+                    // sending data to new activity
+                    i.putExtra("email", emailTitle);
+                    i.putExtra("body", emailTitle);
+                    startActivity(i);
 
-          //     }
-          // });
+                }
+            });
 
 
 
