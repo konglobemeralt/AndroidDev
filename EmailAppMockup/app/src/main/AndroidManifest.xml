@@ -19,6 +19,9 @@
         <activity
             android:name=".SingleEmailActivity"
             android:label="Single Item Selected"/>
+        <activity
+            android:name=".SendEmailActivity"
+            android:label="New Email"/>
 
     </application>
 

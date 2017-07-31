@@ -63,8 +63,8 @@ public class MainEmailActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Folder", null).show();
+                Intent i = new Intent(getApplicationContext(), SendEmailActivity.class);
+                startActivity(i);
             }
         });
 
