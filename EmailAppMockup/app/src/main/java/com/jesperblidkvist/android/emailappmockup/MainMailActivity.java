@@ -34,6 +34,7 @@ public class MainMailActivity extends AppCompatActivity {
         //getActionBar().setTitle("Fake_Email.account@temp.com");
 
 
+
       // storing string resources into Array
       String[] emailHeaders = getResources().getStringArray(R.array.email_list);
       String[] emailBodies = getResources().getStringArray(R.array.email_body_list);
