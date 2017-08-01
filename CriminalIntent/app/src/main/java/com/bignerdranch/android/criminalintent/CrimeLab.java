@@ -4,14 +4,19 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 
 public class CrimeLab {
     private ArrayList<Crime> mCrimes;
+    private Context mContext;
+    private SQLiteDatabase mDatabase;
 
     private static CrimeLab sCrimeLab;
     private Context mAppContext;
 
     private CrimeLab(Context appContext) {
+        mContext = appContext.getApplicationContext();
+        mDatabase = new CrimeBaseHelper(mContext).getWritableDatabase();
         mAppContext = appContext;
         mCrimes = new ArrayList<Crime>();
 
