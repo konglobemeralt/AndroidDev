@@ -48,5 +48,19 @@ public class CrimeLab {
         mDatabase.insert(CrimeDbSchema.CrimeTable.NAME, null, values);
     }
 
+    public void updateCrime(Crime crime){
+        String uuidString = crime.getId().toString();
+        ContentValues values = getContentValues(crime);
+
+        mDatabase.update(CrimeDbSchema.CrimeTable.NAME, values,
+                CrimeDbSchema.CrimeTable.Cols.UUID + " = ?",
+                new String[] { uuidString});
+
+    }
+
+    public ArrayList<Crime> getCrimes() {
+        return new ArrayList<Crime>();
+    }
+
 }
 
