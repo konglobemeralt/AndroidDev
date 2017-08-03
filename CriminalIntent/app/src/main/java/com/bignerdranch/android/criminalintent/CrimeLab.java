@@ -7,7 +7,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 public class CrimeLab {
-    private ArrayList<Crime> mCrimes;
     private Context mContext;
     private SQLiteDatabase mDatabase;
 
@@ -18,7 +17,6 @@ public class CrimeLab {
         mContext = appContext.getApplicationContext();
         mDatabase = new CrimeBaseHelper(mContext).getWritableDatabase();
         mAppContext = appContext;
-        mCrimes = new ArrayList<Crime>();
 
     }
 
@@ -30,19 +28,13 @@ public class CrimeLab {
     }
 
     public Crime getCrime(UUID id) {
-        for (Crime c : mCrimes) {
-            if (c.getId().equals(id))
-                return c;
-        }
+
         return null;
     }
 
     public void addCrime(Crime c) {
-        mCrimes.add(c);
+
     }
 
-    public ArrayList<Crime> getCrimes() {
-        return mCrimes;
-    }
 }
 
