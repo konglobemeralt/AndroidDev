@@ -44,7 +44,8 @@ public class CrimeLab {
     }
 
     public void addCrime(Crime c) {
-
+        ContentValues values = getContentValues(c);
+        mDatabase.insert(CrimeDbSchema.CrimeTable.NAME, null, values);
     }
 
 }
