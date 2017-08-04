@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 public class CrimeLab {
@@ -41,6 +42,19 @@ public class CrimeLab {
         values.put(CrimeDbSchema.CrimeTable.Cols.SOLVED, crime.isSolved() ? 1 : 0);
 
         return values;
+    }
+
+    private Cursor queryCrimes(String whereClause, String[] whereArgs){
+        Cursor cursor = mDatabase.query(
+                CrimeDbSchema.CrimeTable.NAME,
+                null, // Columns - null selects all columns
+                whereClause,
+                whereArgs,
+                null, // group by
+                null, // having
+                null // order by
+        );
+        return cursor;
     }
 
     public void addCrime(Crime c) {
