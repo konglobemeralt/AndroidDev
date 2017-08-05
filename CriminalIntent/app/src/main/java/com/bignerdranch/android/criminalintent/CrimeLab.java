@@ -1,6 +1,7 @@
 package com.bignerdranch.android.criminalintent;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import android.content.ContentValues;
@@ -8,12 +9,17 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+
+
 public class CrimeLab {
     private Context mContext;
     private SQLiteDatabase mDatabase;
 
     private static CrimeLab sCrimeLab;
     private Context mAppContext;
+
+    List<Crime> crimes = new ArrayList<>();
+
 
     private CrimeLab(Context appContext) {
         mContext = appContext.getApplicationContext();
@@ -72,8 +78,20 @@ public class CrimeLab {
 
     }
 
-    public ArrayList<Crime> getCrimes() {
-        return new ArrayList<Crime>();
+
+    public List<Crime> getCrimes() {
+        List<Crime> crimes = new ArrayList<>();
+        CrimeCursorWrapper cursor = (CrimeCursorWrapper) queryCrimes(null, null);
+        try {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                crimes.add(cursor.getCrime());
+                cursor.moveToNext();
+            }
+        } finally {
+            cursor.close();
+        }
+        return crimes;
     }
 
 }
