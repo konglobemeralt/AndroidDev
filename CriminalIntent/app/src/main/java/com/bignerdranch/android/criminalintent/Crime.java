@@ -4,11 +4,11 @@ import java.util.Date;
 import java.util.UUID;
 
 public class Crime {
+
     private UUID mId;
     private String mTitle;
     private Date mDate;
     private boolean mSolved;
-
 
     public Crime() {
         this(UUID.randomUUID());
@@ -19,9 +19,8 @@ public class Crime {
         mDate = new Date();
     }
 
-    @Override
-    public String toString() {
-        return mTitle;
+    public UUID getId() {
+        return mId;
     }
 
     public String getTitle() {
@@ -32,8 +31,12 @@ public class Crime {
         mTitle = title;
     }
 
-    public UUID getId() {
-        return mId;
+    public Date getDate() {
+        return mDate;
+    }
+
+    public void setDate(Date date) {
+        mDate = date;
     }
 
     public boolean isSolved() {
@@ -43,14 +46,4 @@ public class Crime {
     public void setSolved(boolean solved) {
         mSolved = solved;
     }
-
-    public Date getDate() {
-        return mDate;
-    }
-
-    public void setDate(Date date) {
-        mDate = date;
-    }
-
-
 }
