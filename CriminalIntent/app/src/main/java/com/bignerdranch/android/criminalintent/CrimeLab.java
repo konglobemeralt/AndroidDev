@@ -16,7 +16,7 @@ public class CrimeLab {
     private SQLiteDatabase mDatabase;
 
     private static CrimeLab sCrimeLab;
-    private Context mAppContext;
+    private Context mContext;
 
     List<Crime> crimes = new ArrayList<>();
 
@@ -24,7 +24,7 @@ public class CrimeLab {
     private CrimeLab(Context appContext) {
         mContext = appContext.getApplicationContext();
         mDatabase = new CrimeBaseHelper(mContext).getWritableDatabase();
-        mAppContext = appContext;
+        mContext = appContext;
 
     }
 
