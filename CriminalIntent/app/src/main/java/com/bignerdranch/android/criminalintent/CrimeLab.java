@@ -12,14 +12,10 @@ import android.database.sqlite.SQLiteDatabase;
 
 
 public class CrimeLab {
-    private Context mContext;
     private SQLiteDatabase mDatabase;
 
     private static CrimeLab sCrimeLab;
     private Context mContext;
-
-    List<Crime> crimes = new ArrayList<>();
-
 
     private CrimeLab(Context appContext) {
         mContext = appContext.getApplicationContext();
