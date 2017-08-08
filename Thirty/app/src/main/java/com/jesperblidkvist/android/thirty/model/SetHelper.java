@@ -74,43 +74,21 @@ public class SetHelper {
      * A method that uses the setSum funtions to find the number of sets that which have a given sum.
      */
     public int getCombinations(int[] set, int sum) {
-        System.out.println("****START****");
 
         values = new int[]{0, 0, 0 ,0 ,0 ,0};
         countOccurences(set);
 
-
         int counter = 0;
         SetHelper.findTargetSumSubsets(set, sum, "", 0);
 
-        System.out.println("****Before Sort****");
-        for (String str : allSubsets) {
-            System.out.println(str);
-        }
-
         java.util.Collections.sort(allSubsets, new StringComparator(""));
 
-        System.out.println("****After Sort****");
         for (String str : allSubsets) {
-            System.out.println(str);
-        }
-
-        for (String str : allSubsets) {
-
-                System.out.println(counter + ":st set to test:  " + str);
                 if(dicesAvaliable(str)){
-                    System.out.println(counter + ":st Valid set:  " + str);
                     counter++;
                 }
         }
 
-        System.out.println("****DICE LEFT****");
-        for(int j=0; j<values.length; j++){
-            System.out.println("Amount of " + (j+1) + "s: "+ values[j]);
-        }
-
-
-        System.out.println("****END****");
         allSubsets = new ArrayList<>();
         return counter;
     }
@@ -119,7 +97,6 @@ public class SetHelper {
     private void countOccurences(int[] array){
         for(int i=0; i < array.length; i++ ){
             values[array[i]-1]++; //Add one to the place in the array;
-            System.out.println("Added a " + array[i]);
         }
     }
 
@@ -137,7 +114,6 @@ public class SetHelper {
            }
            values[Integer.parseInt(array[i])-1]--;
            removedDices.add(Integer.parseInt(array[i]));
-           System.out.println("Removed a " + array[i]);
        }
 
         return true;
