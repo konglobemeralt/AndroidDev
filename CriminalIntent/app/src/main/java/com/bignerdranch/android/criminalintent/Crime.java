@@ -25,7 +25,7 @@ public class Crime {
         return mSuspect;
     }
 
-    public void SetSuspect(String suspect){
+    public void setSuspect(String suspect){
         mSuspect = suspect;
     }
 

@@ -76,6 +76,7 @@ public class CrimeLab {
         values.put(TITLE, crime.getTitle());
         values.put(DATE, crime.getDate().getTime());
         values.put(SOLVED, crime.isSolved() ? 1 : 0);
+        values.put(CrimeDbSchema.CrimeTable.Cols.SUSPECT, crime.getSuspect());
 
         return values;
     }
