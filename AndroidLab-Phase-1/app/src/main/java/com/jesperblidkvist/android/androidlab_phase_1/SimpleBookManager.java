@@ -12,6 +12,7 @@ public class SimpleBookManager implements BookManager {
     List<Book> bookList = new ArrayList<Book>();
 
     SimpleBookManager(){
+        //Add five dummy books to have something to work with
         for(int i = 0; i < 5; i++){
             Book tmpBook = new Book("Author " + i, "Title " + i, i, "ISBN " + i, "Course " + i);
             bookList.add(tmpBook);
@@ -21,27 +22,30 @@ public class SimpleBookManager implements BookManager {
 
     @Override
     public int count() {
-        return 0;
+        return bookList.size();
     }
 
     @Override
     public Book getBook(int index) {
-        return null;
+        return bookList.get(index);
     }
 
     @Override
     public Book createBook() {
-        return null;
+        //Dummy create new book
+        int count = count() + 1;
+        Book tmpBook = new Book("Author " + count, "Title " + count, count, "ISBN " + count, "Course " + count);
+        return tmpBook;
     }
 
     @Override
     public ArrayList<Book> getAllBooks() {
-        return null;
+        return (ArrayList)bookList;
     }
 
     @Override
     public void removeBook(Book book) {
-
+        bookList.remove(book);
     }
 
     @Override
