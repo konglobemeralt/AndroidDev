@@ -28,7 +28,13 @@ public class SimpleBookManager implements BookManager {
 
     @Override
     public Book getBook(int index) {
-        return bookList.get(index);
+        if(index <= count()){
+            return bookList.get(index);
+        }
+        else {
+            return null;
+        }
+
     }
 
     @Override
@@ -82,7 +88,10 @@ public class SimpleBookManager implements BookManager {
 
     @Override
     public float getMeanPrice() {
-        return getTotalCost()/count();
+        if(count() != 0){
+            return getTotalCost()/count();
+        }
+        return 0;
     }
 
     @Override
