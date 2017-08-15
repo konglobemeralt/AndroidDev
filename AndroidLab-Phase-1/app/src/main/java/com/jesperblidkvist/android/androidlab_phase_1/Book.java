@@ -10,7 +10,24 @@ public class Book {
     private String title;
     private int price;
     private String isbn;
-    private String Course;
+    private String course;
+
+    Book(String author, String title, int price, String isbn, String course){
+        this.author = author;
+        this.title = title;
+        this.price = price;
+        this.isbn = isbn;
+        this.course = course;
+    }
+
+    Book(){
+        this.author = null;
+        this.title = null;
+        this.price = 0;
+        this.isbn = null;
+        this.course = null;
+    }
+
 
     public String getAuthor() {
         return author;
