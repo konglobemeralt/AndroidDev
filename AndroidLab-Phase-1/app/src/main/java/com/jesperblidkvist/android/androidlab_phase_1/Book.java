@@ -62,10 +62,10 @@ public class Book {
     }
 
     public String getCourse() {
-        return Course;
+        return course;
     }
 
     public void setCourse(String course) {
-        Course = course;
+        course = course;
     }
 }
