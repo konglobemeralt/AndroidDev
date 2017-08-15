@@ -1,6 +1,7 @@
 package com.jesperblidkvist.android.androidlab_phase_1;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -50,31 +51,53 @@ public class SimpleBookManager implements BookManager {
 
     @Override
     public void moveBook(int from, int to) {
-
+        Collections.swap(bookList, from, to);
     }
 
     @Override
     public int getMinPrice() {
-        return 0;
+
+        int min = Integer.MAX_VALUE;
+
+        for(int i = 0; i < count() ; i++){
+            if(getBook(i).getPrice() < min){
+                min = getBook(i).getPrice();
+            }
+        }
+        return min;
     }
 
     @Override
     public int getMaxPrice() {
-        return 0;
+
+        int max = 0;
+
+        for(int i = 0; i < count() ; i++){
+            if(getBook(i).getPrice() > max){
+                max = getBook(i).getPrice();
+            }
+        }
+        return max;
     }
 
     @Override
     public float getMeanPrice() {
-        return 0;
+        return getTotalCost()/count();
     }
 
     @Override
     public int getTotalCost() {
-        return 0;
+
+        int total = 0;
+
+        for(int i = 0; i < count() ; i++){
+            total += getBook(i).getPrice();
+        }
+        return total;
     }
 
     @Override
     public void saveChanges() {
-
+        //Empty for now
     }
 }
