@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">AndroidLab-Phase-1</string>
+
+    <string name="title_string">Title</string>
+    <string name="author_string">Author</string>
+    <string name="course_string">Course</string>
+    <string name="price_string">Price</string>
+    <string name="ISBN_string">ISBN</string>
 </resources>
