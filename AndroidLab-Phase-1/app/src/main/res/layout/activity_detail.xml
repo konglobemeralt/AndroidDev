@@ -7,56 +7,52 @@
     android:layout_height="match_parent"
     tools:context="com.jesperblidkvist.android.androidlab_phase_1.DetailActivity">
 
-    <EditText
+    <TextView
         android:id="@+id/titleLable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_marginLeft="29dp"
         android:layout_marginStart="29dp"
         android:layout_marginTop="34dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/title_string"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:text="@string/title_string"/>
 
-    <EditText
+    <TextView
         android:id="@+id/authorLable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
         android:text="@string/author_string"
+        android:layout_marginTop="61dp"
         android:layout_below="@+id/titleLable"
         android:layout_alignLeft="@+id/titleLable"
-        android:layout_alignStart="@+id/titleLable"
-        android:layout_marginTop="23dp"/>
+        android:layout_alignStart="@+id/titleLable"/>
 
-    <EditText
+    <TextView
         android:id="@+id/courseLable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
         android:text="@string/course_string"
         android:layout_below="@+id/authorLable"
         android:layout_alignLeft="@+id/authorLable"
         android:layout_alignStart="@+id/authorLable"/>
 
-    <EditText
+    <TextView
         android:id="@+id/priceLable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
         android:text="@string/price_string"
         android:layout_above="@+id/ISBNLable"
         android:layout_alignLeft="@+id/courseLable"
         android:layout_alignStart="@+id/courseLable"
         android:layout_marginBottom="55dp"/>
 
-    <EditText
+    <TextView
         android:id="@+id/ISBNLable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -65,7 +61,6 @@
         android:layout_alignStart="@+id/priceLable"
         android:layout_marginBottom="119dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:text="@string/ISBN_string"
         />
 </RelativeLayout>
