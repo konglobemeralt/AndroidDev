@@ -7,4 +7,9 @@
     android:layout_height="match_parent"
     tools:context="com.jesperblidkvist.android.androidlab_phase_1.SummaryActivity">
 
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"/>
 </android.support.constraint.ConstraintLayout>
