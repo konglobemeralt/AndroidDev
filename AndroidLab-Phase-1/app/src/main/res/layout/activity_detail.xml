@@ -11,14 +11,14 @@
         android:id="@+id/titleLable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="29dp"
-        android:layout_marginStart="29dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginStart="28dp"
         android:layout_marginTop="34dp"
         android:ems="10"
-        android:text="@string/title_string"/>
+        android:text="@string/title_string"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
 
     <TextView
         android:id="@+id/authorLable"
@@ -63,4 +63,56 @@
         android:ems="10"
         android:text="@string/ISBN_string"
         />
+
+    <TextView
+        android:id="@+id/ISBNText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/ISBNLable"
+        android:layout_alignBottom="@+id/ISBNLable"
+        android:layout_alignLeft="@+id/priceText"
+        android:layout_alignStart="@+id/priceText"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/priceText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/priceLable"
+        android:layout_alignBottom="@+id/priceLable"
+        android:layout_alignLeft="@+id/courseText"
+        android:layout_alignStart="@+id/courseText"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/courseText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/courseLable"
+        android:layout_alignBottom="@+id/courseLable"
+        android:layout_alignLeft="@+id/authorText"
+        android:layout_alignStart="@+id/authorText"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/authorText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/authorLable"
+        android:layout_alignBottom="@+id/authorLable"
+        android:layout_alignLeft="@+id/titleText"
+        android:layout_alignStart="@+id/titleText"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/titleLable"
+        android:layout_alignBottom="@+id/titleLable"
+        android:layout_alignEnd="@+id/titleLable"
+        android:layout_alignRight="@+id/titleLable"
+        android:layout_marginEnd="49dp"
+        android:layout_marginRight="49dp"
+        android:textStyle="bold"/>
 </RelativeLayout>

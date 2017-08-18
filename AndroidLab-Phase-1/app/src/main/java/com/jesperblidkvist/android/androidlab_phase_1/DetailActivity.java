@@ -2,10 +2,18 @@ package com.jesperblidkvist.android.androidlab_phase_1;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
 
 public class DetailActivity extends AppCompatActivity {
 
     SimpleBookManager mSimpleBookManger;
+
+    TextView mTitleView;
+    TextView mAuthorView;
+    TextView mCourseView;
+    TextView mPriceView;
+    TextView mISBNView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -13,6 +21,12 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         mSimpleBookManger = new SimpleBookManager();
+
+        mTitleView = (TextView) findViewById(R.id.titleText);
+        mAuthorView = (TextView) findViewById(R.id.authorText);
+        mCourseView = (TextView) findViewById(R.id.courseText);
+        mPriceView = (TextView) findViewById(R.id.priceText);
+        mISBNView = (TextView) findViewById(R.id.ISBNText);
 
 
     }
