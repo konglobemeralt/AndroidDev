@@ -24,15 +24,19 @@ public class SummaryActivity extends AppCompatActivity {
 
         mSimpleBookManger = new SimpleBookManager();
 
-        mTotalPrice = (TextView) findViewById(R.id.averagePriceString);
-        mTotalPrice.setText(mSimpleBookManger.getTotalCost());
+        mTotalPrice = (TextView) findViewById(R.id.totalCostString);
+        mTotalPrice.setText(Integer.toString(mSimpleBookManger.getTotalCost()));
 
         mMostExpensive = (TextView) findViewById(R.id.mostExpensiveItemString);
-        mMostExpensive.setText(mSimpleBookManger.getMaxPrice());
+        mMostExpensive.setText(Integer.toString(mSimpleBookManger.getMaxPrice()));
 
         mLeastExpensive = (TextView) findViewById(R.id.leastExpensiveItemString);
-        mLeastExpensive.setText(mSimpleBookManger.getMinPrice());
+        mLeastExpensive.setText(Integer.toString(mSimpleBookManger.getMinPrice()));
 
+        mAveragePrice = (TextView) findViewById(R.id.averagePriceString);
+        mAveragePrice.setText(Float.toString(mSimpleBookManger.getMeanPrice()));
 
+        mBookCounterString = (TextView) findViewById(R.id.bookCountString);
+        mBookCounterString.setText(mSimpleBookManger.getAllBooks().size() + " Books in your library");
     }
 }
