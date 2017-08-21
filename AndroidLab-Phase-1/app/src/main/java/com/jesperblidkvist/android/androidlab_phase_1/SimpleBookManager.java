@@ -63,6 +63,10 @@ public class SimpleBookManager implements BookManager {
     @Override
     public int getMinPrice() {
 
+        if(count() == 0){
+            return 0;
+        }
+
         int min = Integer.MAX_VALUE;
 
         for(int i = 0; i < count() ; i++){
