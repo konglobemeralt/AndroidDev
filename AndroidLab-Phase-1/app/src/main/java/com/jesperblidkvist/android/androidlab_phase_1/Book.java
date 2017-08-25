@@ -30,7 +30,12 @@ public class Book {
 
 
     public String getAuthor() {
-        return author;
+        if(author !=null){
+            return author;
+        }
+        else
+            return "Author not avaliable";
+
     }
 
     public void setAuthor(String author) {
@@ -38,7 +43,12 @@ public class Book {
     }
 
     public String getTitle() {
-        return title;
+        if(title !=null){
+            return title;
+        }
+        else
+            return "Title not avaliable";
+
     }
 
     public void setTitle(String title) {
@@ -54,7 +64,12 @@ public class Book {
     }
 
     public String getIsbn() {
-        return isbn;
+        if(isbn !=null){
+            return isbn;
+        }
+        else
+            return "ISBN not avaliable";
+
     }
 
     public void setIsbn(String isbn) {
@@ -62,7 +77,11 @@ public class Book {
     }
 
     public String getCourse() {
-        return course;
+        if(course !=null){
+            return course;
+        }
+        else
+            return "Course not avaliable";
     }
 
     public void setCourse(String course) {
