@@ -28,10 +28,28 @@ public class DetailActivity extends AppCompatActivity {
         mPriceView = (TextView) findViewById(R.id.priceText);
         mISBNView = (TextView) findViewById(R.id.ISBNText);
 
+
+        setTitle();
         mTitleView.setText(mSimpleBookManger.getBook(0).getTitle());
         mAuthorView.setText(mSimpleBookManger.getBook(0).getAuthor());
         mCourseView.setText(mSimpleBookManger.getBook(0).getCourse());
         mPriceView.setText(Integer.toString(mSimpleBookManger.getBook(0).getPrice()));
         mISBNView.setText(mSimpleBookManger.getBook(0).getIsbn());
     }
+
+
+    private void setTitle(){
+
+        String title = mSimpleBookManger.getBook(0).getTitle();
+
+        if(title != null){
+            mTitleView.setText(mSimpleBookManger.getBook(0).getTitle());
+        }
+
+        else{
+            mTitleView.setText("No book avaliable");
+        }
+
+    }
+
 }
